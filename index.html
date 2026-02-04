@@ -1,134 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Award-winning portfolio showcasing creative excellence and innovation">
-    <title>Portfolio | Creative Excellence</title>
+    <meta name="description"
+        content="Joel Lalrinhlua - Creative Developer & Designer crafting exceptional digital experiences">
+    <title>Joel Lalrinhlua | Creative Developer</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+        rel="stylesheet">
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
+
 <body>
-    <!-- Animated Background -->
-    <div class="background-animation">
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
-        <div class="gradient-orb orb-3"></div>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-text">
+                <span class="loader-word">Joel</span>
+                <span class="loader-word">Lalrinhlua</span>
+            </div>
+            <div class="loader-progress">
+                <div class="loader-bar"></div>
+            </div>
+        </div>
     </div>
 
-    <!-- Particle Canvas -->
-    <canvas id="particleCanvas"></canvas>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
 
     <!-- Navigation -->
-    <nav class="navbar" id="navbar">
+    <nav class="nav">
         <div class="nav-container">
-            <div class="logo">
-                <span class="logo-text">Portfolio</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+            <a href="#home" class="nav-logo magnetic">
+                <span>Joel©</span>
+            </a>
+            <div class="nav-menu-btn magnetic" id="menu-btn">
+                <span class="menu-text">Menu</span>
+                <div class="menu-icon">
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">
-                    <span class="title-line animate-text">Hello, I'm</span>
-                    <span class="title-line animate-text delay-1">Your Name</span>
-                    <span class="title-line gradient-text animate-text delay-2">Creative Designer</span>
-                </h1>
-                <p class="hero-subtitle animate-fade-up delay-3">
-                    Crafting exceptional digital experiences with passion and innovation. 
-                    This is placeholder text that you can customize later.
-                </p>
-                <div class="hero-buttons animate-fade-up delay-4">
-                    <a href="#projects" class="btn btn-primary">
-                        <span>View My Work</span>
-                        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none">
-                            <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <span>Get in Touch</span>
-                    </a>
-                </div>
+    <!-- Full Screen Menu -->
+    <div class="menu-overlay" id="menu-overlay">
+        <div class="menu-container">
+            <div class="menu-links">
+                <a href="#home" class="menu-link" data-index="01">
+                    <span class="menu-link-text">Home</span>
+                </a>
+                <a href="#work" class="menu-link" data-index="02">
+                    <span class="menu-link-text">Work</span>
+                </a>
+                <a href="#about" class="menu-link" data-index="03">
+                    <span class="menu-link-text">About</span>
+                </a>
+                <a href="#services" class="menu-link" data-index="04">
+                    <span class="menu-link-text">Services</span>
+                </a>
+                <a href="#contact" class="menu-link" data-index="05">
+                    <span class="menu-link-text">Contact</span>
+                </a>
             </div>
-            <div class="hero-visual">
-                <div class="floating-card">
-                    <div class="card-glow"></div>
+            <div class="menu-info">
+                <div class="menu-info-col">
+                    <span class="menu-info-label">Email</span>
+                    <a href="mailto:hello@joelalrinhlua.me" class="menu-info-link">hello@joelalrinhlua.me</a>
+                </div>
+                <div class="menu-info-col">
+                    <span class="menu-info-label">Social</span>
+                    <div class="menu-socials">
+                        <a href="#" class="menu-social magnetic">Twitter</a>
+                        <a href="#" class="menu-social magnetic">LinkedIn</a>
+                        <a href="#" class="menu-social magnetic">GitHub</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <div class="mouse">
-                <div class="wheel"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-title-wrap">
+                <h1 class="hero-title">
+                    <span class="hero-line">
+                        <span class="hero-word" data-animation="reveal">Creative</span>
+                    </span>
+                    <span class="hero-line">
+                        <span class="hero-word" data-animation="reveal">Developer</span>
+                        <span class="hero-word italic" data-animation="reveal">&</span>
+                    </span>
+                    <span class="hero-line">
+                        <span class="hero-word" data-animation="reveal">Designer</span>
+                    </span>
+                </h1>
             </div>
-            <p>Scroll to explore</p>
+            <div class="hero-info">
+                <p class="hero-tagline" data-animation="fade">
+                    Crafting unusually creative digital experiences that transform ideas into impactful realities.
+                </p>
+                <div class="hero-cta">
+                    <a href="#work" class="btn-circle magnetic">
+                        <span class="btn-text">View Work</span>
+                        <span class="btn-arrow">↓</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span class="scroll-text">Scroll to explore</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Marquee Section -->
+    <section class="marquee-section">
+        <div class="marquee">
+            <div class="marquee-content">
+                <span class="marquee-item">Design</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">Development</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">Motion</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">Branding</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">Design</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">Development</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">Motion</span>
+                <span class="marquee-separator">✦</span>
+                <span class="marquee-item">Branding</span>
+                <span class="marquee-separator">✦</span>
+            </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about-section">
+    <section id="about" class="about">
         <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Get to know me</span>
-                <h2 class="section-title">About Me</h2>
+            <div class="about-header">
+                <span class="section-label">(About)</span>
+                <span class="section-number">01</span>
             </div>
             <div class="about-content">
-                <div class="about-text">
-                    <h3 class="about-heading">Passionate about creating amazing experiences</h3>
-                    <p class="about-description">
-                        This is where you can describe your journey, passion, and what drives you. 
-                        Share your story and what makes you unique in your field. This text is 
-                        completely customizable to reflect your personal brand and professional background.
+                <h2 class="about-title" data-animation="split">
+                    I'm Joel, a creative developer based in India, passionate about crafting
+                    digital experiences that blend aesthetics with functionality.
+                </h2>
+                <div class="about-details">
+                    <p class="about-text" data-animation="fade">
+                        With a focus on innovative design and clean code, I help brands create
+                        memorable digital products. My approach combines strategic thinking with
+                        creative execution to deliver results that matter.
                     </p>
-                    <p class="about-description">
-                        Highlight your achievements, your approach to work, and what you bring to the table. 
-                        Make it personal and authentic to connect with your audience.
-                    </p>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <h4 class="stat-number" data-target="50">0</h4>
-                            <p class="stat-label">Projects Completed</p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <span class="stat-number" data-count="5">0</span>
+                            <span class="stat-label">Years of Experience</span>
                         </div>
-                        <div class="stat-card">
-                            <h4 class="stat-number" data-target="100">0</h4>
-                            <p class="stat-label">Happy Clients</p>
+                        <div class="stat">
+                            <span class="stat-number" data-count="50">0</span>
+                            <span class="stat-label">Projects Completed</span>
                         </div>
-                        <div class="stat-card">
-                            <h4 class="stat-number" data-target="15">0</h4>
-                            <p class="stat-label">Awards Won</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-visual">
-                    <div class="profile-card">
-                        <div class="profile-card-inner">
-                            <div class="profile-placeholder">
-                                <svg viewBox="0 0 200 200" fill="none">
-                                    <circle cx="100" cy="100" r="100" fill="url(#profileGradient)"/>
-                                    <defs>
-                                        <linearGradient id="profileGradient" x1="0" y1="0" x2="200" y2="200">
-                                            <stop offset="0%" stop-color="#667eea"/>
-                                            <stop offset="100%" stop-color="#764ba2"/>
-                                        </linearGradient>
-                                    </defs>
-                                </svg>
-                            </div>
+                        <div class="stat">
+                            <span class="stat-number" data-count="30">0</span>
+                            <span class="stat-label">Happy Clients</span>
                         </div>
                     </div>
                 </div>
@@ -136,234 +185,151 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects-section">
+    <!-- Work Section - Horizontal Scroll -->
+    <section id="work" class="work">
         <div class="container">
-            <div class="section-header">
-                <span class="section-tag">My Work</span>
-                <h2 class="section-title">Featured Projects</h2>
+            <div class="work-header">
+                <span class="section-label">(Selected Work)</span>
+                <span class="section-number">02</span>
             </div>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <a href="#" class="project-link">View Project</a>
-                        </div>
+            <h2 class="work-title" data-animation="split">Featured Projects</h2>
+        </div>
+        <div class="work-horizontal">
+            <div class="work-horizontal-wrapper">
+                <div class="work-item">
+                    <div class="work-image">
+                        <div class="work-image-inner"></div>
                     </div>
-                    <div class="project-info">
-                        <h3 class="project-title">Project Name One</h3>
-                        <p class="project-description">
-                            A brief description of this amazing project. Customize this text to describe 
-                            your actual work and achievements.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">Design</span>
-                            <span class="tag">Development</span>
-                            <span class="tag">UI/UX</span>
-                        </div>
+                    <div class="work-info">
+                        <span class="work-category">Web Design</span>
+                        <h3 class="work-name">Project Alpha</h3>
+                        <p class="work-desc">Brand identity and web experience for a tech startup</p>
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <a href="#" class="project-link">View Project</a>
-                        </div>
+                <div class="work-item">
+                    <div class="work-image">
+                        <div class="work-image-inner"></div>
                     </div>
-                    <div class="project-info">
-                        <h3 class="project-title">Project Name Two</h3>
-                        <p class="project-description">
-                            Another fantastic project showcasing your skills. Replace this with your 
-                            project details and highlights.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">Branding</span>
-                            <span class="tag">Web</span>
-                        </div>
+                    <div class="work-info">
+                        <span class="work-category">Development</span>
+                        <h3 class="work-name">Project Beta</h3>
+                        <p class="work-desc">Full-stack application with modern architecture</p>
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <a href="#" class="project-link">View Project</a>
-                        </div>
+                <div class="work-item">
+                    <div class="work-image">
+                        <div class="work-image-inner"></div>
                     </div>
-                    <div class="project-info">
-                        <h3 class="project-title">Project Name Three</h3>
-                        <p class="project-description">
-                            Your third featured project. Showcase what makes this work special and 
-                            the impact it created.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">Mobile</span>
-                            <span class="tag">App Design</span>
-                        </div>
+                    <div class="work-info">
+                        <span class="work-category">UI/UX Design</span>
+                        <h3 class="work-name">Project Gamma</h3>
+                        <p class="work-desc">Mobile app design for fitness platform</p>
+                    </div>
+                </div>
+                <div class="work-item">
+                    <div class="work-image">
+                        <div class="work-image-inner"></div>
+                    </div>
+                    <div class="work-info">
+                        <span class="work-category">Branding</span>
+                        <h3 class="work-name">Project Delta</h3>
+                        <p class="work-desc">Complete brand refresh for creative agency</p>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="container">
+            <a href="#" class="view-all-link magnetic">
+                <span>View all projects</span>
+                <span class="arrow">→</span>
+            </a>
+        </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills-section">
+    <!-- Services Section -->
+    <section id="services" class="services">
         <div class="container">
-            <div class="section-header">
-                <span class="section-tag">What I Do</span>
-                <h2 class="section-title">Skills & Expertise</h2>
+            <div class="services-header">
+                <span class="section-label">(What I Do)</span>
+                <span class="section-number">03</span>
             </div>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <h3 class="skill-title">Creative Design</h3>
-                    <p class="skill-description">
-                        Crafting beautiful and functional designs that capture attention and deliver results.
-                    </p>
+            <h2 class="services-title" data-animation="split">Services & Expertise</h2>
+            <div class="services-grid">
+                <div class="service-item" data-animation="fade">
+                    <span class="service-number">01</span>
+                    <h3 class="service-name">Web Design</h3>
+                    <p class="service-desc">Creating stunning, user-centered designs that captivate and convert</p>
+                    <ul class="service-list">
+                        <li>UI/UX Design</li>
+                        <li>Responsive Design</li>
+                        <li>Design Systems</li>
+                    </ul>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
-                            <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <h3 class="skill-title">Web Development</h3>
-                    <p class="skill-description">
-                        Building responsive and performant websites with modern technologies and best practices.
-                    </p>
+                <div class="service-item" data-animation="fade">
+                    <span class="service-number">02</span>
+                    <h3 class="service-name">Development</h3>
+                    <p class="service-desc">Building fast, scalable, and maintainable web applications</p>
+                    <ul class="service-list">
+                        <li>Frontend Development</li>
+                        <li>Backend Development</li>
+                        <li>API Integration</li>
+                    </ul>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
-                            <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <h3 class="skill-title">Brand Strategy</h3>
-                    <p class="skill-description">
-                        Developing cohesive brand identities that resonate with audiences and drive engagement.
-                    </p>
+                <div class="service-item" data-animation="fade">
+                    <span class="service-number">03</span>
+                    <h3 class="service-name">Motion & Animation</h3>
+                    <p class="service-desc">Bringing interfaces to life with thoughtful micro-interactions</p>
+                    <ul class="service-list">
+                        <li>GSAP Animations</li>
+                        <li>Scroll Effects</li>
+                        <li>3D & WebGL</li>
+                    </ul>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" stroke="currentColor" stroke-width="2"/>
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96" stroke="currentColor" stroke-width="2"/>
-                            <line x1="12" y1="22.08" x2="12" y2="12" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <h3 class="skill-title">UI/UX Design</h3>
-                    <p class="skill-description">
-                        Creating intuitive user experiences that are both beautiful and easy to use.
-                    </p>
+                <div class="service-item" data-animation="fade">
+                    <span class="service-number">04</span>
+                    <h3 class="service-name">Branding</h3>
+                    <p class="service-desc">Developing cohesive brand identities that resonate</p>
+                    <ul class="service-list">
+                        <li>Brand Strategy</li>
+                        <li>Visual Identity</li>
+                        <li>Brand Guidelines</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact-section">
+    <section id="contact" class="contact">
         <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Let's Connect</span>
-                <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-header">
+                <span class="section-label">(Get in Touch)</span>
+                <span class="section-number">04</span>
             </div>
             <div class="contact-content">
-                <div class="contact-info">
-                    <h3 class="contact-heading">Let's create something amazing together</h3>
-                    <p class="contact-description">
-                        Whether you have a project in mind or just want to chat, I'd love to hear from you. 
-                        Reach out and let's make something great!
-                    </p>
-                    <div class="contact-methods">
-                        <div class="contact-method">
-                            <div class="method-icon">
-                                <svg viewBox="0 0 24 24" fill="none">
-                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2"/>
-                                    <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4>Email</h4>
-                                <p>your.email@example.com</p>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <div class="method-icon">
-                                <svg viewBox="0 0 24 24" fill="none">
-                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4>Phone</h4>
-                                <p>+1 (555) 123-4567</p>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <div class="method-icon">
-                                <svg viewBox="0 0 24 24" fill="none">
-                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2"/>
-                                    <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4>Location</h4>
-                                <p>Your City, Country</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Twitter">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                <h2 class="contact-title" data-animation="split">
+                    Have a project in mind? Let's create something extraordinary together.
+                </h2>
+                <div class="contact-cta">
+                    <a href="mailto:hello@joelalrinhlua.me" class="contact-btn magnetic">
+                        <span class="contact-btn-text">Start a Project</span>
+                        <span class="contact-btn-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                        </a>
-                        <a href="#" class="social-link" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
-                                <circle cx="4" cy="4" r="2"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="social-link" aria-label="GitHub">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Dribbble">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.53m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32" stroke="white" stroke-width="2" fill="none"/>
-                            </svg>
-                        </a>
-                    </div>
+                        </span>
+                    </a>
                 </div>
-                <div class="contact-form-wrapper">
-                    <form class="contact-form">
-                        <div class="form-group">
-                            <input type="text" id="name" class="form-input" placeholder=" " required>
-                            <label for="name" class="form-label">Your Name</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" class="form-input" placeholder=" " required>
-                            <label for="email" class="form-label">Your Email</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="subject" class="form-input" placeholder=" ">
-                            <label for="subject" class="form-label">Subject</label>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" class="form-input" rows="5" placeholder=" " required></textarea>
-                            <label for="message" class="form-label">Message</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-full">
-                            <span>Send Message</span>
-                            <svg class="btn-arrow" viewBox="0 0 24 24" fill="none">
-                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </button>
-                    </form>
+            </div>
+            <div class="contact-info">
+                <div class="contact-info-item">
+                    <span class="contact-label">Email</span>
+                    <a href="mailto:hello@joelalrinhlua.me" class="contact-value magnetic">hello@joelalrinhlua.me</a>
+                </div>
+                <div class="contact-info-item">
+                    <span class="contact-label">Location</span>
+                    <span class="contact-value">India</span>
                 </div>
             </div>
         </div>
@@ -373,11 +339,33 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2026 Your Name. All rights reserved. Built with passion and creativity.</p>
+                <div class="footer-left">
+                    <span class="footer-logo">Joel©</span>
+                    <span class="footer-year">2026</span>
+                </div>
+                <div class="footer-center">
+                    <span class="footer-tagline">Crafting Digital Experiences</span>
+                </div>
+                <div class="footer-right">
+                    <div class="footer-socials">
+                        <a href="#" class="footer-social magnetic">Tw</a>
+                        <a href="#" class="footer-social magnetic">Li</a>
+                        <a href="#" class="footer-social magnetic">Gh</a>
+                        <a href="#" class="footer-social magnetic">Dr</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span class="footer-credit">Designed & Built by Joel Lalrinhlua</span>
+                <a href="#home" class="back-to-top magnetic">
+                    <span>Back to top</span>
+                    <span class="arrow">↑</span>
+                </a>
             </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>
