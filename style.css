@@ -748,6 +748,181 @@ button {
     transform: translateX(4px);
 }
 
+/* ===== GAMES SECTION ===== */
+.games {
+    padding: 160px 0;
+    background: var(--bg-secondary);
+}
+
+.games-header {
+    margin-bottom: 80px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--accent-muted);
+}
+
+.games-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 500;
+    margin-bottom: 60px;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 40px;
+}
+
+.game-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--bg-tertiary);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform var(--duration-base) var(--ease-out-expo),
+        box-shadow var(--duration-base) var(--ease-out-expo);
+}
+
+.game-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+}
+
+.game-card-inner {
+    display: flex;
+    flex-direction: column;
+}
+
+.game-preview {
+    position: relative;
+    height: 280px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.game-preview-bg {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+    animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+        transform: scale(1.1) rotate(5deg);
+    }
+}
+
+.game-play-icon {
+    position: relative;
+    z-index: 2;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: var(--text-primary);
+    transition: all var(--duration-fast) var(--ease-out-expo);
+}
+
+.game-card:hover .game-play-icon {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    transform: scale(1.15);
+    border-color: var(--text-primary);
+}
+
+.game-info {
+    padding: 32px;
+}
+
+.game-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 100px;
+    margin-bottom: 16px;
+}
+
+.game-name {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+}
+
+.game-desc {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.game-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 32px;
+    border-top: 1px solid var(--accent-muted);
+    transition: background var(--duration-fast);
+}
+
+.game-card:hover .game-cta {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.game-cta-text {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.game-cta-arrow {
+    font-size: 1.25rem;
+    transition: transform var(--duration-fast) var(--ease-out-expo);
+}
+
+.game-card:hover .game-cta-arrow {
+    transform: translateX(8px);
+}
+
+@media (max-width: 480px) {
+    .games-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .game-preview {
+        height: 200px;
+    }
+
+    .game-play-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+}
+
 /* ===== SERVICES SECTION ===== */
 .services {
     padding: 160px 0;
