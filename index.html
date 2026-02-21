@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Caveat:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <!-- GSAP for animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -40,8 +40,14 @@
     <nav class="nav">
         <div class="nav-container">
             <a href="#home" class="nav-logo magnetic">
-                <span>Joel©</span>
+                <span class="logo-text">Joel<span class="logo-accent">©</span></span>
             </a>
+            <div class="nav-links-desktop">
+                <a href="#about" class="nav-link-desktop">About</a>
+                <a href="#work" class="nav-link-desktop">Work</a>
+                <a href="#games" class="nav-link-desktop">Games</a>
+                <a href="#services" class="nav-link-desktop">Services</a>
+            </div>
             <div class="nav-menu-btn magnetic" id="menu-btn">
                 <span class="menu-text">Menu</span>
                 <div class="menu-icon">
@@ -65,8 +71,8 @@
                 <a href="#about" class="menu-link" data-index="03">
                     <span class="menu-link-text">About</span>
                 </a>
-                <a href="#games" class="menu-link" data-index="04">
-                    <span class="menu-link-text">Games</span>
+                <a href="#process" class="menu-link" data-index="04">
+                    <span class="menu-link-text">Process</span>
                 </a>
                 <a href="#services" class="menu-link" data-index="05">
                     <span class="menu-link-text">Services</span>
@@ -78,14 +84,29 @@
             <div class="menu-info">
                 <div class="menu-info-col">
                     <span class="menu-info-label">Email</span>
-                    <a href="mailto:hello@joelalrinhlua.me" class="menu-info-link">hello@joelalrinhlua.me</a>
+                    <a href="mailto:joelkizyking@gmail.com" class="menu-info-link">joelkizyking@gmail.com</a>
                 </div>
                 <div class="menu-info-col">
                     <span class="menu-info-label">Social</span>
                     <div class="menu-socials">
-                        <a href="#" class="menu-social magnetic">Twitter</a>
-                        <a href="#" class="menu-social magnetic">LinkedIn</a>
-                        <a href="#" class="menu-social magnetic">GitHub</a>
+                        <a href="#" class="menu-social magnetic" title="Twitter/X">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="menu-social magnetic" title="LinkedIn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.365-1.85 3.605 0 4.27 2.372 4.27 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="menu-social magnetic" title="GitHub">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -95,32 +116,64 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <div class="hero-title-wrap">
-                <h1 class="hero-title">
-                    <span class="hero-line">
-                        <span class="hero-word" data-animation="reveal">Creative</span>
-                    </span>
-                    <span class="hero-line">
-                        <span class="hero-word" data-animation="reveal">Developer</span>
-                        <span class="hero-word italic" data-animation="reveal">&</span>
-                    </span>
-                    <span class="hero-line">
-                        <span class="hero-word" data-animation="reveal">Designer</span>
-                    </span>
-                </h1>
+            <div class="hero-top-bar">
+                <span class="hero-year">2026</span>
+                <span class="hero-subtitle-top">Personal Portfolio</span>
             </div>
-            <div class="hero-info">
-                <p class="hero-tagline" data-animation="fade">
-                    Crafting unusually creative digital experiences that transform ideas into impactful realities.
-                </p>
-                <div class="hero-cta">
-                    <a href="#work" class="btn-circle magnetic">
-                        <span class="btn-text">View Work</span>
-                        <span class="btn-arrow">↓</span>
-                    </a>
+
+            <div class="hero-main">
+                <div class="hero-text-side">
+                    <!-- Decorative star -->
+                    <svg class="deco-star deco-star-hero" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <path d="M16 0L19.5 12.5L32 16L19.5 19.5L16 32L12.5 19.5L0 16L12.5 12.5L16 0Z" fill="#1a1a1a" />
+                    </svg>
+
+                    <h1 class="hero-title">
+                        <span class="hero-line">
+                            <span class="hero-word" data-animation="reveal">PORT</span>
+                        </span>
+                        <span class="hero-line">
+                            <span class="hero-word" data-animation="reveal">FOLIO</span>
+                        </span>
+                    </h1>
+
+                    <p class="hero-tagline" data-animation="fade">
+                        Crafting unusually creative digital experiences that transform ideas into impactful realities.
+                    </p>
+
+                    <div class="hero-skills">
+                        <span class="skill-tag">UI Design</span>
+                        <span class="skill-tag">Development</span>
+                        <span class="skill-tag accent-green">Motion</span>
+                        <span class="skill-tag accent-pink">Branding</span>
+                    </div>
+                </div>
+
+                <div class="hero-avatar-side">
+                    <div class="hero-avatar-wrapper">
+                        <img src="avatar.png" alt="Joel Lalrinhlua" class="hero-avatar-img">
+                        <!-- Decorative elements around avatar -->
+                        <svg class="deco-arrow" width="60" height="30" viewBox="0 0 60 30" fill="none">
+                            <path d="M0 15C20 15 30 5 45 5L40 0M45 5L40 10" stroke="#1a1a1a" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span class="deco-label handwritten">Creative Developer</span>
+                    </div>
                 </div>
             </div>
+
+            <div class="hero-bottom-bar">
+                <div class="hero-contact-info">
+                    <span>Email / joelkizyking@gmail.com</span>
+                    <span>Location / India</span>
+                </div>
+                <a href="#work" class="hero-cta-link magnetic">
+                    <span>Explore Work</span>
+                    <span class="cta-arrow">↓</span>
+                </a>
+            </div>
         </div>
+
         <div class="hero-scroll">
             <span class="scroll-text">Scroll to explore</span>
             <div class="scroll-line"></div>
@@ -154,33 +207,100 @@
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <div class="about-header">
+            <div class="section-header">
                 <span class="section-label">(About)</span>
                 <span class="section-number">01</span>
             </div>
+
+            <div class="about-greeting" data-animation="split">
+                <svg class="deco-star" width="24" height="24" viewBox="0 0 32 32" fill="none">
+                    <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="#ff6b9d" />
+                </svg>
+                <h2 class="about-hello">Hello!</h2>
+                <svg class="deco-star" width="20" height="20" viewBox="0 0 32 32" fill="none">
+                    <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="#4ecdc4" />
+                </svg>
+            </div>
+
             <div class="about-content">
-                <h2 class="about-title" data-animation="split">
-                    I'm Joel, a creative developer based in India, passionate about crafting
-                    digital experiences that blend aesthetics with functionality.
-                </h2>
-                <div class="about-details">
+                <div class="about-bio">
+                    <h3 class="about-name" data-animation="fade">I'm Joel Lalrinhlua</h3>
+                    <p class="about-role" data-animation="fade">Creative Developer & Designer</p>
                     <p class="about-text" data-animation="fade">
-                        With a focus on innovative design and clean code, I help brands create
-                        memorable digital products. My approach combines strategic thinking with
-                        creative execution to deliver results that matter.
+                        I'm a creative developer based in India, passionate about crafting
+                        digital experiences that blend aesthetics with functionality. With a focus on
+                        innovative design and clean code, I help brands create memorable digital products.
                     </p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <span class="stat-number" data-count="5">0</span>
-                            <span class="stat-label">Years of Experience</span>
+                    <div class="about-interests">
+                        <span class="interest-label">Domain of interest:</span>
+                        <div class="interest-tags">
+                            <span class="interest-tag">UI/UX Design</span>
+                            <span class="interest-tag">Development</span>
+                            <span class="interest-tag">Motion</span>
                         </div>
-                        <div class="stat">
-                            <span class="stat-number" data-count="50">0</span>
-                            <span class="stat-label">Projects Completed</span>
+                    </div>
+                </div>
+
+                <div class="about-details-grid">
+                    <div class="about-column" data-animation="fade">
+                        <h4 class="column-title">
+                            <svg class="title-deco" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 0V16M0 8H16M2.3 2.3L13.7 13.7M13.7 2.3L2.3 13.7" stroke="#1a1a1a"
+                                    stroke-width="1.5" />
+                            </svg>
+                            Experience
+                        </h4>
+                        <div class="column-item">
+                            <span class="item-period">2021 - Present</span>
+                            <span class="item-title">Creative Developer</span>
+                            <span class="item-detail">Freelance</span>
                         </div>
-                        <div class="stat">
-                            <span class="stat-number" data-count="30">0</span>
-                            <span class="stat-label">Happy Clients</span>
+                        <div class="column-item">
+                            <span class="item-period">2020 - 2021</span>
+                            <span class="item-title">Web Designer</span>
+                            <span class="item-detail">Independent Projects</span>
+                        </div>
+                    </div>
+
+                    <div class="about-column" data-animation="fade">
+                        <h4 class="column-title">
+                            <svg class="title-deco" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 0V16M0 8H16M2.3 2.3L13.7 13.7M13.7 2.3L2.3 13.7" stroke="#1a1a1a"
+                                    stroke-width="1.5" />
+                            </svg>
+                            Aptitudes
+                        </h4>
+                        <div class="aptitude-tags">
+                            <span class="aptitude-tag">HTML/CSS</span>
+                            <span class="aptitude-tag">JavaScript</span>
+                            <span class="aptitude-tag">React</span>
+                            <span class="aptitude-tag">GSAP</span>
+                            <span class="aptitude-tag">Figma</span>
+                            <span class="aptitude-tag">GameMaker</span>
+                        </div>
+                    </div>
+
+                    <div class="about-column" data-animation="fade">
+                        <h4 class="column-title">
+                            <svg class="title-deco" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 0V16M0 8H16M2.3 2.3L13.7 13.7M13.7 2.3L2.3 13.7" stroke="#1a1a1a"
+                                    stroke-width="1.5" />
+                            </svg>
+                            Stats
+                        </h4>
+                        <div class="stats-grid">
+                            <div class="stat">
+                                <span class="stat-number" data-count="5">0</span>
+                                <span class="stat-label">Years Exp</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" data-count="50">0</span>
+                                <span class="stat-label">Projects</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" data-count="30">0</span>
+                                <span class="stat-label">Clients</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -188,60 +308,73 @@
         </div>
     </section>
 
-    <!-- Work Section - Horizontal Scroll -->
+    <!-- Work Section -->
     <section id="work" class="work">
         <div class="container">
-            <div class="work-header">
+            <div class="section-header">
                 <span class="section-label">(Selected Work)</span>
                 <span class="section-number">02</span>
             </div>
-            <h2 class="work-title" data-animation="split">Featured Projects</h2>
-        </div>
-        <div class="work-horizontal">
-            <div class="work-horizontal-wrapper">
-                <div class="work-item">
-                    <div class="work-image">
-                        <div class="work-image-inner"></div>
+
+            <div class="work-title-row">
+                <h2 class="work-title" data-animation="split">Works</h2>
+                <div class="work-title-deco">
+                    <svg class="deco-star" width="28" height="28" viewBox="0 0 32 32" fill="none">
+                        <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="#ffd93d" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="works-numbered-grid">
+                <div class="work-card" data-animation="fade">
+                    <div class="work-card-number">01</div>
+                    <div class="work-card-image">
+                        <div class="work-card-image-inner gradient-1"></div>
                     </div>
-                    <div class="work-info">
-                        <span class="work-category">Web Design</span>
-                        <h3 class="work-name">Project Alpha</h3>
-                        <p class="work-desc">Brand identity and web experience for a tech startup</p>
+                    <div class="work-card-info">
+                        <span class="work-card-category">Web Design</span>
+                        <h3 class="work-card-name">Project Alpha</h3>
+                        <p class="work-card-desc">Brand identity and web experience for a tech startup</p>
                     </div>
                 </div>
-                <div class="work-item">
-                    <div class="work-image">
-                        <div class="work-image-inner"></div>
+
+                <div class="work-card" data-animation="fade">
+                    <div class="work-card-number">02</div>
+                    <div class="work-card-image">
+                        <div class="work-card-image-inner gradient-2"></div>
                     </div>
-                    <div class="work-info">
-                        <span class="work-category">Development</span>
-                        <h3 class="work-name">Project Beta</h3>
-                        <p class="work-desc">Full-stack application with modern architecture</p>
-                    </div>
-                </div>
-                <div class="work-item">
-                    <div class="work-image">
-                        <div class="work-image-inner"></div>
-                    </div>
-                    <div class="work-info">
-                        <span class="work-category">UI/UX Design</span>
-                        <h3 class="work-name">Project Gamma</h3>
-                        <p class="work-desc">Mobile app design for fitness platform</p>
+                    <div class="work-card-info">
+                        <span class="work-card-category">Development</span>
+                        <h3 class="work-card-name">Project Beta</h3>
+                        <p class="work-card-desc">Full-stack application with modern architecture</p>
                     </div>
                 </div>
-                <div class="work-item">
-                    <div class="work-image">
-                        <div class="work-image-inner"></div>
+
+                <div class="work-card" data-animation="fade">
+                    <div class="work-card-number">03</div>
+                    <div class="work-card-image">
+                        <div class="work-card-image-inner gradient-3"></div>
                     </div>
-                    <div class="work-info">
-                        <span class="work-category">Branding</span>
-                        <h3 class="work-name">Project Delta</h3>
-                        <p class="work-desc">Complete brand refresh for creative agency</p>
+                    <div class="work-card-info">
+                        <span class="work-card-category">UI/UX Design</span>
+                        <h3 class="work-card-name">Project Gamma</h3>
+                        <p class="work-card-desc">Mobile app design for fitness platform</p>
+                    </div>
+                </div>
+
+                <div class="work-card" data-animation="fade">
+                    <div class="work-card-number">04</div>
+                    <div class="work-card-image">
+                        <div class="work-card-image-inner gradient-4"></div>
+                    </div>
+                    <div class="work-card-info">
+                        <span class="work-card-category">Branding</span>
+                        <h3 class="work-card-name">Project Delta</h3>
+                        <p class="work-card-desc">Complete brand refresh for creative agency</p>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="container">
+
             <a href="#" class="view-all-link magnetic">
                 <span>View all projects</span>
                 <span class="arrow">→</span>
@@ -249,42 +382,102 @@
         </div>
     </section>
 
-    <!-- Games Section -->
-    <section id="games" class="games">
+    <!-- My Process Section -->
+    <section id="process" class="process">
         <div class="container">
-            <div class="games-header">
-                <span class="section-label">(Play)</span>
+            <div class="section-header">
+                <span class="section-label">(How I Work)</span>
                 <span class="section-number">03</span>
             </div>
-            <h2 class="games-title" data-animation="split">Games & Experiments</h2>
-            <div class="games-grid">
-                <a href="DASHhtmlzip/dashexe.html" target="_blank" class="game-card magnetic" data-animation="fade">
-                    <div class="game-card-inner">
-                        <div class="game-preview">
-                            <div class="game-preview-bg"></div>
-                            <span class="game-play-icon">▶</span>
-                        </div>
-                        <div class="game-info">
-                            <span class="game-tag">WebGL Game</span>
-                            <h3 class="game-name">DASH</h3>
-                            <p class="game-desc">An action-packed browser game built with GameMaker. Click to play!</p>
-                        </div>
-                        <div class="game-cta">
-                            <span class="game-cta-text">Play Now</span>
-                            <span class="game-cta-arrow">→</span>
-                        </div>
+
+            <div class="process-title-row">
+                <h2 class="process-title" data-animation="split">My Process</h2>
+                <svg class="deco-arrow-down" width="40" height="40" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 4L12 20M12 20L18 14M12 20L6 14" stroke="#ff8a5c" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-step" data-animation="fade">
+                    <div class="step-number handwritten">Step 1</div>
+                    <div class="step-content">
+                        <h3 class="step-name">Discovery & Strategy</h3>
+                        <p class="step-desc">We start by understanding your goals, audience, and project requirements to
+                            build a solid foundation.</p>
                     </div>
-                </a>
+                </div>
+
+                <div class="process-step" data-animation="fade">
+                    <div class="step-number handwritten">Step 2</div>
+                    <div class="step-content">
+                        <h3 class="step-name">Design & Prototyping</h3>
+                        <p class="step-desc">Creating wireframes and visual designs that bring the strategic vision to
+                            life with pixel-perfect precision.</p>
+                    </div>
+                </div>
+
+                <div class="process-step" data-animation="fade">
+                    <div class="step-number handwritten">Step 3</div>
+                    <div class="step-content">
+                        <h3 class="step-name">Development</h3>
+                        <p class="step-desc">Translating designs into clean, semantic code with modern frameworks and
+                            smooth animations.</p>
+                    </div>
+                </div>
+
+                <div class="process-step" data-animation="fade">
+                    <div class="step-number handwritten">Step 4</div>
+                    <div class="step-content">
+                        <h3 class="step-name">Launch & Refine</h3>
+                        <p class="step-desc">Rigorous testing across devices followed by deployment and ongoing
+                            optimizations.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">(Kind Words)</span>
+                <span class="section-number">04</span>
+            </div>
+
+            <div class="testimonials-slider" data-animation="fade">
+                <div class="testimonial-card">
+                    <div class="quote-mark">"</div>
+                    <p class="testimonial-text">Joel completely transformed our digital presence. The new website is not
+                        only beautiful but extremely fast and user-friendly. Highly recommended!</p>
+                    <div class="testimonial-author">
+                        <span class="author-name">Sarah Chen</span>
+                        <span class="author-role">Founder, TechSpace</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="quote-mark">"</div>
+                    <p class="testimonial-text">Working with Joel was an absolute pleasure. He brought our creative
+                        vision to life with incredible animations that wow our customers every time.</p>
+                    <div class="testimonial-author">
+                        <span class="author-name">Marcus Johnson</span>
+                        <span class="author-role">Creative Director, Studio Y</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Section removed as requested -->
+
     <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
-            <div class="services-header">
+            <div class="section-header">
                 <span class="section-label">(What I Do)</span>
-                <span class="section-number">04</span>
+                <span class="section-number">05</span>
             </div>
             <h2 class="services-title" data-animation="split">Services & Expertise</h2>
             <div class="services-grid">
@@ -303,8 +496,8 @@
                     <h3 class="service-name">Development</h3>
                     <p class="service-desc">Building fast, scalable, and maintainable web applications</p>
                     <ul class="service-list">
-                        <li>Frontend Development</li>
-                        <li>Backend Development</li>
+                        <li>Frontend Dev</li>
+                        <li>Backend Dev</li>
                         <li>API Integration</li>
                     </ul>
                 </div>
@@ -335,30 +528,38 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <div class="contact-header">
+            <div class="section-header">
                 <span class="section-label">(Get in Touch)</span>
-                <span class="section-number">05</span>
+                <span class="section-number">06</span>
             </div>
             <div class="contact-content">
+                <div class="contact-deco">
+                    <svg class="deco-star" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="#4ecdc4" />
+                    </svg>
+                </div>
                 <h2 class="contact-title" data-animation="split">
-                    Have a project in mind? Let's create something extraordinary together.
+                    <span class="contact-thanks handwritten">Thanks!</span>
+                    <br>
+                    Let's create something extraordinary together.
                 </h2>
+                <p class="contact-subtitle">If you are interested, please contact me.</p>
                 <div class="contact-cta">
-                    <a href="mailto:hello@joelalrinhlua.me" class="contact-btn magnetic">
-                        <span class="contact-btn-text">Start a Project</span>
+                    <button class="contact-btn magnetic mt-trigger">
+                        <span class="contact-btn-text">Contact Me</span>
                         <span class="contact-btn-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </span>
-                    </a>
+                    </button>
                 </div>
             </div>
             <div class="contact-info">
                 <div class="contact-info-item">
                     <span class="contact-label">Email</span>
-                    <a href="joelkizyking@gmail.com" class="contact-value magnetic">joelkizyking@gmail.com</a>
+                    <a href="mailto:joelkizyking@gmail.com" class="contact-value magnetic">joelkizyking@gmail.com</a>
                 </div>
                 <div class="contact-info-item">
                     <span class="contact-label">Location</span>
@@ -381,10 +582,24 @@
                 </div>
                 <div class="footer-right">
                     <div class="footer-socials">
-                        <a href="#" class="footer-social magnetic">Tw</a>
-                        <a href="#" class="footer-social magnetic">Li</a>
-                        <a href="#" class="footer-social magnetic">Gh</a>
-                        <a href="#" class="footer-social magnetic">Dr</a>
+                        <a href="#" class="footer-social magnetic" title="Twitter/X">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="footer-social magnetic" title="LinkedIn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.365-1.85 3.605 0 4.27 2.372 4.27 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="footer-social magnetic" title="GitHub">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -398,8 +613,46 @@
         </div>
     </footer>
 
+    <!-- Floating Status Widget -->
+    <div class="status-widget magnetic">
+        <div class="status-dot"></div>
+        <div class="status-content">
+            <span class="status-label">Currently</span>
+            <span class="status-text">Available for work</span>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="contact-modal" id="contact-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">×</button>
+            <div class="modal-header">
+                <svg class="deco-star" width="24" height="24" viewBox="0 0 32 32" fill="none">
+                    <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="#ff6b9d" />
+                </svg>
+                <h3 class="modal-title">Write to Me</h3>
+            </div>
+            <form class="contact-form" action="mailto:joelkizyking@gmail.com" method="post" enctype="text/plain">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" placeholder="How can we build something amazing?"
+                        required></textarea>
+                </div>
+                <button type="submit" class="submit-btn magnetic">Send Message 🚀</button>
+            </form>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
-
 
 </html>
