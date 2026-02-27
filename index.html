@@ -1,635 +1,629 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="is-scroll-blocked theme-contrasted">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <title>Joel Lalrinhlua – Creative Developer</title>
     <meta name="description"
-        content="Joel Lalrinhlua - Creative Developer & Designer crafting exceptional digital experiences">
-    <title>Joel Lalrinhlua | Creative Developer</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Caveat:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-    <!-- GSAP for animations -->
+        content="Joel Lalrinhlua – Creative Developer & Designer crafting exceptional digital experiences. Based in India." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="theme-color" content="#160000" />
+
+    <!-- Fonts -->
+    <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="fonts/PPEditorialNew-Ultralight.woff2" as="font" type="font/woff2"
+        crossorigin="anonymous" />
+    <link rel="preload" href="fonts/PPFraktionMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="fonts/PPFraktionMono-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="fonts/Bigger-Display.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
+    <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <!-- Loading Screen -->
-    <div class="loader" id="loader">
-        <div class="loader-content">
-            <div class="loader-text">
-                <span class="loader-word">Joel</span>
-                <span class="loader-word">Lalrinhlua</span>
-            </div>
-            <div class="loader-progress">
-                <div class="loader-bar"></div>
-            </div>
-        </div>
-    </div>
+    <!-- ===== SITE WRAPPER ===== -->
+    <div class="site-wrapper js-site-wrapper" style="opacity: 0;">
 
-    <!-- Custom Cursor -->
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-follower" id="cursor-follower"></div>
-
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-container">
-            <a href="#home" class="nav-logo magnetic">
-                <span class="logo-text">Joel<span class="logo-accent">©</span></span>
-            </a>
-            <div class="nav-links-desktop">
-                <a href="#about" class="nav-link-desktop">About</a>
-                <a href="#work" class="nav-link-desktop">Work</a>
-                <a href="#games" class="nav-link-desktop">Games</a>
-                <a href="#services" class="nav-link-desktop">Services</a>
-            </div>
-            <div class="nav-menu-btn magnetic" id="menu-btn">
-                <span class="menu-text">Menu</span>
-                <div class="menu-icon">
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Full Screen Menu -->
-    <div class="menu-overlay" id="menu-overlay">
-        <div class="menu-container">
-            <div class="menu-links">
-                <a href="#home" class="menu-link" data-index="01">
-                    <span class="menu-link-text">Home</span>
-                </a>
-                <a href="#work" class="menu-link" data-index="02">
-                    <span class="menu-link-text">Work</span>
-                </a>
-                <a href="#about" class="menu-link" data-index="03">
-                    <span class="menu-link-text">About</span>
-                </a>
-                <a href="#process" class="menu-link" data-index="04">
-                    <span class="menu-link-text">Process</span>
-                </a>
-                <a href="#services" class="menu-link" data-index="05">
-                    <span class="menu-link-text">Services</span>
-                </a>
-                <a href="#contact" class="menu-link" data-index="06">
-                    <span class="menu-link-text">Contact</span>
-                </a>
-            </div>
-            <div class="menu-info">
-                <div class="menu-info-col">
-                    <span class="menu-info-label">Email</span>
-                    <a href="mailto:joelkizyking@gmail.com" class="menu-info-link">joelkizyking@gmail.com</a>
-                </div>
-                <div class="menu-info-col">
-                    <span class="menu-info-label">Social</span>
-                    <div class="menu-socials">
-                        <a href="#" class="menu-social magnetic" title="Twitter/X">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="menu-social magnetic" title="LinkedIn">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.365-1.85 3.605 0 4.27 2.372 4.27 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="menu-social magnetic" title="GitHub">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-top-bar">
-                <span class="hero-year">2026</span>
-                <span class="hero-subtitle-top">Personal Portfolio</span>
-            </div>
-
-            <div class="hero-main">
-                <div class="hero-text-side">
-                    <!-- Decorative star -->
-                    <svg class="deco-star deco-star-hero" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                        <path d="M16 0L19.5 12.5L32 16L19.5 19.5L16 32L12.5 19.5L0 16L12.5 12.5L16 0Z" fill="#1a1a1a" />
-                    </svg>
-
-                    <h1 class="hero-title">
-                        <span class="hero-line">
-                            <span class="hero-word" data-animation="reveal">PORT</span>
-                        </span>
-                        <span class="hero-line">
-                            <span class="hero-word" data-animation="reveal">FOLIO</span>
-                        </span>
-                    </h1>
-
-                    <p class="hero-tagline" data-animation="fade">
-                        Crafting unusually creative digital experiences that transform ideas into impactful realities.
-                    </p>
-
-                    <div class="hero-skills">
-                        <span class="skill-tag">UI Design</span>
-                        <span class="skill-tag">Development</span>
-                        <span class="skill-tag accent-green">Motion</span>
-                        <span class="skill-tag accent-pink">Branding</span>
-                    </div>
-                </div>
-
-                <div class="hero-avatar-side">
-                    <div class="hero-avatar-wrapper">
-                        <img src="avatar.png" alt="Joel Lalrinhlua" class="hero-avatar-img">
-                        <!-- Decorative elements around avatar -->
-                        <svg class="deco-arrow" width="60" height="30" viewBox="0 0 60 30" fill="none">
-                            <path d="M0 15C20 15 30 5 45 5L40 0M45 5L40 10" stroke="#1a1a1a" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
+        <!-- ===== HEADER ===== -->
+        <header class="site-head" data-intersect>
+            <div class="site-head__container">
+                <!-- Logo -->
+                <div class="sb-logo">
+                    <a href="#">
+                        <svg class="js-logo" width="280" height="280" viewBox="0 0 280 280" fill="none">
+                            <!-- J -->
+                            <path d="M0 0h40v220c0 33.137-26.863 60-60 60h-20v-40h20c11.046 0 20-8.954 20-20V0z"
+                                fill="#160000" />
+                            <!-- L -->
+                            <path d="M120 0h40v240h100v40H120V0z" fill="#160000" />
                         </svg>
-                        <span class="deco-label handwritten">Creative Developer</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hero-bottom-bar">
-                <div class="hero-contact-info">
-                    <span>Email / joelkizyking@gmail.com</span>
-                    <span>Location / India</span>
-                </div>
-                <a href="#work" class="hero-cta-link magnetic">
-                    <span>Explore Work</span>
-                    <span class="cta-arrow">↓</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="hero-scroll">
-            <span class="scroll-text">Scroll to explore</span>
-            <div class="scroll-line"></div>
-        </div>
-    </section>
-
-    <!-- Marquee Section -->
-    <section class="marquee-section">
-        <div class="marquee">
-            <div class="marquee-content">
-                <span class="marquee-item">Design</span>
-                <span class="marquee-separator">✦</span>
-                <span class="marquee-item">Development</span>
-                <span class="marquee-separator">✦</span>
-                <span class="marquee-item">Motion</span>
-                <span class="marquee-separator">✦</span>
-                <span class="marquee-item">Branding</span>
-                <span class="marquee-separator">✦</span>
-                <span class="marquee-item">Design</span>
-                <span class="marquee-separator">✦</span>
-                <span class="marquee-item">Development</span>
-                <span class="marquee-separator">✦</span>
-                <span class="marquee-item">Motion</span>
-                <span class="marquee-separator">✦</span>
-                <span class="marquee-item">Branding</span>
-                <span class="marquee-separator">✦</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">(About)</span>
-                <span class="section-number">01</span>
-            </div>
-
-            <div class="about-greeting" data-animation="split">
-                <svg class="deco-star" width="24" height="24" viewBox="0 0 32 32" fill="none">
-                    <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="#ff6b9d" />
-                </svg>
-                <h2 class="about-hello">Hello!</h2>
-                <svg class="deco-star" width="20" height="20" viewBox="0 0 32 32" fill="none">
-                    <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="#4ecdc4" />
-                </svg>
-            </div>
-
-            <div class="about-content">
-                <div class="about-bio">
-                    <h3 class="about-name" data-animation="fade">I'm Joel Lalrinhlua</h3>
-                    <p class="about-role" data-animation="fade">Creative Developer & Designer</p>
-                    <p class="about-text" data-animation="fade">
-                        I'm a creative developer based in India, passionate about crafting
-                        digital experiences that blend aesthetics with functionality. With a focus on
-                        innovative design and clean code, I help brands create memorable digital products.
-                    </p>
-                    <div class="about-interests">
-                        <span class="interest-label">Domain of interest:</span>
-                        <div class="interest-tags">
-                            <span class="interest-tag">UI/UX Design</span>
-                            <span class="interest-tag">Development</span>
-                            <span class="interest-tag">Motion</span>
-                        </div>
-                    </div>
+                        <span class="u-sr-only">Joel Lalrinhlua</span>
+                    </a>
                 </div>
 
-                <div class="about-details-grid">
-                    <div class="about-column" data-animation="fade">
-                        <h4 class="column-title">
-                            <svg class="title-deco" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M8 0V16M0 8H16M2.3 2.3L13.7 13.7M13.7 2.3L2.3 13.7" stroke="#1a1a1a"
-                                    stroke-width="1.5" />
-                            </svg>
-                            Experience
-                        </h4>
-                        <div class="column-item">
-                            <span class="item-period">2021 - Present</span>
-                            <span class="item-title">Creative Developer</span>
-                            <span class="item-detail">Freelance</span>
-                        </div>
-                        <div class="column-item">
-                            <span class="item-period">2020 - 2021</span>
-                            <span class="item-title">Web Designer</span>
-                            <span class="item-detail">Independent Projects</span>
-                        </div>
-                    </div>
-
-                    <div class="about-column" data-animation="fade">
-                        <h4 class="column-title">
-                            <svg class="title-deco" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M8 0V16M0 8H16M2.3 2.3L13.7 13.7M13.7 2.3L2.3 13.7" stroke="#1a1a1a"
-                                    stroke-width="1.5" />
-                            </svg>
-                            Aptitudes
-                        </h4>
-                        <div class="aptitude-tags">
-                            <span class="aptitude-tag">HTML/CSS</span>
-                            <span class="aptitude-tag">JavaScript</span>
-                            <span class="aptitude-tag">React</span>
-                            <span class="aptitude-tag">GSAP</span>
-                            <span class="aptitude-tag">Figma</span>
-                            <span class="aptitude-tag">GameMaker</span>
-                        </div>
-                    </div>
-
-                    <div class="about-column" data-animation="fade">
-                        <h4 class="column-title">
-                            <svg class="title-deco" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M8 0V16M0 8H16M2.3 2.3L13.7 13.7M13.7 2.3L2.3 13.7" stroke="#1a1a1a"
-                                    stroke-width="1.5" />
-                            </svg>
-                            Stats
-                        </h4>
-                        <div class="stats-grid">
-                            <div class="stat">
-                                <span class="stat-number" data-count="5">0</span>
-                                <span class="stat-label">Years Exp</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-number" data-count="50">0</span>
-                                <span class="stat-label">Projects</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-number" data-count="30">0</span>
-                                <span class="stat-label">Clients</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Work Section -->
-    <section id="work" class="work">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">(Selected Work)</span>
-                <span class="section-number">02</span>
-            </div>
-
-            <div class="work-title-row">
-                <h2 class="work-title" data-animation="split">Works</h2>
-                <div class="work-title-deco">
-                    <svg class="deco-star" width="28" height="28" viewBox="0 0 32 32" fill="none">
-                        <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="#ffd93d" />
-                    </svg>
-                </div>
-            </div>
-
-            <div class="works-numbered-grid">
-                <div class="work-card" data-animation="fade">
-                    <div class="work-card-number">01</div>
-                    <div class="work-card-image">
-                        <div class="work-card-image-inner gradient-1"></div>
-                    </div>
-                    <div class="work-card-info">
-                        <span class="work-card-category">Web Design</span>
-                        <h3 class="work-card-name">Project Alpha</h3>
-                        <p class="work-card-desc">Brand identity and web experience for a tech startup</p>
-                    </div>
+                <!-- Console -->
+                <div class="sb-console" role="presentation">
+                    <div class="sb-console__inner js-console"></div>
                 </div>
 
-                <div class="work-card" data-animation="fade">
-                    <div class="work-card-number">02</div>
-                    <div class="work-card-image">
-                        <div class="work-card-image-inner gradient-2"></div>
-                    </div>
-                    <div class="work-card-info">
-                        <span class="work-card-category">Development</span>
-                        <h3 class="work-card-name">Project Beta</h3>
-                        <p class="work-card-desc">Full-stack application with modern architecture</p>
-                    </div>
-                </div>
-
-                <div class="work-card" data-animation="fade">
-                    <div class="work-card-number">03</div>
-                    <div class="work-card-image">
-                        <div class="work-card-image-inner gradient-3"></div>
-                    </div>
-                    <div class="work-card-info">
-                        <span class="work-card-category">UI/UX Design</span>
-                        <h3 class="work-card-name">Project Gamma</h3>
-                        <p class="work-card-desc">Mobile app design for fitness platform</p>
-                    </div>
-                </div>
-
-                <div class="work-card" data-animation="fade">
-                    <div class="work-card-number">04</div>
-                    <div class="work-card-image">
-                        <div class="work-card-image-inner gradient-4"></div>
-                    </div>
-                    <div class="work-card-info">
-                        <span class="work-card-category">Branding</span>
-                        <h3 class="work-card-name">Project Delta</h3>
-                        <p class="work-card-desc">Complete brand refresh for creative agency</p>
-                    </div>
-                </div>
-            </div>
-
-            <a href="#" class="view-all-link magnetic">
-                <span>View all projects</span>
-                <span class="arrow">→</span>
-            </a>
-        </div>
-    </section>
-
-    <!-- My Process Section -->
-    <section id="process" class="process">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">(How I Work)</span>
-                <span class="section-number">03</span>
-            </div>
-
-            <div class="process-title-row">
-                <h2 class="process-title" data-animation="split">My Process</h2>
-                <svg class="deco-arrow-down" width="40" height="40" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 4L12 20M12 20L18 14M12 20L6 14" stroke="#ff8a5c" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-            </div>
-
-            <div class="process-steps">
-                <div class="process-step" data-animation="fade">
-                    <div class="step-number handwritten">Step 1</div>
-                    <div class="step-content">
-                        <h3 class="step-name">Discovery & Strategy</h3>
-                        <p class="step-desc">We start by understanding your goals, audience, and project requirements to
-                            build a solid foundation.</p>
-                    </div>
-                </div>
-
-                <div class="process-step" data-animation="fade">
-                    <div class="step-number handwritten">Step 2</div>
-                    <div class="step-content">
-                        <h3 class="step-name">Design & Prototyping</h3>
-                        <p class="step-desc">Creating wireframes and visual designs that bring the strategic vision to
-                            life with pixel-perfect precision.</p>
-                    </div>
-                </div>
-
-                <div class="process-step" data-animation="fade">
-                    <div class="step-number handwritten">Step 3</div>
-                    <div class="step-content">
-                        <h3 class="step-name">Development</h3>
-                        <p class="step-desc">Translating designs into clean, semantic code with modern frameworks and
-                            smooth animations.</p>
-                    </div>
-                </div>
-
-                <div class="process-step" data-animation="fade">
-                    <div class="step-number handwritten">Step 4</div>
-                    <div class="step-content">
-                        <h3 class="step-name">Launch & Refine</h3>
-                        <p class="step-desc">Rigorous testing across devices followed by deployment and ongoing
-                            optimizations.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">(Kind Words)</span>
-                <span class="section-number">04</span>
-            </div>
-
-            <div class="testimonials-slider" data-animation="fade">
-                <div class="testimonial-card">
-                    <div class="quote-mark">"</div>
-                    <p class="testimonial-text">Joel completely transformed our digital presence. The new website is not
-                        only beautiful but extremely fast and user-friendly. Highly recommended!</p>
-                    <div class="testimonial-author">
-                        <span class="author-name">Sarah Chen</span>
-                        <span class="author-role">Founder, TechSpace</span>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="quote-mark">"</div>
-                    <p class="testimonial-text">Working with Joel was an absolute pleasure. He brought our creative
-                        vision to life with incredible animations that wow our customers every time.</p>
-                    <div class="testimonial-author">
-                        <span class="author-name">Marcus Johnson</span>
-                        <span class="author-role">Creative Director, Studio Y</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Games Section removed as requested -->
-
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">(What I Do)</span>
-                <span class="section-number">05</span>
-            </div>
-            <h2 class="services-title" data-animation="split">Services & Expertise</h2>
-            <div class="services-grid">
-                <div class="service-item" data-animation="fade">
-                    <span class="service-number">01</span>
-                    <h3 class="service-name">Web Design</h3>
-                    <p class="service-desc">Creating stunning, user-centered designs that captivate and convert</p>
-                    <ul class="service-list">
-                        <li>UI/UX Design</li>
-                        <li>Responsive Design</li>
-                        <li>Design Systems</li>
+                <!-- Nav -->
+                <nav class="sb-menu">
+                    <ul class="sb__list">
+                        <li class="sb__item js-menu-item">
+                            <a href="#about" class="js-menu-link"><span class="sb__text">About</span></a>
+                        </li>
+                        <li class="sb__item js-menu-item">
+                            <a href="#work" class="js-menu-link"><span class="sb__text">Work</span></a>
+                        </li>
+                        <li class="sb__item js-menu-item">
+                            <a href="#contact" class="js-menu-link"><span class="sb__text">Contact</span></a>
+                        </li>
                     </ul>
-                </div>
-                <div class="service-item" data-animation="fade">
-                    <span class="service-number">02</span>
-                    <h3 class="service-name">Development</h3>
-                    <p class="service-desc">Building fast, scalable, and maintainable web applications</p>
-                    <ul class="service-list">
-                        <li>Frontend Dev</li>
-                        <li>Backend Dev</li>
-                        <li>API Integration</li>
-                    </ul>
-                </div>
-                <div class="service-item" data-animation="fade">
-                    <span class="service-number">03</span>
-                    <h3 class="service-name">Motion & Animation</h3>
-                    <p class="service-desc">Bringing interfaces to life with thoughtful micro-interactions</p>
-                    <ul class="service-list">
-                        <li>GSAP Animations</li>
-                        <li>Scroll Effects</li>
-                        <li>3D & WebGL</li>
-                    </ul>
-                </div>
-                <div class="service-item" data-animation="fade">
-                    <span class="service-number">04</span>
-                    <h3 class="service-name">Branding</h3>
-                    <p class="service-desc">Developing cohesive brand identities that resonate</p>
-                    <ul class="service-list">
-                        <li>Brand Strategy</li>
-                        <li>Visual Identity</li>
-                        <li>Brand Guidelines</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+                </nav>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">(Get in Touch)</span>
-                <span class="section-number">06</span>
-            </div>
-            <div class="contact-content">
-                <div class="contact-deco">
-                    <svg class="deco-star" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                        <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="#4ecdc4" />
-                    </svg>
-                </div>
-                <h2 class="contact-title" data-animation="split">
-                    <span class="contact-thanks handwritten">Thanks!</span>
-                    <br>
-                    Let's create something extraordinary together.
-                </h2>
-                <p class="contact-subtitle">If you are interested, please contact me.</p>
-                <div class="contact-cta">
-                    <button class="contact-btn magnetic mt-trigger">
-                        <span class="contact-btn-text">Contact Me</span>
-                        <span class="contact-btn-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
+                <!-- Socials -->
+                <ul class="sb-socials">
+                    <li class="sb__item">
+                        <a href="https://github.com/JoelLalrinhlua" target="_blank" rel="noopener" title="GitHub">
+                            <span class="sb__icon sb__icon--github"
+                                style="--path: path('M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12');">
+                            </span>
+                            <span class="u-sr-only">GitHub</span>
+                        </a>
+                    </li>
+                    <li class="sb__item">
+                        <a href="https://www.linkedin.com/in/joel-lalrinhlua/" target="_blank" rel="noopener"
+                            title="LinkedIn">
+                            <span class="sb__icon sb__icon--linkedin"
+                                style="--path: path('M1.13 14.98h2.81V4.6H1.13v10.38zm1.4-14.97C1.6.01.85.76.85 1.7c0 .935.748 1.684 1.683 1.684.936 0 1.684-.749 1.684-1.684 0-.936-.748-1.684-1.684-1.684zm6.18 6.18V4.6H5.9v10.38h2.81V9.65c0-2.994 3.836-3.18 3.836 0v5.33h2.806V8.62c0-5.05-5.332-4.864-6.642-2.432z');">
+                            </span>
+                            <span class="u-sr-only">LinkedIn</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Contrast Toggle -->
+                <button class="sb-contrast js-contrast" type="button">
+                    <span class="sb__icon"
+                        style="--path: path('M10.1 20C8.716 20 7.416 19.737 6.2 19.212 4.983 18.687 3.925 17.974 3.025 17.075 2.125 16.176 1.412 15.117.888 13.9.363 12.683.1 11.383.1 10 .099 8.617.362 7.317.888 6.1 1.414 4.883 2.126 3.824 3.025 2.925 3.923 2.026 4.982 1.313 6.2.788 7.418.263 8.718 0 10.1 0c1.382 0 2.682.263 3.9.788 1.218.525 2.276 1.238 3.175 2.137.899.899 1.611 1.958 2.138 3.175.527 1.217.789 2.517.787 3.9-.002 1.383-.265 2.683-.788 3.9-.527 1.117-1.239 2.176-2.138 3.075-.899.899-1.957 1.612-3.175 2.138-1.216.526-2.516.788-3.9.787zM11.1 17.925c1.983-.25 3.646-1.121 4.988-2.613 1.342-1.492 2.013-3.263 2.012-5.312-.001-2.05-.672-3.82-2.014-5.312C14.744 3.196 13.083 2.325 11.1 2.075v15.85z');">
+                    </span>
+                    <span class="u-sr-only">Toggle contrast</span>
+                </button>
+
+                <!-- Availability -->
+                <aside class="sb-availability">
+                    <p>
+                        <span class="sb__line">
+                            <span class="sb__text">Coding from India.</span>
                         </span>
-                    </button>
-                </div>
+                        <span class="sb__line">
+                            <span class="sb__text">Available for freelance →</span>
+                            <a href="mailto:joelkizyking@gmail.com" class="sb__link">Hire me</a>
+                        </span>
+                    </p>
+                </aside>
             </div>
-            <div class="contact-info">
-                <div class="contact-info-item">
-                    <span class="contact-label">Email</span>
-                    <a href="mailto:joelkizyking@gmail.com" class="contact-value magnetic">joelkizyking@gmail.com</a>
-                </div>
-                <div class="contact-info-item">
-                    <span class="contact-label">Location</span>
-                    <span class="contact-value">India</span>
-                </div>
-            </div>
-        </div>
-    </section>
+        </header>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-left">
-                    <span class="footer-logo">Joel©</span>
-                    <span class="footer-year">2026</span>
+        <!-- ===== HERO ===== -->
+        <div class="s-hero" data-intersect>
+            <div class="a-waves s__waves" data-intersect>
+                <svg class="js-waves-svg"></svg>
+            </div>
+
+            <div class="s__content js-hero-content">
+                <!-- Top separator -->
+                <div class="a-separator s__separator js-separator">
+                    <div class="a-separator__inner">
+                        <span>Joel</span>
+                        <span>Lalrin</span>
+                        <span>hlua</span>
+                    </div>
                 </div>
-                <div class="footer-center">
-                    <span class="footer-tagline">Crafting Digital Experiences</span>
-                </div>
-                <div class="footer-right">
-                    <div class="footer-socials">
-                        <a href="#" class="footer-social magnetic" title="Twitter/X">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="footer-social magnetic" title="LinkedIn">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.365-1.85 3.605 0 4.27 2.372 4.27 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="footer-social magnetic" title="GitHub">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                            </svg>
-                        </a>
+
+                <h1 class="s__title">
+                    <span class="s__title__word js-word">Creative</span>
+                    <img class="s__title__asset js-star" src="asset-star.svg" alt="" width="48" height="48" />
+                    <span class="s__title__word js-word">Developer</span>
+                </h1>
+
+                <!-- Bottom separator -->
+                <div class="a-separator s__separator js-separator">
+                    <div class="a-separator__inner">
+                        <span>Do</span>
+                        <span>Things</span>
+                        <span>Your</span>
+                        <span>Way</span>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <span class="footer-credit">Designed & Built by Joel Lalrinhlua</span>
-                <a href="#home" class="back-to-top magnetic">
-                    <span>Back to top</span>
-                    <span class="arrow">↑</span>
-                </a>
+
+            <div class="s__border js-hero-border"></div>
+        </div><!-- .s-hero -->
+
+        <!-- ===== ABOUT ===== -->
+        <section id="about" class="s-about" data-intersect>
+            <div class="s__inner js-about-inner">
+                <div class="s__block s__block--about">
+                    <h2 class="s__title">About</h2>
+                    <div class="s__content">
+                        <p>
+                            I'm Joel Lalrinhlua, a creative developer based in India, passionate about crafting
+                            digital experiences that blend aesthetics with functionality. With a focus on
+                            innovative design and clean code, I help brands create memorable digital products.
+                        </p>
+                        <p>
+                            Over the years, I've grown from exploring web design to building full-stack
+                            applications. I believe in constant learning—studying other developers' work,
+                            experimenting with new technologies, and pushing creative boundaries.
+                        </p>
+                        <p>
+                            I specialize in UI/UX Design, Frontend Development, Motion Design, and Branding.
+                            My approach combines strategic thinking with pixel-perfect execution to deliver
+                            experiences that truly stand out.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="s__block s__block--skills">
+                    <h2 class="s__title">Skills</h2>
+                    <ul class="s__skills">
+                        <li class="s__skill s__skill--counter js-skill">
+                            <span class="s__skill__inner">
+                                <span class="s__skill__name">HTML/CSS</span>
+                            </span>
+                            <span class="s__skill__mask"></span>
+                        </li>
+                        <li class="s__skill s__skill--counter js-skill">
+                            <span class="s__skill__inner">
+                                <span class="s__skill__name">JavaScript</span>
+                            </span>
+                            <span class="s__skill__mask"></span>
+                        </li>
+                        <li class="s__skill s__skill--counter js-skill">
+                            <span class="s__skill__inner">
+                                <span class="s__skill__name">React</span>
+                            </span>
+                            <span class="s__skill__mask"></span>
+                        </li>
+                        <li class="s__skill s__skill--counter js-skill">
+                            <span class="s__skill__inner">
+                                <span class="s__skill__name">GSAP</span>
+                            </span>
+                            <span class="s__skill__mask"></span>
+                        </li>
+                        <li class="s__skill s__skill--counter js-skill">
+                            <span class="s__skill__inner">
+                                <span class="s__skill__name">Figma</span>
+                            </span>
+                            <span class="s__skill__mask"></span>
+                        </li>
+                        <li class="s__skill s__skill--counter js-skill">
+                            <span class="s__skill__inner">
+                                <span class="s__skill__name">UI/UX Design</span>
+                            </span>
+                            <span class="s__skill__mask"></span>
+                        </li>
+                        <li class="s__skill s__skill--text js-skill">
+                            <span class="s__skill__inner">
+                                <span class="s__skill__text">5+ Years Experience</span>
+                            </span>
+                            <span class="s__skill__mask"></span>
+                        </li>
+                        <li class="s__skill s__skill--text js-skill">
+                            <span class="s__skill__inner">
+                                <span class="s__skill__text">50+ Projects Delivered</span>
+                            </span>
+                            <span class="s__skill__mask"></span>
+                        </li>
+                        <li class="s__skill s__skill--text js-skill">
+                            <span class="s__skill__inner">
+                                <span class="s__skill__text">30+ Happy Clients</span>
+                            </span>
+                            <span class="s__skill__mask"></span>
+                        </li>
+                        <li class="s__skill s__skill--text js-skill">
+                            <span class="s__skill__inner">
+                                <span class="s__skill__text">Web Design &amp; Development</span>
+                            </span>
+                            <span class="s__skill__mask"></span>
+                        </li>
+
+                        <!-- Decorative blank item -->
+                        <li class="s__skill s__skill--blank">
+                            <svg width="49" height="49" viewBox="0 0 49 49" fill="none">
+                                <path fill="#160000"
+                                    d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z" />
+                            </svg>
+                            <svg width="49" height="49" viewBox="0 0 49 49" fill="none">
+                                <path fill="#160000"
+                                    d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z" />
+                            </svg>
+                            <svg width="49" height="49" viewBox="0 0 49 49" fill="none">
+                                <path fill="#160000"
+                                    d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z" />
+                            </svg>
+                            <svg width="49" height="49" viewBox="0 0 49 49" fill="none">
+                                <path fill="#160000"
+                                    d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z" />
+                            </svg>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <svg class="s__grid js-about-grid">
+                <path class="js-about-grid-path" d=""></path>
+            </svg>
+
+            <canvas class="s__canvas js-about-canvas"></canvas>
+        </section>
+
+        <!-- ===== SEPARATOR ===== -->
+        <div class="a-separator a-separator--secondary">
+            <div class="a-separator__inner">
+                <span>Selected</span>
+                <span>Works</span>
             </div>
         </div>
-    </footer>
 
-    <!-- Floating Status Widget -->
-    <div class="status-widget magnetic">
-        <div class="status-dot"></div>
-        <div class="status-content">
-            <span class="status-label">Currently</span>
-            <span class="status-text">Available for work</span>
+        <!-- ===== WORK ===== -->
+        <section id="work" class="s-work" data-intersect>
+            <div class="s__outer">
+                <div class="s__inner js-work-container">
+                    <h2 class="s__title">
+                        <span class="s__title__inner js-work-title">
+                            <span class="s__title__letter js-work-letter">W</span>
+                            <span class="s__title__letter js-work-letter">O</span>
+                            <span class="s__title__letter js-work-letter">R</span>
+                            <span class="s__title__letter js-work-letter">K</span>
+                        </span>
+                    </h2>
+
+                    <div class="s__scene js-work-scene">
+                        <!-- Project cards -->
+                        <div class="s__scene__work js-project" data-caption="Project Alpha" data-category="Web Design">
+                            <div class="s__scene__work__inner gradient-1"></div>
+                            <div class="s__scene__work__info">
+                                <span class="s__scene__work__category">Web Design</span>
+                                <span class="s__scene__work__name">Project Alpha</span>
+                                <span class="s__scene__work__desc">Brand identity and web experience for a tech
+                                    startup</span>
+                            </div>
+                        </div>
+
+                        <div class="s__scene__work js-project" data-caption="Project Beta" data-category="Development">
+                            <div class="s__scene__work__inner gradient-2"></div>
+                            <div class="s__scene__work__info">
+                                <span class="s__scene__work__category">Development</span>
+                                <span class="s__scene__work__name">Project Beta</span>
+                                <span class="s__scene__work__desc">Full-stack application with modern
+                                    architecture</span>
+                            </div>
+                        </div>
+
+                        <div class="s__scene__work js-project" data-caption="Project Gamma"
+                            data-category="UI/UX Design">
+                            <div class="s__scene__work__inner gradient-3"></div>
+                            <div class="s__scene__work__info">
+                                <span class="s__scene__work__category">UI/UX Design</span>
+                                <span class="s__scene__work__name">Project Gamma</span>
+                                <span class="s__scene__work__desc">Mobile app design for fitness platform</span>
+                            </div>
+                        </div>
+
+                        <div class="s__scene__work js-project" data-caption="Project Delta" data-category="Branding">
+                            <div class="s__scene__work__inner gradient-4"></div>
+                            <div class="s__scene__work__info">
+                                <span class="s__scene__work__category">Branding</span>
+                                <span class="s__scene__work__name">Project Delta</span>
+                                <span class="s__scene__work__desc">Complete brand refresh for creative agency</span>
+                            </div>
+                        </div>
+                    </div><!-- .s__scene -->
+
+                    <canvas class="s__canvas js-work-canvas"></canvas>
+                </div><!-- .s__inner -->
+
+                <div class="s__mask-outer">
+                    <div class="s__mask js-work-mask">
+                        <svg class="s__mask__svg js-work-mask-svg">
+                            <path class="s__mask__path-inner js-work-mask-path-inner" d=""></path>
+                            <path class="s__mask__path-outer js-work-mask-path-outer" d=""></path>
+                            <path class="s__mask__path-lines js-work-mask-path-lines" d=""></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="s__ruler js-work-ruler"></div>
+            </div><!-- .s__outer -->
+        </section>
+
+        <!-- ===== SEPARATOR ===== -->
+        <div class="a-separator a-separator--secondary">
+            <div class="a-separator__inner">
+                <span>My</span>
+                <span>Process</span>
+            </div>
+        </div>
+
+        <!-- ===== MY WAY / PROCESS ===== -->
+        <section class="s-my-way" data-intersect>
+            <svg class="s__smiley js-smiley" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77.8 77.8"
+                xml:space="preserve">
+                <circle cx="38.9" cy="38.9" r="38.9"></circle>
+                <path
+                    d="M38.9 77.8c-2 0-4.1-.2-6.2-.5C11.6 73.9-2.9 53.9.5 32.8 2.1 22.5 7.7 13.5 16.1 7.4c8.4-6.1 18.7-8.5 29-6.9 10.3 1.6 19.3 7.2 25.4 15.6 6.1 8.4 8.5 18.7 6.9 29-3.1 19.1-19.7 32.7-38.5 32.7zM38.8 1c-7.9 0-15.6 2.5-22.1 7.2C8.5 14.1 3.1 22.9 1.5 32.9-1.8 53.5 12.3 73 32.9 76.3 53.5 79.6 73 65.5 76.3 44.9l.5.1-.5-.1c1.6-10-.8-20-6.7-28.2S54.9 3.1 44.9 1.5c-2-.3-4.1-.5-6.1-.5zM25.5 23.1c-1.9 0-3.5 2-4.1 5.1l-.1.3 3 2.2-2.9 2.2.1.3c.6 2.5 1.5 5.1 4.1 5.1 2.4 0 4.2-3.3 4.2-7.6s-2.4-7.6-4.3-7.6zm26.6 0c-1.9 0-3.5 2-4.1 5.1v.3l3 2.2-3 2.2.1.3c.6 2.5 1.5 5.1 4.1 5.1 2.4 0 4.2-3.3 4.2-7.6s-2.3-7.6-4.3-7.6zM62 39c0-.3-.2-.5-.5-.5s-.5.2-.5.5c0 12.2-9.9 22.1-22.1 22.1-12.2 0-22.1-9.9-22.1-22.1 0-.3-.2-.5-.5-.5s-.5.2-.5.5c0 12.7 10.4 23.1 23.1 23.1S62 51.7 62 39z">
+                </path>
+            </svg>
+
+            <div class="s__objects js-objects">
+                <!-- Process step cards as floating objects -->
+                <div class="a-object a-object--frame">
+                    <figure class="a__inner">
+                        <div class="a__process-card">
+                            <span class="a__step-number">01</span>
+                            <h3 class="a__step-name">Discovery & Strategy</h3>
+                            <p class="a__step-desc">Understanding your goals, audience, and project requirements.</p>
+                        </div>
+                        <figcaption class="a__caption">Step 1 — Discovery</figcaption>
+                    </figure>
+                    <div class="a__side a__side--vertical"></div>
+                    <div class="a__side a__side--horizontal"></div>
+                </div>
+
+                <div class="a-object a-object--frame">
+                    <figure class="a__inner">
+                        <div class="a__process-card">
+                            <span class="a__step-number">02</span>
+                            <h3 class="a__step-name">Design & Prototyping</h3>
+                            <p class="a__step-desc">Creating wireframes and visual designs with pixel-perfect precision.
+                            </p>
+                        </div>
+                        <figcaption class="a__caption">Step 2 — Design</figcaption>
+                    </figure>
+                    <div class="a__side a__side--vertical"></div>
+                    <div class="a__side a__side--horizontal"></div>
+                </div>
+
+                <div class="a-object a-object--frame">
+                    <figure class="a__inner">
+                        <div class="a__process-card">
+                            <span class="a__step-number">03</span>
+                            <h3 class="a__step-name">Development</h3>
+                            <p class="a__step-desc">Translating designs into clean, semantic code with smooth
+                                animations.</p>
+                        </div>
+                        <figcaption class="a__caption">Step 3 — Build</figcaption>
+                    </figure>
+                    <div class="a__side a__side--vertical"></div>
+                    <div class="a__side a__side--horizontal"></div>
+                </div>
+
+                <div class="a-object a-object--frame">
+                    <figure class="a__inner">
+                        <div class="a__process-card">
+                            <span class="a__step-number">04</span>
+                            <h3 class="a__step-name">Launch & Refine</h3>
+                            <p class="a__step-desc">Rigorous testing across devices followed by deployment and
+                                optimizations.</p>
+                        </div>
+                        <figcaption class="a__caption">Step 4 — Launch</figcaption>
+                    </figure>
+                    <div class="a__side a__side--vertical"></div>
+                    <div class="a__side a__side--horizontal"></div>
+                </div>
+
+                <!-- Decorative stars -->
+                <div class="a-object a-object--star">
+                    <div class="a__side a__side--top-left"></div>
+                    <div class="a__side a__side--top-right"></div>
+                    <div class="a__side a__side--bottom-left"></div>
+                    <div class="a__side a__side--bottom-right"></div>
+                </div>
+                <div class="a-object a-object--star">
+                    <div class="a__side a__side--top-left"></div>
+                    <div class="a__side a__side--top-right"></div>
+                    <div class="a__side a__side--bottom-left"></div>
+                    <div class="a__side a__side--bottom-right"></div>
+                </div>
+                <div class="a-object a-object--star">
+                    <div class="a__side a__side--top-left"></div>
+                    <div class="a__side a__side--top-right"></div>
+                    <div class="a__side a__side--bottom-left"></div>
+                    <div class="a__side a__side--bottom-right"></div>
+                </div>
+                <div class="a-object a-object--star">
+                    <div class="a__side a__side--top-left"></div>
+                    <div class="a__side a__side--top-right"></div>
+                    <div class="a__side a__side--bottom-left"></div>
+                    <div class="a__side a__side--bottom-right"></div>
+                </div>
+                <div class="a-object a-object--star">
+                    <div class="a__side a__side--top-left"></div>
+                    <div class="a__side a__side--top-right"></div>
+                    <div class="a__side a__side--bottom-left"></div>
+                    <div class="a__side a__side--bottom-right"></div>
+                </div>
+
+                <div class="s__ruler js-myway-ruler"></div>
+            </div><!-- .s__objects -->
+
+            <div class="s__catcher">
+                <div class="s__catcher__distorted-wrapper">
+                    <div class="s__catcher__distorted">
+                        <div class="s__catcher__text s__catcher__text--distorted">
+                            My <br />
+                            Creative <br />
+                            Process
+                        </div>
+                    </div>
+                </div>
+                <div class="s__catcher__normal-wrapper">
+                    <div class="s__catcher__normal">
+                        <div class="s__catcher__text s__catcher__text--normal">
+                            My <br />
+                            Creative <br />
+                            Process
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .s__catcher -->
+
+            <svg class="s__svg js-myway-svg">
+                <path class="s__svg__circular-path js-myway-lines-path" d=""></path>
+            </svg>
+        </section>
+
+        <!-- ===== CTA / CONTACT ===== -->
+        <section class="s-cta" data-intersect>
+            <div id="contact" class="s__inner js-cta-container">
+                <div class="s__hover js-cta-hover">
+                    <div class="s__button js-cta-button">
+                        <div class="s__button__inner">
+                            <div class="s__button__text js-cta-button-text">GO</div>
+                        </div>
+                    </div>
+
+                    <div class="s__cta js-cta-circle">
+                        <div class="s__cta__line s__cta__line--top">
+                            <div class="s__cta__text">
+                                <span class="s__cta__char">
+                                    <span class="s__cta__char__slice">L</span><span
+                                        class="s__cta__char__slice">L</span><span
+                                        class="s__cta__char__slice">L</span><span class="s__cta__char__slice">L</span>
+                                </span>
+                                <span class="s__cta__char">
+                                    <span class="s__cta__char__slice">e</span><span
+                                        class="s__cta__char__slice">e</span><span
+                                        class="s__cta__char__slice">e</span><span class="s__cta__char__slice">e</span>
+                                </span>
+                                <span class="s__cta__char">
+                                    <span class="s__cta__char__slice">t</span><span
+                                        class="s__cta__char__slice">t</span><span
+                                        class="s__cta__char__slice">t</span><span class="s__cta__char__slice">t</span>
+                                </span>
+                                <span class="s__cta__char">
+                                    <span class="s__cta__char__slice">'</span><span
+                                        class="s__cta__char__slice">'</span><span
+                                        class="s__cta__char__slice">'</span><span class="s__cta__char__slice">'</span>
+                                </span>
+                                <span class="s__cta__char">
+                                    <span class="s__cta__char__slice">s</span><span
+                                        class="s__cta__char__slice">s</span><span
+                                        class="s__cta__char__slice">s</span><span class="s__cta__char__slice">s</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="s__cta__line s__cta__line--bottom">
+                            <div class="s__cta__text">
+                                <span class="s__cta__char">
+                                    <span class="s__cta__char__slice">R</span><span
+                                        class="s__cta__char__slice">R</span><span
+                                        class="s__cta__char__slice">R</span><span class="s__cta__char__slice">R</span>
+                                </span>
+                                <span class="s__cta__char">
+                                    <span class="s__cta__char__slice">o</span><span
+                                        class="s__cta__char__slice">o</span><span
+                                        class="s__cta__char__slice">o</span><span class="s__cta__char__slice">o</span>
+                                </span>
+                                <span class="s__cta__char">
+                                    <span class="s__cta__char__slice">c</span><span
+                                        class="s__cta__char__slice">c</span><span
+                                        class="s__cta__char__slice">c</span><span class="s__cta__char__slice">c</span>
+                                </span>
+                                <span class="s__cta__char">
+                                    <span class="s__cta__char__slice">k</span><span
+                                        class="s__cta__char__slice">k</span><span
+                                        class="s__cta__char__slice">k</span><span class="s__cta__char__slice">k</span>
+                                </span>
+                            </div>
+                        </div>
+                        <a href="mailto:joelkizyking@gmail.com" class="s__cta__link">
+                            joelkizyking@gmail.com
+                        </a>
+                        <div class="s__cta__stars">
+                            <svg class="s__cta__star" width="49" height="49" viewBox="0 0 49 49" fill="none">
+                                <path d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z">
+                                </path>
+                            </svg>
+                            <svg class="s__cta__star" width="49" height="49" viewBox="0 0 49 49" fill="none">
+                                <path d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z">
+                                </path>
+                            </svg>
+                            <svg class="s__cta__star" width="49" height="49" viewBox="0 0 49 49" fill="none">
+                                <path d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z">
+                                </path>
+                            </svg>
+                            <svg class="s__cta__star" width="49" height="49" viewBox="0 0 49 49" fill="none">
+                                <path d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div><!-- .s__cta -->
+                </div><!-- .s__hover -->
+            </div><!-- .s__inner -->
+
+            <div class="s__grid js-cta-grid">
+                <svg class="s__grid__svg js-cta-grid-svg">
+                    <path class="s__grid__path js-cta-grid-path" d=""></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="site-foot">
+            <div class="site-foot__container">
+                <span class="site-foot__text">Designed & Built by Joel Lalrinhlua</span>
+                <span class="site-foot__text">© 2026</span>
+            </div>
+        </footer>
+    </div><!-- .site-wrapper -->
+
+    <!-- ===== INTRO SCREEN ===== -->
+    <div class="site-intro js-intro"
+        style="opacity: 1; position: fixed; top: 0; left: 0; z-index: 50; width: 100%; height: 100%; background: #F40C3F;">
+        <div class="sb-logo js-intro-logo">
+            <div class="sb__path sb__path--v sb__path--v-1 js-logo-line-v"></div>
+            <div class="sb__path sb__path--h sb__path--h-1 js-logo-line-h"></div>
+            <div class="sb__path sb__path--v sb__path--v-2 js-logo-line-v"></div>
+            <div class="sb__path sb__path--v sb__path--v-3 js-logo-line-v"></div>
+            <div class="sb__path sb__path--h sb__path--h-2 js-logo-line-h"></div>
+            <div class="sb__path sb__path--v sb__path--v-4 js-logo-line-v"></div>
+            <div class="sb__path sb__path--h sb__path--h-3 js-logo-line-h"></div>
+            <div class="sb__path sb__path--v sb__path--v-5 js-logo-line-v"></div>
+        </div>
+
+        <div class="site-intro__border site-intro__border--top js-border-top"></div>
+        <div class="site-intro__border site-intro__border--left js-border-left"></div>
+        <div class="site-intro__border site-intro__border--right js-border-right"></div>
+    </div><!-- .site-intro -->
+
+    <div class="site-mount js-mount"></div>
+    <div class="site-contrast-mask js-contrast-mask"></div>
+
+    <!-- ===== SCROLLBAR ===== -->
+    <div class="site-scrollbar js-scrollbar">
+        <div class="site-scrollbar__track">
+            <div class="site-scrollbar__thumb js-scrollbar-thumb"></div>
         </div>
     </div>
 
-    <!-- Contact Modal -->
+    <!-- ===== CONTACT MODAL ===== -->
     <div class="contact-modal" id="contact-modal">
         <div class="modal-backdrop"></div>
         <div class="modal-content">
             <button class="modal-close" id="modal-close">×</button>
             <div class="modal-header">
-                <svg class="deco-star" width="24" height="24" viewBox="0 0 32 32" fill="none">
-                    <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="#ff6b9d" />
+                <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+                    <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="#F40C3F" />
                 </svg>
                 <h3 class="modal-title">Write to Me</h3>
             </div>
@@ -647,7 +641,7 @@
                     <textarea id="message" name="message" rows="4" placeholder="How can we build something amazing?"
                         required></textarea>
                 </div>
-                <button type="submit" class="submit-btn magnetic">Send Message 🚀</button>
+                <button type="submit" class="submit-btn">Send Message →</button>
             </form>
         </div>
     </div>
