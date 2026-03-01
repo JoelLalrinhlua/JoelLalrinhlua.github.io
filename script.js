@@ -115,177 +115,145 @@ class Site {
         const intro = document.querySelector('.js-intro');
         const mount = document.querySelector('.js-mount');
         if (!intro) return;
-        const linesV = intro.querySelectorAll('.js-logo-line-v');
-        const linesH = intro.querySelectorAll('.js-logo-line-h');
+        const splash = intro.querySelector('.js-splash');
+        const greeting = intro.querySelector('.js-greeting');
         const borderTop = intro.querySelector('.js-border-top');
         const borderLeft = intro.querySelector('.js-border-left');
         const borderRight = intro.querySelector('.js-border-right');
         const tl = gsap.timeline();
+        // Phase 1: Show splash character
         tl.set(wrapper, { opacity: '' });
-        tl.set(intro, { background: 'transparent' });
-        tl.fromTo(linesV, { scaleY: 0 }, { scaleY: 1, duration: 1, ease: 'power4.inOut', stagger: 0.15 }, 0);
-        tl.fromTo(linesH, { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: 'power4.inOut' }, 1);
-        tl.set(linesV, { transformOrigin: '50% 0' });
-        tl.fromTo(linesV, { scaleY: 1 }, { scaleY: 0, duration: 1, ease: 'power4.in', immediateRender: false, stagger: 0.1 }, 2);
-        tl.fromTo(linesH, { scaleY: 1 }, { scaleY: 0, duration: 0.5, ease: 'power4.in', immediateRender: false }, 2.1);
-        tl.from(borderTop, { scaleY: 0, duration: 3, ease: 'power3.inOut' }, 1);
-        tl.from([borderLeft, borderRight], { scaleX: 0, duration: 3, ease: 'power3.inOut' }, 1);
-        tl.call(() => document.dispatchEvent(new CustomEvent('intro')), null, '-=1.85');
+        if (splash) {
+            tl.fromTo(splash, { scale: 0, rotate: -15, opacity: 0 },
+                { scale: 1, rotate: 0, opacity: 1, duration: 1.2, ease: 'back.out(1.7)' }, 0);
+        }
+        // Phase 2: Show greeting
+        if (greeting) {
+            tl.to(greeting, { opacity: 1, duration: 0.8, ease: 'power2.out' }, 0.8);
+        }
+        // Phase 3: Border animations
+        if (borderTop) tl.from(borderTop, { scaleY: 0, duration: 2, ease: 'power3.inOut' }, 1.2);
+        if (borderLeft && borderRight) tl.from([borderLeft, borderRight], { scaleX: 0, duration: 2, ease: 'power3.inOut' }, 1.2);
+        // Phase 4: Fade out and reveal site
+        tl.to(intro, { opacity: 0, duration: 0.8, ease: 'power2.inOut' }, 3);
+        tl.call(() => document.dispatchEvent(new CustomEvent('intro')), null, 2.8);
         tl.call(() => {
             if (mount) mount.style.opacity = '1';
             intro.remove();
             document.documentElement.classList.remove('is-scroll-blocked');
             ticker.nextTick(() => emitter.emit('resize', true, true));
-        }, null, 5);
+        }, null, 4.2);
     }
 }
 
-// ===== WAVES =====
-class WavesSection {
+// ===== NEW HERO =====
+class NewHeroSection {
     constructor() {
-        this.el = document.querySelector('.a-waves');
+        this.el = document.querySelector('.js-hero-new');
         if (!this.el) return;
-        this.svg = this.el.querySelector('.js-waves-svg');
-        this.noise = new Noise(Math.random());
-        this.lines = []; this.paths = [];
-        this.mouse = { x: -10, y: 0, lx: 0, ly: 0, sx: 0, sy: 0, v: 0, vs: 0, a: 0, set: false };
-        this.isInteractive = false; this.isPaused = true;
-        this.setSize(); this.setLines(); this.bindEvents();
+        this.scene = this.el.querySelector('.js-hero-scene');
+        this.layers = this.el.querySelectorAll('.js-parallax-layer');
+        this.words = this.el.querySelectorAll('.js-magnetic-word');
+        this.sparkles = this.el.querySelectorAll('.js-sparkle');
+        this.character = this.el.querySelector('.js-hero-character');
+        this.subtitle = this.el.querySelector('.js-hero-subtitle');
+        this.lines = this.el.querySelectorAll('.js-hero-line');
+        this.marqueeTrack = this.el.querySelector('.js-marquee-track');
+        this.mouse = { x: 0, y: 0, cx: 0, cy: 0 };
+        this.center = { x: 0, y: 0 };
+        this.isActive = false;
+        this.bindEvents();
     }
     bindEvents() {
-        emitter.on('mousemove', this.onMouseMove, this);
-        emitter.on('resize', () => { this.setSize(); this.setLines(); }, this);
-        this.el.addEventListener('intersect', e => {
-            this.isPaused = !e.detail.isIntersecting;
-            if (this.isPaused) emitter.off('tick', this.tick, this);
-            else emitter.on('tick', this.tick, this);
-        }, { passive: true });
-        document.addEventListener('intro', () => { this.isInteractive = true; }, { once: true });
-    }
-    onMouseMove(x, y) {
-        this.mouse.x = x - (this.bounding?.left || 0);
-        this.mouse.y = y - (this.bounding?.top || 0) + window.scrollY;
-        if (!this.mouse.set) { this.mouse.sx = this.mouse.x; this.mouse.sy = this.mouse.y; this.mouse.lx = this.mouse.x; this.mouse.ly = this.mouse.y; this.mouse.set = true; }
-    }
-    setSize() {
-        const b = this.el.getBoundingClientRect();
-        this.bounding = { left: b.left, top: b.top + window.scrollY, width: this.el.clientWidth, height: this.el.clientHeight };
-        this.svg.style.width = this.bounding.width + 'px';
-        this.svg.style.height = this.bounding.height + 'px';
-    }
-    setLines() {
-        const { width, height } = this.bounding;
-        this.lines = []; this.paths.forEach(p => p.remove()); this.paths = [];
-        const xGap = 10, yGap = 32;
-        const oW = width + 200, oH = height + 30;
-        const totalL = Math.ceil(oW / xGap), totalP = Math.ceil(oH / yGap);
-        const xS = (width - xGap * totalL) / 2, yS = (height - yGap * totalP) / 2;
-        for (let i = 0; i <= totalL; i++) {
-            const pts = [];
-            for (let j = 0; j <= totalP; j++) pts.push({ x: xS + xGap * i, y: yS + yGap * j, wave: { x: 0, y: 0 }, cursor: { x: 0, y: 0, vx: 0, vy: 0 } });
-            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            path.classList.add('a__line');
-            this.svg.appendChild(path);
-            this.paths.push(path);
-            this.lines.push(pts);
-        }
-        if (this.isPaused) this.drawLines();
-    }
-    tick(time) {
-        const m = this.mouse;
-        m.sx += (m.x - m.sx) * 0.1; m.sy += (m.y - m.sy) * 0.1;
-        m.v = Math.hypot(m.x - m.lx, m.y - m.ly);
-        m.vs += (m.v - m.vs) * 0.1; m.vs = Math.min(100, m.vs);
-        m.a = Math.atan2(m.y - m.ly, m.x - m.lx);
-        m.lx = m.x; m.ly = m.y;
-        this.el.style.setProperty('--x', m.sx + 'px');
-        this.el.style.setProperty('--y', m.sy + 'px');
-        this.movePoints(time); this.drawLines();
-    }
-    movePoints(time) {
-        this.lines.forEach(pts => {
-            pts.forEach(p => {
-                const mv = this.noise.perlin2((p.x + time * 0.0125) * 0.002, (p.y + time * 0.005) * 0.0015) * 12;
-                p.wave.x = Math.cos(mv) * 32; p.wave.y = Math.sin(mv) * 16;
-                if (this.isInteractive) {
-                    const dx = p.x - this.mouse.sx, dy = p.y - this.mouse.sy;
-                    const d = Math.hypot(dx, dy), l = Math.max(175, this.mouse.vs);
-                    if (d < l) { const s = 1 - d / l, f = Math.cos(d * 0.001) * s; p.cursor.vx += Math.cos(this.mouse.a) * f * l * this.mouse.vs * 0.00065; p.cursor.vy += Math.sin(this.mouse.a) * f * l * this.mouse.vs * 0.00065; }
-                    p.cursor.vx += (0 - p.cursor.x) * 0.005; p.cursor.vy += (0 - p.cursor.y) * 0.005;
-                    p.cursor.vx *= 0.925; p.cursor.vy *= 0.925;
-                    p.cursor.x += p.cursor.vx * 2; p.cursor.y += p.cursor.vy * 2;
-                    p.cursor.x = Math.min(100, Math.max(-100, p.cursor.x)); p.cursor.y = Math.min(100, Math.max(-100, p.cursor.y));
-                }
-            });
-        });
-    }
-    moved(p, cur = true) {
-        return { x: Math.round((p.x + p.wave.x + (cur ? p.cursor.x : 0)) * 10) / 10, y: Math.round((p.y + p.wave.y + (cur ? p.cursor.y : 0)) * 10) / 10 };
-    }
-    drawLines() {
-        this.lines.forEach((pts, i) => {
-            let d = `M ${this.moved(pts[0], false).x} ${this.moved(pts[0], false).y}`;
-            pts.forEach((p, j) => { const m = this.moved(p, j !== pts.length - 1); d += ` L ${m.x} ${m.y}`; });
-            this.paths[i].setAttribute('d', d);
-        });
-    }
-}
-
-// ===== HERO =====
-class HeroSection {
-    constructor() {
-        this.el = document.querySelector('.s-hero');
-        if (!this.el) return;
-        this.words = this.el.querySelectorAll('.js-word');
-        this.chars = []; this.isPaused = true; this.isWaiting = true;
-        if (document.readyState === 'complete') ticker.nextTick(this.init, this);
-        else emitter.once('siteLoaded', this.init, this);
-    }
-    init() { this.splitWords(); this.bindEvents(); }
-    bindEvents() {
-        emitter.on('resize', () => this.splitWords(), this);
         document.addEventListener('intro', () => this.intro(), { once: true });
         this.el.addEventListener('intersect', e => {
-            this.isPaused = !e.detail.isIntersecting;
-            if (!this.isPaused) emitter.on('tick', this.tick, this);
-            else emitter.off('tick', this.tick, this);
+            if (e.detail.isIntersecting && !this.isActive) {
+                this.isActive = true;
+                emitter.on('tick', this.tick, this);
+            } else if (!e.detail.isIntersecting && this.isActive) {
+                this.isActive = false;
+                emitter.off('tick', this.tick, this);
+            }
         }, { passive: true });
+        emitter.on('mousemove', (x, y) => {
+            this.mouse.x = x; this.mouse.y = y;
+        }, this);
+        emitter.on('resize', () => this.updateCenter(), this);
+        // Magnetic hover effect for words
+        this.words.forEach(word => {
+            word.addEventListener('mousemove', e => {
+                const rect = word.getBoundingClientRect();
+                const relX = (e.clientX - rect.left) / rect.width - 0.5;
+                const relY = (e.clientY - rect.top) / rect.height - 0.5;
+                gsap.to(word, {
+                    rotateY: relX * 12,
+                    rotateX: -relY * 8,
+                    scale: 1.02,
+                    duration: 0.4,
+                    ease: 'power2.out'
+                });
+            });
+            word.addEventListener('mouseleave', () => {
+                gsap.to(word, {
+                    rotateY: 0, rotateX: 0, scale: 1,
+                    duration: 0.6, ease: 'elastic.out(1, 0.5)'
+                });
+            });
+        });
+        this.updateCenter();
     }
-    splitWords() {
-        this.chars = [];
-        this.words.forEach(w => {
-            w.innerHTML = w.textContent.split('').map(c => {
-                const cls = 'char char--' + c.toLowerCase();
-                return `<span class="${cls}"><span class="char__inner" data-letter="${c.toUpperCase()}">${c}</span></span>`;
-            }).join('');
-            w.querySelectorAll('.char').forEach(c => this.chars.push(c));
+    updateCenter() {
+        if (!this.scene) return;
+        const rect = this.scene.getBoundingClientRect();
+        this.center.x = rect.left + rect.width / 2;
+        this.center.y = rect.top + rect.height / 2;
+    }
+    tick() {
+        // Smooth mouse follow
+        this.mouse.cx += (this.mouse.x - this.mouse.cx) * 0.06;
+        this.mouse.cy += (this.mouse.y - this.mouse.cy) * 0.06;
+        const dx = (this.mouse.cx - this.center.x);
+        const dy = (this.mouse.cy - this.center.y);
+        // Move each layer at its own depth
+        this.layers.forEach(layer => {
+            const depth = parseFloat(layer.dataset.depth) || 0;
+            const tx = dx * depth;
+            const ty = dy * depth;
+            layer.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
         });
     }
     intro() {
-        const content = this.el.querySelector('.js-hero-content');
-        const border = this.el.querySelector('.js-hero-border');
-        const chars = this.el.querySelectorAll('.char__inner');
-        const seps = this.el.querySelectorAll('.js-separator');
-        const star = this.el.querySelector('.js-star');
-        const waves = this.el.querySelector('.a-waves');
+        const metas = this.el.querySelectorAll('.hero-meta');
         const tl = gsap.timeline();
+        // Show section
         tl.set(this.el, { opacity: 1 }, 0);
-        tl.to(border, { scaleY: 0.025, y: -(content?.clientHeight || 300), duration: 1, ease: 'expo.inOut' }, 0);
-        if (waves) tl.from(waves, { y: '100%', duration: 1.35, ease: 'expo.out' }, 0);
-        tl.fromTo(content, { clipPath: 'polygon(0 0,100% 0,100% 0,0 0)' }, { clipPath: 'polygon(0 0,100% 0,100% 100%,0 100%)', duration: 1, ease: 'expo.inOut' }, 1);
-        tl.to(border, { scaleY: 1, y: 0, duration: 1, ease: 'expo.inOut' }, 1);
-        if (star) tl.from(star, { rotate: 90, duration: 2, ease: 'expo.out' }, 1.5);
-        tl.fromTo(chars, { y: '-200%' }, { y: '-100%', duration: 2, ease: 'expo.inOut', stagger: 0.02 }, 0.45);
-        tl.from(seps, { y: (i) => i % 2 === 0 ? '-100%' : '100%', duration: 1.5, ease: 'expo.inOut' }, 0.75);
-        tl.call(() => { this.isWaiting = false; });
-    }
-    tick() {
-        if (this.isWaiting || Math.random() > 0.01 || !this.chars.length) return;
-        const c = this.chars[Math.floor(Math.random() * this.chars.length)];
-        if (c.classList.contains('to-top') || c.classList.contains('to-bottom')) return;
-        const dir = ['bottom', 'left', 'top', 'right'][Math.floor(Math.random() * 4)];
-        c.classList.add('to-' + dir);
-        setTimeout(() => c.classList.remove('to-' + dir), 2000);
+        // Title lines slide in from opposite sides
+        if (this.lines.length >= 2) {
+            tl.fromTo(this.lines[0], { x: '-110%', opacity: 0 },
+                { x: '0%', opacity: 1, duration: 1.2, ease: 'expo.out' }, 0.2);
+            tl.fromTo(this.lines[1], { x: '110%', opacity: 0 },
+                { x: '0%', opacity: 1, duration: 1.2, ease: 'expo.out' }, 0.35);
+        }
+        // Character bounces in
+        if (this.character) {
+            tl.fromTo(this.character, { scale: 0, rotate: -15, opacity: 0 },
+                { scale: 1, rotate: 0, opacity: 1, duration: 1, ease: 'back.out(1.4)' }, 0.6);
+        }
+        // Sparkles pop in staggered
+        tl.fromTo(this.sparkles, { scale: 0, opacity: 0 },
+            { scale: 1, opacity: 0.7, duration: 0.5, ease: 'back.out(3)', stagger: 0.1 }, 0.8);
+        // Subtitle fades in
+        if (this.subtitle) {
+            tl.to(this.subtitle, { opacity: 1, duration: 0.8, ease: 'power2.out' }, 1.2);
+        }
+        // Corner metas fade in
+        tl.fromTo(metas, { opacity: 0, y: 10 },
+            { opacity: 0.5, y: 0, duration: 0.6, stagger: 0.08 }, 1);
+        // Marquee starts
+        if (this.marqueeTrack) {
+            tl.fromTo(this.marqueeTrack.parentElement, { opacity: 0 },
+                { opacity: 1, duration: 0.6 }, 1.3);
+        }
     }
 }
 
@@ -659,15 +627,13 @@ class HeaderSection {
         tl.call(() => { this.canWrite = true; }, null, 1.5);
     }
     toggleContrast() {
-        const isContrasted = document.documentElement.classList.contains('theme-contrasted');
-        gsap.fromTo(this.contrastMask, { x: isContrasted ? '-100%' : '0' }, {
-            x: isContrasted ? '0' : '-100%', duration: 1, ease: 'expo.inOut',
-            onComplete: () => {
-                this.contrastMask.style.transform = '';
-                document.documentElement.classList.toggle('theme-contrasted');
-            }
-        });
-        if (!isContrasted) document.documentElement.classList.add('theme-contrasted');
+        const isDark = document.documentElement.classList.contains('theme-dark');
+        // Simple toggle with smooth CSS transition (handled by --theme-transition variable)
+        document.documentElement.classList.toggle('theme-dark');
+        // Small flash animation on the button for feedback
+        if (this.contrastButton) {
+            gsap.fromTo(this.contrastButton, { scale: 0.85 }, { scale: 1, duration: 0.4, ease: 'back.out(2)' });
+        }
     }
     updateConsole(time) {
         if (!this.canWrite || !this.console || time - this.lastTypeTime < this.writeDelay) return;
@@ -717,8 +683,7 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => site.init(), { once: true });
 } else { site.init(); }
 
-new WavesSection();
-new HeroSection();
+new NewHeroSection();
 new AboutSection();
 new WorkSection();
 new MyWaySection();

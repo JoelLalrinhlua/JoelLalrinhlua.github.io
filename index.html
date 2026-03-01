@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="is-scroll-blocked theme-contrasted">
+<html lang="en" class="is-scroll-blocked">
 
 <head>
     <meta charset="utf-8" />
@@ -8,7 +8,7 @@
         content="Joel Lalrinhlua – Creative Developer & Designer crafting exceptional digital experiences. Based in India." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta name="theme-color" content="#160000" />
+    <meta name="theme-color" content="#1A1A2E" />
 
     <!-- Fonts -->
     <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
@@ -37,13 +37,7 @@
                 <!-- Logo -->
                 <div class="sb-logo">
                     <a href="#">
-                        <svg class="js-logo" width="280" height="280" viewBox="0 0 280 280" fill="none">
-                            <!-- J -->
-                            <path d="M0 0h40v220c0 33.137-26.863 60-60 60h-20v-40h20c11.046 0 20-8.954 20-20V0z"
-                                fill="#160000" />
-                            <!-- L -->
-                            <path d="M120 0h40v240h100v40H120V0z" fill="#160000" />
-                        </svg>
+                        <img class="logo-img js-logo" src="logo.jpg" alt="Joel Lalrinhlua" />
                         <span class="u-sr-only">Joel Lalrinhlua</span>
                     </a>
                 </div>
@@ -113,40 +107,120 @@
         </header>
 
         <!-- ===== HERO ===== -->
-        <div class="s-hero" data-intersect>
-            <div class="a-waves s__waves" data-intersect>
-                <svg class="js-waves-svg"></svg>
+        <section class="s-hero-new js-hero-new" data-intersect>
+            <!-- Corner meta labels -->
+            <div class="hero-meta hero-meta--tl">
+                <span class="hero-meta__label">Portfolio</span>
+                <span class="hero-meta__sub">Joel Lalrinhlua</span>
+            </div>
+            <div class="hero-meta hero-meta--tr">
+                <span class="hero-meta__label">Creative</span>
+                <span class="hero-meta__sub">Developer</span>
+            </div>
+            <div class="hero-meta hero-meta--bl">
+                <span class="hero-meta__label">Based in</span>
+                <span class="hero-meta__sub">India 🇮🇳</span>
+            </div>
+            <div class="hero-meta hero-meta--br">
+                <span class="hero-meta__label">Year</span>
+                <span class="hero-meta__sub">2026</span>
             </div>
 
-            <div class="s__content js-hero-content">
-                <!-- Top separator -->
-                <div class="a-separator s__separator js-separator">
-                    <div class="a-separator__inner">
-                        <span>Joel</span>
-                        <span>Lalrin</span>
-                        <span>hlua</span>
-                    </div>
+            <!-- Main hero content with parallax layers -->
+            <div class="hero-scene js-hero-scene">
+                <!-- Layer 1: Background decorative text -->
+                <div class="hero-layer hero-layer--bg js-parallax-layer" data-depth="0.02">
+                    <div class="hero-bg-text">JOEL</div>
                 </div>
 
-                <h1 class="s__title">
-                    <span class="s__title__word js-word">Creative</span>
-                    <img class="s__title__asset js-star" src="asset-star.svg" alt="" width="48" height="48" />
-                    <span class="s__title__word js-word">Developer</span>
-                </h1>
+                <!-- Tubes Cursor Canvas Layer -->
+                <div class="hero-layer"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+                    <canvas id="canvas" style="width: 100%; height: 100%; display: block;"></canvas>
+                </div>
 
-                <!-- Bottom separator -->
-                <div class="a-separator s__separator js-separator">
-                    <div class="a-separator__inner">
-                        <span>Do</span>
-                        <span>Things</span>
-                        <span>Your</span>
-                        <span>Way</span>
-                    </div>
+                <!-- Layer 2: Main stacked typography -->
+                <div class="hero-layer hero-layer--text js-parallax-layer" data-depth="0.04">
+                    <h1 class="hero-title">
+                        <span class="hero-title__line js-hero-line">
+                            <span class="hero-title__word js-magnetic-word">CREA</span>
+                        </span>
+                        <span class="hero-title__line js-hero-line">
+                            <span class="hero-title__word js-magnetic-word">TIVE</span>
+                        </span>
+                    </h1>
+                </div>
+
+
+
+                <!-- Layer 4: Sparkle decorations -->
+                <div class="hero-layer hero-layer--sparkles js-parallax-layer" data-depth="0.08">
+                    <svg class="hero-sparkle hero-sparkle--1 js-sparkle" viewBox="0 0 32 32" width="40" height="40">
+                        <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="var(--color-accent)" />
+                    </svg>
+                    <svg class="hero-sparkle hero-sparkle--2 js-sparkle" viewBox="0 0 32 32" width="28" height="28">
+                        <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="var(--color-secondary)" />
+                    </svg>
+                    <svg class="hero-sparkle hero-sparkle--3 js-sparkle" viewBox="0 0 32 32" width="22" height="22">
+                        <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="var(--color-accent)" />
+                    </svg>
+                    <svg class="hero-sparkle hero-sparkle--4 js-sparkle" viewBox="0 0 32 32" width="18" height="18">
+                        <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="var(--color-secondary)" />
+                    </svg>
+                    <svg class="hero-sparkle hero-sparkle--5 js-sparkle" viewBox="0 0 32 32" width="34" height="34">
+                        <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="var(--color-accent)" />
+                    </svg>
+                </div>
+
+                <!-- Subtitle -->
+                <div class="hero-subtitle js-hero-subtitle">
+                    <span class="hero-subtitle__text">Developer</span>
+                    <span class="hero-subtitle__divider">×</span>
+                    <span class="hero-subtitle__text">Designer</span>
+                    <span class="hero-subtitle__divider">×</span>
+                    <span class="hero-subtitle__text">Creator</span>
                 </div>
             </div>
 
-            <div class="s__border js-hero-border"></div>
-        </div><!-- .s-hero -->
+            <!-- Skills marquee ticker -->
+            <div class="hero-marquee">
+                <div class="hero-marquee__track js-marquee-track">
+                    <span class="hero-marquee__item">UI Design</span>
+                    <span class="hero-marquee__dot">✦</span>
+                    <span class="hero-marquee__item">Frontend Dev</span>
+                    <span class="hero-marquee__dot">✦</span>
+                    <span class="hero-marquee__item">Motion Design</span>
+                    <span class="hero-marquee__dot">✦</span>
+                    <span class="hero-marquee__item">React</span>
+                    <span class="hero-marquee__dot">✦</span>
+                    <span class="hero-marquee__item">GSAP</span>
+                    <span class="hero-marquee__dot">✦</span>
+                    <span class="hero-marquee__item">Branding</span>
+                    <span class="hero-marquee__dot">✦</span>
+                    <span class="hero-marquee__item">JavaScript</span>
+                    <span class="hero-marquee__dot">✦</span>
+                    <span class="hero-marquee__item">Figma</span>
+                    <span class="hero-marquee__dot">✦</span>
+                    <!-- Duplicate for seamless loop -->
+                    <span class="hero-marquee__item">UI Design</span>
+                    <span class="hero-marquee__dot">✦</span>
+                    <span class="hero-marquee__item">Frontend Dev</span>
+                    <span class="hero-marquee__dot">✦</span>
+                    <span class="hero-marquee__item">Motion Design</span>
+                    <span class="hero-marquee__dot">✦</span>
+                    <span class="hero-marquee__item">React</span>
+                    <span class="hero-marquee__dot">✦</span>
+                    <span class="hero-marquee__item">GSAP</span>
+                    <span class="hero-marquee__dot">✦</span>
+                    <span class="hero-marquee__item">Branding</span>
+                    <span class="hero-marquee__dot">✦</span>
+                    <span class="hero-marquee__item">JavaScript</span>
+                    <span class="hero-marquee__dot">✦</span>
+                    <span class="hero-marquee__item">Figma</span>
+                    <span class="hero-marquee__dot">✦</span>
+                </div>
+            </div>
+        </section><!-- .s-hero-new -->
 
         <!-- ===== ABOUT ===== -->
         <section id="about" class="s-about" data-intersect>
@@ -589,17 +663,9 @@
 
     <!-- ===== INTRO SCREEN ===== -->
     <div class="site-intro js-intro"
-        style="opacity: 1; position: fixed; top: 0; left: 0; z-index: 50; width: 100%; height: 100%; background: #F40C3F;">
-        <div class="sb-logo js-intro-logo">
-            <div class="sb__path sb__path--v sb__path--v-1 js-logo-line-v"></div>
-            <div class="sb__path sb__path--h sb__path--h-1 js-logo-line-h"></div>
-            <div class="sb__path sb__path--v sb__path--v-2 js-logo-line-v"></div>
-            <div class="sb__path sb__path--v sb__path--v-3 js-logo-line-v"></div>
-            <div class="sb__path sb__path--h sb__path--h-2 js-logo-line-h"></div>
-            <div class="sb__path sb__path--v sb__path--v-4 js-logo-line-v"></div>
-            <div class="sb__path sb__path--h sb__path--h-3 js-logo-line-h"></div>
-            <div class="sb__path sb__path--v sb__path--v-5 js-logo-line-v"></div>
-        </div>
+        style="opacity: 1; position: fixed; top: 0; left: 0; z-index: 50; width: 100%; height: 100%; background: #E63B2E;">
+        <img class="site-intro__splash js-splash" src="splash.jpg" alt="Joel" />
+        <div class="site-intro__greeting js-greeting">Hello!</div>
 
         <div class="site-intro__border site-intro__border--top js-border-top"></div>
         <div class="site-intro__border site-intro__border--left js-border-left"></div>
@@ -623,7 +689,7 @@
             <button class="modal-close" id="modal-close">×</button>
             <div class="modal-header">
                 <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
-                    <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="#F40C3F" />
+                    <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="#E63B2E" />
                 </svg>
                 <h3 class="modal-title">Write to Me</h3>
             </div>
@@ -647,6 +713,38 @@
     </div>
 
     <script src="script.js"></script>
+
+    <!-- Tubes Cursor Module -->
+    <script type="module">
+        import TubesCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js";
+
+        const canvasElement = document.getElementById('canvas');
+        if (canvasElement) {
+            const app = TubesCursor(canvasElement, {
+                tubes: {
+                    colors: ["#f967fb", "#53bc28", "#6958d5"],
+                    lights: {
+                        intensity: 200,
+                        colors: ["#83f36e", "#fe8a2e", "#ff008a", "#60aed5"]
+                    }
+                }
+            });
+
+            // Using canvas element for the click to avoid interference with other UI.
+            document.body.addEventListener('click', () => {
+                const colors = randomColors(3);
+                const lightsColors = randomColors(4);
+                app.tubes.setColors(colors);
+                app.tubes.setLightsColors(lightsColors);
+            });
+
+            function randomColors(count) {
+                return new Array(count)
+                    .fill(0)
+                    .map(() => "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0'));
+            }
+        }
+    </script>
 </body>
 
 </html>
