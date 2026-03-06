@@ -595,15 +595,20 @@ class CTASection {
 // ===== HEADER =====
 class HeaderSection {
     constructor() {
-        this.el = document.querySelector('.site-head');
-        if (!this.el) return;
-        this.console = document.querySelector('.js-console');
         this.contrastButton = document.querySelector('.js-contrast');
         this.contrastMask = document.querySelector('.js-contrast-mask');
-        this.links = this.el.querySelectorAll('.js-menu-link');
-        this.messages = ['Preparing debugging session', 'Compiling designer dreams', 'Optimizing creativity', 'Loading animations', 'Calibrating pixels', 'Running protocols', 'Crafting magic', 'Aligning elements', 'Integrating code', 'Almost ready'];
-        this.message = ''; this.lastMessage = ''; this.lastTypeTime = 0;
-        this.writeDelay = 0; this.canWrite = false;
+        
+        this.el = document.querySelector('.site-head');
+        if (this.el) {
+            this.console = document.querySelector('.js-console');
+            this.links = this.el.querySelectorAll('.js-menu-link');
+            this.messages = ['Preparing debugging session', 'Compiling designer dreams', 'Optimizing creativity', 'Loading animations', 'Calibrating pixels', 'Running protocols', 'Crafting magic', 'Aligning elements', 'Integrating code', 'Almost ready'];
+            this.message = ''; this.lastMessage = ''; this.lastTypeTime = 0;
+            this.writeDelay = 0; this.canWrite = false;
+        } else {
+            this.links = document.querySelectorAll('.js-menu-link');
+        }
+        
         this.bindEvents();
     }
     bindEvents() {

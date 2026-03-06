@@ -44,6 +44,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Compacta Bold';
+  src: url('fonts/Compacta Bold/Compacta Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ===== CSS VARIABLES ===== */
 :root {
   --color-primary: #000000;
@@ -52,7 +60,7 @@
   --color-white: #FFFFFF;
   --color-accent: #E63B2E;
   --font-editorial: 'Editorial New', Georgia, serif;
-  --font-bigger: 'Bigger Display', Impact, sans-serif;
+  --font-bigger: 'Compacta Bold', 'Bigger Display', Impact, sans-serif;
   --font-fraktion: 'Fraktion Mono', 'Courier New', monospace;
   --theme-transition: background 0.6s ease, color 0.6s ease, border-color 0.6s ease, fill 0.6s ease;
 }
@@ -133,6 +141,8 @@ button {
   border: 0;
 }
 
+
+
 /* ===== SITE WRAPPER ===== */
 .site-wrapper {
   position: relative;
@@ -140,6 +150,7 @@ button {
   background: var(--color-primary);
   transition: var(--theme-transition);
 }
+
 
 /* No mobile override needed without border */
 
@@ -1033,6 +1044,12 @@ button {
   z-index: 0;
   display: block;
   pointer-events: none;
+  transition: filter 0.6s ease;
+}
+
+/* Sync the tubes cursor background to light mode */
+html.is-contrasted .hero-tubes-canvas {
+  filter: invert(1) hue-rotate(180deg);
 }
 
 /* Hero Nav — top right corner */
@@ -1259,12 +1276,16 @@ button {
 
 .hero-title__word {
   display: inline-block;
-  font: 700 clamp(5rem, 16vw, 18rem)/0.85 var(--font-bigger);
+  font-family: var(--font-hero-dynamic, var(--font-bigger));
+  font-weight: 700;
+  font-size: clamp(4rem, 13vw, 15rem);
+  line-height: 0.85;
   text-transform: uppercase;
   letter-spacing: -0.03em;
   color: var(--color-secondary);
   transition: color 0.6s ease;
   will-change: transform;
+  cursor: pointer;
 }
 
 .hero-title__word:hover {
@@ -1273,7 +1294,7 @@ button {
 
 @media (max-width: 767px) {
   .hero-title__word {
-    font-size: clamp(3.5rem, 18vw, 6rem);
+    font-size: clamp(3rem, 15vw, 5.5rem);
   }
 }
 
@@ -1413,16 +1434,27 @@ button {
 }
 
 /* Skills marquee ticker */
-.hero-marquee {
+/* Marquee text animations */
+.marquee {
   position: relative;
   z-index: 6;
-  width: calc(100% + 6rem);
-  margin: 0 -3rem;
-  padding: 0.75rem 0;
+  width: 100%;
+  padding: 1rem 0;
   border-top: 1px solid var(--color-secondary);
+  border-bottom: 1px solid var(--color-secondary);
   overflow: hidden;
   flex-shrink: 0;
   transition: border-color 0.6s ease;
+  background: var(--color-primary);
+  content-visibility: auto;
+  contain-intrinsic-size: 80px;
+}
+
+.hero-marquee {
+  width: calc(100% + 6rem);
+  margin: 0 -3rem;
+  border-bottom: none;
+  padding: 0.75rem 0;
 }
 
 @media (max-width: 767px) {
@@ -1432,7 +1464,7 @@ button {
   }
 }
 
-.hero-marquee__track {
+.marquee__track {
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -1441,18 +1473,19 @@ button {
   will-change: transform;
 }
 
-.hero-marquee:hover .hero-marquee__track {
+.marquee:hover .marquee__track,
+.hero-marquee:hover .marquee__track {
   animation-play-state: paused;
 }
 
-.hero-marquee__item {
+.marquee__item {
   font: 400 13px/1 var(--font-fraktion);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   flex-shrink: 0;
 }
 
-.hero-marquee__dot {
+.marquee__dot {
   color: var(--color-accent);
   font-size: 10px;
   flex-shrink: 0;
@@ -1475,6 +1508,8 @@ button {
   z-index: 3;
   padding: 15rem 0;
   overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px;
 }
 
 @media (max-width: 1280px) {
@@ -1624,6 +1659,9 @@ button {
   position: relative;
   z-index: 3;
   height: var(--height, 200lvh);
+  background: var(--color-primary);
+  content-visibility: auto;
+  contain-intrinsic-size: 1200px;
 }
 
 .s-work .s__outer {
@@ -1838,6 +1876,8 @@ button {
   z-index: 2;
   padding: var(--padding) 0;
   overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: 1500px;
 }
 
 @media (max-width: 1280px) {
@@ -2334,6 +2374,9 @@ button {
   position: relative;
   z-index: 2;
   border-top: 1px solid var(--color-secondary);
+  padding: 2rem;
+  content-visibility: auto;
+  contain-intrinsic-size: 150px;
 }
 
 .site-foot__container {
