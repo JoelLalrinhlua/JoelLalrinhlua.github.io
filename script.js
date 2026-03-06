@@ -627,9 +627,9 @@ class HeaderSection {
         tl.call(() => { this.canWrite = true; }, null, 1.5);
     }
     toggleContrast() {
-        const isDark = document.documentElement.classList.contains('theme-dark');
+        const isLight = document.documentElement.classList.contains('theme-light');
         // Simple toggle with smooth CSS transition (handled by --theme-transition variable)
-        document.documentElement.classList.toggle('theme-dark');
+        document.documentElement.classList.toggle('theme-light');
         // Small flash animation on the button for feedback
         if (this.contrastButton) {
             gsap.fromTo(this.contrastButton, { scale: 0.85 }, { scale: 1, duration: 0.4, ease: 'back.out(2)' });
@@ -692,4 +692,4 @@ new HeaderSection();
 new CustomScrollbar();
 initContactModal();
 
-console.log('%c✨ Portfolio by Joel Lalrinhlua', 'color: #160000; background: #f40c3f; padding: 10px 20px; font-size: 14px;');
+console.log('%c✨ Portfolio by Joel Lalrinhlua', 'color: #FFFFFF; background: #E63B2E; padding: 10px 20px; font-size: 14px;');

@@ -8,7 +8,7 @@
         content="Joel Lalrinhlua – Creative Developer & Designer crafting exceptional digital experiences. Based in India." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta name="theme-color" content="#1A1A2E" />
+    <meta name="theme-color" content="#FFFFFF" />
 
     <!-- Fonts -->
     <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
@@ -47,42 +47,6 @@
                     <div class="sb-console__inner js-console"></div>
                 </div>
 
-                <!-- Nav -->
-                <nav class="sb-menu">
-                    <ul class="sb__list">
-                        <li class="sb__item js-menu-item">
-                            <a href="#about" class="js-menu-link"><span class="sb__text">About</span></a>
-                        </li>
-                        <li class="sb__item js-menu-item">
-                            <a href="#work" class="js-menu-link"><span class="sb__text">Work</span></a>
-                        </li>
-                        <li class="sb__item js-menu-item">
-                            <a href="#contact" class="js-menu-link"><span class="sb__text">Contact</span></a>
-                        </li>
-                    </ul>
-                </nav>
-
-                <!-- Socials -->
-                <ul class="sb-socials">
-                    <li class="sb__item">
-                        <a href="https://github.com/JoelLalrinhlua" target="_blank" rel="noopener" title="GitHub">
-                            <span class="sb__icon sb__icon--github"
-                                style="--path: path('M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12');">
-                            </span>
-                            <span class="u-sr-only">GitHub</span>
-                        </a>
-                    </li>
-                    <li class="sb__item">
-                        <a href="https://www.linkedin.com/in/joel-lalrinhlua/" target="_blank" rel="noopener"
-                            title="LinkedIn">
-                            <span class="sb__icon sb__icon--linkedin"
-                                style="--path: path('M1.13 14.98h2.81V4.6H1.13v10.38zm1.4-14.97C1.6.01.85.76.85 1.7c0 .935.748 1.684 1.683 1.684.936 0 1.684-.749 1.684-1.684 0-.936-.748-1.684-1.684-1.684zm6.18 6.18V4.6H5.9v10.38h2.81V9.65c0-2.994 3.836-3.18 3.836 0v5.33h2.806V8.62c0-5.05-5.332-4.864-6.642-2.432z');">
-                            </span>
-                            <span class="u-sr-only">LinkedIn</span>
-                        </a>
-                    </li>
-                </ul>
-
                 <!-- Contrast Toggle -->
                 <button class="sb-contrast js-contrast" type="button">
                     <span class="sb__icon"
@@ -90,63 +54,69 @@
                     </span>
                     <span class="u-sr-only">Toggle contrast</span>
                 </button>
-
-                <!-- Availability -->
-                <aside class="sb-availability">
-                    <p>
-                        <span class="sb__line">
-                            <span class="sb__text">Coding from India.</span>
-                        </span>
-                        <span class="sb__line">
-                            <span class="sb__text">Available for freelance →</span>
-                            <a href="mailto:joelkizyking@gmail.com" class="sb__link">Hire me</a>
-                        </span>
-                    </p>
-                </aside>
             </div>
         </header>
 
         <!-- ===== HERO ===== -->
         <section class="s-hero-new js-hero-new" data-intersect>
+            <!-- Tubes Cursor Canvas — covers full hero -->
+            <canvas id="canvas" class="hero-tubes-canvas"></canvas>
+
+            <!-- Hero Nav -->
+            <nav class="hero-nav">
+                <ul class="hero-nav__list">
+                    <li class="hero-nav__item js-menu-item">
+                        <a href="#about" class="hero-nav__link js-menu-link">About</a>
+                    </li>
+                    <li class="hero-nav__item js-menu-item">
+                        <a href="#work" class="hero-nav__link js-menu-link">Work</a>
+                    </li>
+                    <li class="hero-nav__item js-menu-item">
+                        <a href="#contact" class="hero-nav__link js-menu-link">Contact</a>
+                    </li>
+                    <li class="hero-nav__item">
+                        <button class="hero-nav__toggle js-contrast" type="button" title="Toggle theme">
+                            <span class="hero-nav__toggle-icon"
+                                style="--path: path('M10.1 20C8.716 20 7.416 19.737 6.2 19.212 4.983 18.687 3.925 17.974 3.025 17.075 2.125 16.176 1.412 15.117.888 13.9.363 12.683.1 11.383.1 10 .099 8.617.362 7.317.888 6.1 1.414 4.883 2.126 3.824 3.025 2.925 3.923 2.026 4.982 1.313 6.2.788 7.418.263 8.718 0 10.1 0c1.382 0 2.682.263 3.9.788 1.218.525 2.276 1.238 3.175 2.137.899.899 1.611 1.958 2.138 3.175.527 1.217.789 2.517.787 3.9-.002 1.383-.265 2.683-.788 3.9-.527 1.117-1.239 2.176-2.138 3.075-.899.899-1.957 1.612-3.175 2.138-1.216.526-2.516.788-3.9.787zM11.1 17.925c1.983-.25 3.646-1.121 4.988-2.613 1.342-1.492 2.013-3.263 2.012-5.312-.001-2.05-.672-3.82-2.014-5.312C14.744 3.196 13.083 2.325 11.1 2.075v15.85z');">
+                            </span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
             <!-- Corner meta labels -->
             <div class="hero-meta hero-meta--tl">
-                <span class="hero-meta__label">Portfolio</span>
-                <span class="hero-meta__sub">Joel Lalrinhlua</span>
+                <span class="hero-meta__label">Hello there!</span>
+                <!-- <span class="hero-meta__sub">joel0102</span> -->
             </div>
             <div class="hero-meta hero-meta--tr">
-                <span class="hero-meta__label">Creative</span>
-                <span class="hero-meta__sub">Developer</span>
+                <span class="hero-meta__label"></span>
+                <span class="hero-meta__sub"></span>
             </div>
             <div class="hero-meta hero-meta--bl">
-                <span class="hero-meta__label">Based in</span>
-                <span class="hero-meta__sub">India 🇮🇳</span>
+                <span class="hero-meta__label">(: Welcome</span>
+                <!-- <span class="hero-meta__sub">India 🇮🇳</span> -->
             </div>
             <div class="hero-meta hero-meta--br">
-                <span class="hero-meta__label">Year</span>
-                <span class="hero-meta__sub">2026</span>
+                <span class="hero-meta__label">Chibai :)</span>
+
             </div>
 
             <!-- Main hero content with parallax layers -->
             <div class="hero-scene js-hero-scene">
                 <!-- Layer 1: Background decorative text -->
                 <div class="hero-layer hero-layer--bg js-parallax-layer" data-depth="0.02">
-                    <div class="hero-bg-text">JOEL</div>
-                </div>
-
-                <!-- Tubes Cursor Canvas Layer -->
-                <div class="hero-layer"
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
-                    <canvas id="canvas" style="width: 100%; height: 100%; display: block;"></canvas>
+                    <div class="hero-bg-text">SHYAM</div>
                 </div>
 
                 <!-- Layer 2: Main stacked typography -->
                 <div class="hero-layer hero-layer--text js-parallax-layer" data-depth="0.04">
                     <h1 class="hero-title">
                         <span class="hero-title__line js-hero-line">
-                            <span class="hero-title__word js-magnetic-word">CREA</span>
+                            <span class="hero-title__word js-magnetic-word">JOEL</span>
                         </span>
                         <span class="hero-title__line js-hero-line">
-                            <span class="hero-title__word js-magnetic-word">TIVE</span>
+                            <span class="hero-title__word js-magnetic-word">LALRINHLUA</span>
                         </span>
                     </h1>
                 </div>
@@ -187,34 +157,34 @@
                 <div class="hero-marquee__track js-marquee-track">
                     <span class="hero-marquee__item">UI Design</span>
                     <span class="hero-marquee__dot">✦</span>
-                    <span class="hero-marquee__item">Frontend Dev</span>
+                    <span class="hero-marquee__item">Frontstack Dev</span>
                     <span class="hero-marquee__dot">✦</span>
                     <span class="hero-marquee__item">Motion Design</span>
                     <span class="hero-marquee__dot">✦</span>
                     <span class="hero-marquee__item">React</span>
                     <span class="hero-marquee__dot">✦</span>
-                    <span class="hero-marquee__item">GSAP</span>
+                    <span class="hero-marquee__item">Project Manager</span>
                     <span class="hero-marquee__dot">✦</span>
                     <span class="hero-marquee__item">Branding</span>
                     <span class="hero-marquee__dot">✦</span>
-                    <span class="hero-marquee__item">JavaScript</span>
+                    <span class="hero-marquee__item">FullStack</span>
                     <span class="hero-marquee__dot">✦</span>
                     <span class="hero-marquee__item">Figma</span>
                     <span class="hero-marquee__dot">✦</span>
                     <!-- Duplicate for seamless loop -->
                     <span class="hero-marquee__item">UI Design</span>
                     <span class="hero-marquee__dot">✦</span>
-                    <span class="hero-marquee__item">Frontend Dev</span>
+                    <span class="hero-marquee__item">Frontstack Dev</span>
                     <span class="hero-marquee__dot">✦</span>
                     <span class="hero-marquee__item">Motion Design</span>
                     <span class="hero-marquee__dot">✦</span>
                     <span class="hero-marquee__item">React</span>
                     <span class="hero-marquee__dot">✦</span>
-                    <span class="hero-marquee__item">GSAP</span>
+                    <span class="hero-marquee__item">Project Manager</span>
                     <span class="hero-marquee__dot">✦</span>
                     <span class="hero-marquee__item">Branding</span>
                     <span class="hero-marquee__dot">✦</span>
-                    <span class="hero-marquee__item">JavaScript</span>
+                    <span class="hero-marquee__item">Python</span>
                     <span class="hero-marquee__dot">✦</span>
                     <span class="hero-marquee__item">Figma</span>
                     <span class="hero-marquee__dot">✦</span>
@@ -313,19 +283,19 @@
                         <!-- Decorative blank item -->
                         <li class="s__skill s__skill--blank">
                             <svg width="49" height="49" viewBox="0 0 49 49" fill="none">
-                                <path fill="#160000"
+                                <path fill="#000000"
                                     d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z" />
                             </svg>
                             <svg width="49" height="49" viewBox="0 0 49 49" fill="none">
-                                <path fill="#160000"
+                                <path fill="#000000"
                                     d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z" />
                             </svg>
                             <svg width="49" height="49" viewBox="0 0 49 49" fill="none">
-                                <path fill="#160000"
+                                <path fill="#000000"
                                     d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z" />
                             </svg>
                             <svg width="49" height="49" viewBox="0 0 49 49" fill="none">
-                                <path fill="#160000"
+                                <path fill="#000000"
                                     d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z" />
                             </svg>
                         </li>
@@ -663,7 +633,7 @@
 
     <!-- ===== INTRO SCREEN ===== -->
     <div class="site-intro js-intro"
-        style="opacity: 1; position: fixed; top: 0; left: 0; z-index: 50; width: 100%; height: 100%; background: #E63B2E;">
+        style="opacity: 1; position: fixed; top: 0; left: 0; z-index: 50; width: 100%; height: 100%; background: #000000;">
         <img class="site-intro__splash js-splash" src="splash.jpg" alt="Joel" />
         <div class="site-intro__greeting js-greeting">Hello!</div>
 
