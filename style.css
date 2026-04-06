@@ -2758,42 +2758,42 @@ html.is-contrasted .hero-tubes-canvas {
 .s-cta {
   position: relative;
   z-index: 2;
-  padding: 55rem 0 0;
+  padding: 0;
 }
 
 @media (max-width: 1680px) {
   .s-cta {
-    padding-top: 48rem;
+    padding-top: 0;
   }
 }
 
 @media (max-width: 1440px) {
   .s-cta {
-    padding-top: 41.25rem;
+    padding-top: 0;
   }
 }
 
 @media (max-width: 1280px) {
   .s-cta {
-    padding-top: 34.375rem;
+    padding-top: 0;
   }
 }
 
 @media (max-width: 1024px) {
   .s-cta {
-    padding-top: 36rem;
+    padding-top: 0;
   }
 }
 
 @media (max-width: 900px) {
   .s-cta {
-    padding-top: 30rem;
+    padding-top: 0;
   }
 }
 
 @media (max-width: 767px) {
   .s-cta {
-    padding-top: 21.6rem;
+    padding-top: 0;
   }
 }
 
@@ -3242,3 +3242,287 @@ a:hover {
 .modal-close:hover {
   color: var(--color-accent);
 }
+
+/* ===================================================================
+   MY CREATIVE PROCESS — Redesigned Section
+   =================================================================== */
+
+/* Section container */
+.s-process {
+  position: relative;
+  z-index: 2;
+  background: var(--color-primary);
+  border-top: 1px solid var(--color-secondary);
+  border-bottom: 1px solid var(--color-secondary);
+  padding: 6rem 3rem 7rem;
+  overflow: hidden;
+  transition: var(--theme-transition);
+}
+
+@media (max-width: 767px) {
+  .s-process {
+    padding: 4rem 1.5rem 5rem;
+  }
+}
+
+/* Process intro heading */
+.process-intro {
+  max-width: 640px;
+  margin: 0 auto 5rem;
+  text-align: center;
+}
+
+.process-intro__title {
+  font: 700 clamp(2.5rem, 6vw, 5rem)/0.9 var(--font-bigger);
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+}
+
+.process-intro__sub {
+  font: 400 15px/1.7 var(--font-editorial);
+  color: var(--color-secondary);
+  opacity: 0.55;
+}
+
+/* 4-step grid */
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--color-secondary);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1100px) {
+  .process-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Individual step */
+.process-step {
+  padding: 2.5rem 2rem;
+  border-right: 1px solid var(--color-secondary);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.process-step:last-child {
+  border-right: none;
+}
+
+@media (max-width: 1100px) {
+  .process-step:nth-child(2) { border-right: none; }
+  .process-step:nth-child(3) { border-right: 1px solid var(--color-secondary); border-top: 1px solid var(--color-secondary); }
+  .process-step:nth-child(4) { border-right: none; border-top: 1px solid var(--color-secondary); }
+}
+
+@media (max-width: 600px) {
+  .process-step { border-right: none !important; border-bottom: 1px solid var(--color-secondary); }
+  .process-step:last-child { border-bottom: none; }
+}
+
+.process-step.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1) calc(var(--step-i, 0) * 0.12s),
+    transform 0.6s cubic-bezier(0.23, 1, 0.32, 1) calc(var(--step-i, 0) * 0.12s),
+    background 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.process-step::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-secondary);
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+  z-index: 0;
+}
+
+.process-step:hover::before {
+  transform: translateY(0);
+}
+
+.process-step:hover { color: var(--color-primary); }
+
+/* Step elements relative positioning */
+.process-step__head,
+.process-step__title,
+.process-step__desc,
+.process-step__tags {
+  position: relative;
+  z-index: 1;
+}
+
+/* Step head: number + icon */
+.process-step__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.process-step__num {
+  font: 700 clamp(2.5rem, 5vw, 4rem)/1 var(--font-bigger);
+  color: var(--color-secondary);
+  opacity: 0.1;
+  letter-spacing: -0.02em;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.process-step:hover .process-step__num {
+  color: var(--color-primary);
+  opacity: 0.2;
+}
+
+.process-step__icon {
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--color-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-secondary);
+  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+}
+
+.process-step:hover .process-step__icon {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* Step title */
+.process-step__title {
+  font: 700 clamp(1rem, 1.8vw, 1.3rem)/1.2 var(--font-bigger);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--color-secondary);
+  margin: 0 0 0.85rem;
+  transition: color 0.3s ease;
+}
+
+.process-step:hover .process-step__title {
+  color: var(--color-primary);
+}
+
+/* Step description */
+.process-step__desc {
+  font: 400 13px/1.7 var(--font-editorial);
+  color: var(--color-secondary);
+  opacity: 0.65;
+  margin-bottom: 1.5rem;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.process-step:hover .process-step__desc {
+  color: var(--color-primary);
+  opacity: 0.8;
+}
+
+/* Tags */
+.process-step__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
+}
+
+.process-step__tags span {
+  font: 400 8px/1.2 var(--font-fraktion);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--color-secondary);
+  color: var(--color-secondary);
+  opacity: 0.5;
+  transition: border-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+}
+
+.process-step:hover .process-step__tags span {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  opacity: 0.7;
+}
+
+/* ===================================================================
+   PROJECT CARDS — Top-bar with title
+   =================================================================== */
+
+/* Top bar: number + title + tag all in one row */
+.swm__card__top-bar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 2.75rem;
+  flex-shrink: 0;
+}
+
+.swm__card.is-hovered .swm__card__top-bar {
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+}
+
+/* Title in the top bar */
+.swm__card__name--top {
+  flex: 1;
+  font: 700 clamp(0.65rem, 1.2vw, 0.85rem)/1.2 var(--font-bigger);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--color-secondary);
+  margin: 0;
+  white-space: normal;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  transition: color 0.3s ease;
+}
+
+.swm__card.is-hovered .swm__card__name--top {
+  color: var(--color-primary);
+}
+
+/* Marquee scroll speed tweak via CSS custom property */
+.swm__track {
+  animation-duration: 22s !important;
+}
+
+/* ===================================================================
+   SPLASH IMAGE — transparent mix-blend-mode
+   =================================================================== */
+
+.site-intro__splash {
+  mix-blend-mode: screen;
+}
+
+/* ===================================================================
+   PROCESS BADGE — animation
+   =================================================================== */
+
+.process-badge.is-hanging {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ===================================================================
+   PROCESS STEP — scroll-triggered reveal in JS
+   =================================================================== */
+/* Triggered by IntersectionObserver in initProcessSteps() */
