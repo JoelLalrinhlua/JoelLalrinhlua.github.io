@@ -1,22 +1,52 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="is-scroll-blocked">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>Joel's Portfolio</title>
-    <meta name="description"
-        content="Joel Lalrinhlua – Creative Developer & Designer crafting exceptional digital experiences. Based in India." />
+    <meta
+      name="description"
+      content="Joel Lalrinhlua – Creative Developer & Designer crafting exceptional digital experiences. Based in India."
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <meta name="theme-color" content="#FFFFFF" />
 
     <!-- Fonts -->
-    <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="preload" href="fonts/PPEditorialNew-Ultralight.woff2" as="font" type="font/woff2"
-        crossorigin="anonymous" />
-    <link rel="preload" href="fonts/PPFraktionMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="preload" href="fonts/PPFraktionMono-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="preload" href="fonts/Bigger-Display.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link
+      rel="preload"
+      href="fonts/PPEditorialNew-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="fonts/PPEditorialNew-Ultralight.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="fonts/PPFraktionMono-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="fonts/PPFraktionMono-Bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="fonts/Bigger-Display.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
 
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -25,208 +55,267 @@
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 
     <link rel="stylesheet" href="style.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- ===== SITE WRAPPER ===== -->
-    <div class="site-wrapper js-site-wrapper" style="opacity: 0;">
+    <div class="site-wrapper js-site-wrapper" style="opacity: 0">
+      <!-- ===== HERO ===== -->
+      <section class="s-hero-new js-hero-new" data-intersect>
+        <!-- Tubes Cursor Canvas — covers full hero -->
+        <canvas id="canvas" class="hero-tubes-canvas"></canvas>
 
+        <!-- Hero Nav -->
+        <nav class="hero-nav">
+          <ul class="hero-nav__list">
+            <li class="hero-nav__item js-menu-item">
+              <a href="#about" class="hero-nav__link js-menu-link">About</a>
+            </li>
+            <li class="hero-nav__item js-menu-item">
+              <a href="#work" class="hero-nav__link js-menu-link">Work</a>
+            </li>
+            <li class="hero-nav__item js-menu-item">
+              <a href="#contact" class="hero-nav__link js-menu-link">Contact</a>
+            </li>
+            <li class="hero-nav__item">
+              <button
+                class="hero-nav__toggle js-contrast"
+                type="button"
+                title="Toggle theme"
+              >
+                <span
+                  class="hero-nav__toggle-icon"
+                  style="
+                    --path: path(
+                      &quot;M10.1 20C8.716 20 7.416 19.737 6.2 19.212 4.983 18.687 3.925 17.974 3.025 17.075 2.125 16.176 1.412 15.117.888 13.9.363 12.683.1 11.383.1 10 .099 8.617.362 7.317.888 6.1 1.414 4.883 2.126 3.824 3.025 2.925 3.923 2.026 4.982 1.313 6.2.788 7.418.263 8.718 0 10.1 0c1.382 0 2.682.263 3.9.788 1.218.525 2.276 1.238 3.175 2.137.899.899 1.611 1.958 2.138 3.175.527 1.217.789 2.517.787 3.9-.002 1.383-.265 2.683-.788 3.9-.527 1.117-1.239 2.176-2.138 3.075-.899.899-1.957 1.612-3.175 2.138-1.216.526-2.516.788-3.9.787zM11.1 17.925c1.983-.25 3.646-1.121 4.988-2.613 1.342-1.492 2.013-3.263 2.012-5.312-.001-2.05-.672-3.82-2.014-5.312C14.744 3.196 13.083 2.325 11.1 2.075v15.85z&quot;
+                    );
+                  "
+                >
+                </span>
+              </button>
+            </li>
+          </ul>
+        </nav>
 
+        <!-- Corner meta labels -->
+        <div class="hero-meta hero-meta--tl">
+          <span class="hero-meta__label">Chibai :)</span>
+          <span class="hero-meta__sub">Welcome</span>
+        </div>
+        <div class="hero-meta hero-meta--tr">
+          <span class="hero-meta__label"></span>
+          <span class="hero-meta__sub"></span>
+        </div>
+        <div class="hero-meta hero-meta--bl">
+          <span class="hero-meta__label">:</span>
+          <!-- <span class="hero-meta__sub">India 🇮🇳</span> -->
+        </div>
+        <div class="hero-meta hero-meta--br">
+          <span class="hero-meta__label">:</span>
+        </div>
 
-        <!-- ===== HERO ===== -->
-        <section class="s-hero-new js-hero-new" data-intersect>
-            <!-- Tubes Cursor Canvas — covers full hero -->
-            <canvas id="canvas" class="hero-tubes-canvas"></canvas>
+        <!-- Main hero content with parallax layers -->
+        <div class="hero-scene js-hero-scene">
+          <!-- Layer 1: Background decorative text -->
+          <div
+            class="hero-layer hero-layer--bg js-parallax-layer"
+            data-depth="0.02"
+          >
+            <div class="hero-bg-text">SHYAM</div>
+          </div>
 
-            <!-- Hero Nav -->
-            <nav class="hero-nav">
-                <ul class="hero-nav__list">
-                    <li class="hero-nav__item js-menu-item">
-                        <a href="#about" class="hero-nav__link js-menu-link">About</a>
-                    </li>
-                    <li class="hero-nav__item js-menu-item">
-                        <a href="#work" class="hero-nav__link js-menu-link">Work</a>
-                    </li>
-                    <li class="hero-nav__item js-menu-item">
-                        <a href="#contact" class="hero-nav__link js-menu-link">Contact</a>
-                    </li>
-                    <li class="hero-nav__item">
-                        <button class="hero-nav__toggle js-contrast" type="button" title="Toggle theme">
-                            <span class="hero-nav__toggle-icon"
-                                style="--path: path('M10.1 20C8.716 20 7.416 19.737 6.2 19.212 4.983 18.687 3.925 17.974 3.025 17.075 2.125 16.176 1.412 15.117.888 13.9.363 12.683.1 11.383.1 10 .099 8.617.362 7.317.888 6.1 1.414 4.883 2.126 3.824 3.025 2.925 3.923 2.026 4.982 1.313 6.2.788 7.418.263 8.718 0 10.1 0c1.382 0 2.682.263 3.9.788 1.218.525 2.276 1.238 3.175 2.137.899.899 1.611 1.958 2.138 3.175.527 1.217.789 2.517.787 3.9-.002 1.383-.265 2.683-.788 3.9-.527 1.117-1.239 2.176-2.138 3.075-.899.899-1.957 1.612-3.175 2.138-1.216.526-2.516.788-3.9.787zM11.1 17.925c1.983-.25 3.646-1.121 4.988-2.613 1.342-1.492 2.013-3.263 2.012-5.312-.001-2.05-.672-3.82-2.014-5.312C14.744 3.196 13.083 2.325 11.1 2.075v15.85z');">
-                            </span>
-                        </button>
-                    </li>
-                </ul>
-            </nav>
+          <!-- Layer 2: Main stacked typography -->
+          <div
+            class="hero-layer hero-layer--text js-parallax-layer"
+            data-depth="0.06"
+          >
+            <h1 class="hero-title">
+              <span class="hero-title__line js-hero-line">
+                <span class="hero-title__word js-magnetic-word">JOEL</span>
+              </span>
+              <span class="hero-title__line js-hero-line">
+                <span class="hero-title__word js-magnetic-word"
+                  >LALRINHLUA</span
+                >
+              </span>
+            </h1>
+          </div>
 
-            <!-- Corner meta labels -->
-            <div class="hero-meta hero-meta--tl">
-                <span class="hero-meta__label">Chibai :)</span>
-                <span class="hero-meta__sub">Welcome</span>
+          <!-- Layer 4: Sparkle decorations -->
+          <div
+            class="hero-layer hero-layer--sparkles js-parallax-layer"
+            data-depth="0.08"
+          >
+            <svg
+              class="hero-sparkle hero-sparkle--1 js-sparkle"
+              viewBox="0 0 32 32"
+              width="40"
+              height="40"
+            >
+              <path
+                d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z"
+                fill="var(--color-accent)"
+              />
+            </svg>
+            <svg
+              class="hero-sparkle hero-sparkle--2 js-sparkle"
+              viewBox="0 0 32 32"
+              width="28"
+              height="28"
+            >
+              <path
+                d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z"
+                fill="var(--color-secondary)"
+              />
+            </svg>
+            <svg
+              class="hero-sparkle hero-sparkle--3 js-sparkle"
+              viewBox="0 0 32 32"
+              width="22"
+              height="22"
+            >
+              <path
+                d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z"
+                fill="var(--color-accent)"
+              />
+            </svg>
+            <svg
+              class="hero-sparkle hero-sparkle--4 js-sparkle"
+              viewBox="0 0 32 32"
+              width="18"
+              height="18"
+            >
+              <path
+                d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z"
+                fill="var(--color-secondary)"
+              />
+            </svg>
+            <svg
+              class="hero-sparkle hero-sparkle--5 js-sparkle"
+              viewBox="0 0 32 32"
+              width="34"
+              height="34"
+            >
+              <path
+                d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z"
+                fill="var(--color-accent)"
+              />
+            </svg>
+          </div>
+
+          <!-- Subtitle -->
+          <div class="hero-subtitle js-hero-subtitle">
+            <span class="hero-subtitle__text">Developer</span>
+            <span class="hero-subtitle__divider">×</span>
+            <span class="hero-subtitle__text">Designer</span>
+            <span class="hero-subtitle__divider">×</span>
+            <span class="hero-subtitle__text">Creator</span>
+          </div>
+        </div>
+
+        <!-- Skills marquee ticker -->
+        <div class="marquee hero-marquee">
+          <div class="marquee__track js-marquee-track">
+            <span class="marquee__item">UI Design</span>
+            <span class="marquee__dot">✦</span>
+            <span class="marquee__item">Frontstack Dev</span>
+            <span class="marquee__dot">✦</span>
+            <span class="marquee__item">Motion Design</span>
+            <span class="marquee__dot">✦</span>
+            <span class="marquee__item">React</span>
+            <span class="marquee__dot">✦</span>
+            <span class="marquee__item">Project Manager</span>
+            <span class="marquee__dot">✦</span>
+            <span class="marquee__item">Branding</span>
+            <span class="marquee__dot">✦</span>
+            <span class="marquee__item">FullStack</span>
+            <span class="marquee__dot">✦</span>
+            <span class="marquee__item">Figma</span>
+            <span class="marquee__dot">✦</span>
+            <!-- Duplicate for seamless loop -->
+            <span class="marquee__item">UI Design</span>
+            <span class="marquee__dot">✦</span>
+            <span class="marquee__item">Frontstack Dev</span>
+            <span class="marquee__dot">✦</span>
+            <span class="marquee__item">Motion Design</span>
+            <span class="marquee__dot">✦</span>
+            <span class="marquee__item">React</span>
+            <span class="marquee__dot">✦</span>
+            <span class="marquee__item">Project Manager</span>
+            <span class="marquee__dot">✦</span>
+            <span class="marquee__item">Branding</span>
+            <span class="marquee__dot">✦</span>
+            <span class="marquee__item">Python</span>
+            <span class="marquee__dot">✦</span>
+            <span class="marquee__item">Figma</span>
+            <span class="marquee__dot">✦</span>
+          </div>
+        </div>
+      </section>
+      <!-- .s-hero-new -->
+
+      <!-- ===== ABOUT ===== -->
+      <section id="about" class="s-about" data-intersect>
+        <div class="s__inner js-about-inner">
+          <div class="s__block s__block--about">
+            <h2 class="s__title">About</h2>
+            <div class="s__content">
+              <p>
+                I'm Joel Lalrinhlua, a creative developer based in India,
+                passionate about crafting digital experiences that blend
+                aesthetics with functionality. With a focus on innovative design
+                and clean code, I help brands create memorable digital products.
+              </p>
+              <p>
+                Over the years, I've grown from exploring web design to building
+                full-stack applications. I believe in constant learning—studying
+                other developers' work, experimenting with new technologies, and
+                pushing creative boundaries.
+              </p>
+              <p>
+                I specialize in UI/UX Design, Frontend Development, Motion
+                Design, and Branding. My approach combines strategic thinking
+                with pixel-perfect execution to deliver experiences that truly
+                stand out.
+              </p>
             </div>
-            <div class="hero-meta hero-meta--tr">
-                <span class="hero-meta__label"></span>
-                <span class="hero-meta__sub"></span>
-            </div>
-            <div class="hero-meta hero-meta--bl">
-                <span class="hero-meta__label">:</span>
-                <!-- <span class="hero-meta__sub">India 🇮🇳</span> -->
-            </div>
-            <div class="hero-meta hero-meta--br">
-                <span class="hero-meta__label">:</span>
+          </div>
 
-            </div>
+          <div class="s__block s__block--skills">
+            <h2 class="s__title">Skills</h2>
+            <ul class="s__skills">
+              <li class="s__skill s__skill--counter js-skill">
+                <span class="s__skill__inner">
+                  <span class="s__skill__name">HTML/CSS</span>
+                </span>
+                <span class="s__skill__mask"></span>
+              </li>
+              <li class="s__skill s__skill--counter js-skill">
+                <span class="s__skill__inner">
+                  <span class="s__skill__name">JavaScript</span>
+                </span>
+                <span class="s__skill__mask"></span>
+              </li>
+              <li class="s__skill s__skill--counter js-skill">
+                <span class="s__skill__inner">
+                  <span class="s__skill__name">React</span>
+                </span>
+                <span class="s__skill__mask"></span>
+              </li>
+              <li class="s__skill s__skill--counter js-skill">
+                <span class="s__skill__inner">
+                  <span class="s__skill__name">Figma</span>
+                </span>
+                <span class="s__skill__mask"></span>
+              </li>
+              <li class="s__skill s__skill--counter js-skill">
+                <span class="s__skill__inner">
+                  <span class="s__skill__name">UI/UX Design</span>
+                </span>
+                <span class="s__skill__mask"></span>
+              </li>
 
-            <!-- Main hero content with parallax layers -->
-            <div class="hero-scene js-hero-scene">
-                <!-- Layer 1: Background decorative text -->
-                <div class="hero-layer hero-layer--bg js-parallax-layer" data-depth="0.02">
-                    <div class="hero-bg-text">SHYAM</div>
-                </div>
-
-                <!-- Layer 2: Main stacked typography -->
-                <div class="hero-layer hero-layer--text js-parallax-layer" data-depth="0.06">
-                    <h1 class="hero-title">
-                        <span class="hero-title__line js-hero-line">
-                            <span class="hero-title__word js-magnetic-word">JOEL</span>
-                        </span>
-                        <span class="hero-title__line js-hero-line">
-                            <span class="hero-title__word js-magnetic-word">LALRINHLUA</span>
-                        </span>
-                    </h1>
-                </div>
-
-
-
-                <!-- Layer 4: Sparkle decorations -->
-                <div class="hero-layer hero-layer--sparkles js-parallax-layer" data-depth="0.08">
-                    <svg class="hero-sparkle hero-sparkle--1 js-sparkle" viewBox="0 0 32 32" width="40" height="40">
-                        <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="var(--color-accent)" />
-                    </svg>
-                    <svg class="hero-sparkle hero-sparkle--2 js-sparkle" viewBox="0 0 32 32" width="28" height="28">
-                        <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="var(--color-secondary)" />
-                    </svg>
-                    <svg class="hero-sparkle hero-sparkle--3 js-sparkle" viewBox="0 0 32 32" width="22" height="22">
-                        <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="var(--color-accent)" />
-                    </svg>
-                    <svg class="hero-sparkle hero-sparkle--4 js-sparkle" viewBox="0 0 32 32" width="18" height="18">
-                        <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="var(--color-secondary)" />
-                    </svg>
-                    <svg class="hero-sparkle hero-sparkle--5 js-sparkle" viewBox="0 0 32 32" width="34" height="34">
-                        <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="var(--color-accent)" />
-                    </svg>
-                </div>
-
-                <!-- Subtitle -->
-                <div class="hero-subtitle js-hero-subtitle">
-                    <span class="hero-subtitle__text">Developer</span>
-                    <span class="hero-subtitle__divider">×</span>
-                    <span class="hero-subtitle__text">Designer</span>
-                    <span class="hero-subtitle__divider">×</span>
-                    <span class="hero-subtitle__text">Creator</span>
-                </div>
-            </div>
-
-            <!-- Skills marquee ticker -->
-            <div class="marquee hero-marquee">
-                <div class="marquee__track js-marquee-track">
-                    <span class="marquee__item">UI Design</span>
-                    <span class="marquee__dot">✦</span>
-                    <span class="marquee__item">Frontstack Dev</span>
-                    <span class="marquee__dot">✦</span>
-                    <span class="marquee__item">Motion Design</span>
-                    <span class="marquee__dot">✦</span>
-                    <span class="marquee__item">React</span>
-                    <span class="marquee__dot">✦</span>
-                    <span class="marquee__item">Project Manager</span>
-                    <span class="marquee__dot">✦</span>
-                    <span class="marquee__item">Branding</span>
-                    <span class="marquee__dot">✦</span>
-                    <span class="marquee__item">FullStack</span>
-                    <span class="marquee__dot">✦</span>
-                    <span class="marquee__item">Figma</span>
-                    <span class="marquee__dot">✦</span>
-                    <!-- Duplicate for seamless loop -->
-                    <span class="marquee__item">UI Design</span>
-                    <span class="marquee__dot">✦</span>
-                    <span class="marquee__item">Frontstack Dev</span>
-                    <span class="marquee__dot">✦</span>
-                    <span class="marquee__item">Motion Design</span>
-                    <span class="marquee__dot">✦</span>
-                    <span class="marquee__item">React</span>
-                    <span class="marquee__dot">✦</span>
-                    <span class="marquee__item">Project Manager</span>
-                    <span class="marquee__dot">✦</span>
-                    <span class="marquee__item">Branding</span>
-                    <span class="marquee__dot">✦</span>
-                    <span class="marquee__item">Python</span>
-                    <span class="marquee__dot">✦</span>
-                    <span class="marquee__item">Figma</span>
-                    <span class="marquee__dot">✦</span>
-                </div>
-            </div>
-        </section><!-- .s-hero-new -->
-
-        <!-- ===== ABOUT ===== -->
-        <section id="about" class="s-about" data-intersect>
-            <div class="s__inner js-about-inner">
-                <div class="s__block s__block--about">
-                    <h2 class="s__title">About</h2>
-                    <div class="s__content">
-                        <p>
-                            I'm Joel Lalrinhlua, a creative developer based in India, passionate about crafting
-                            digital experiences that blend aesthetics with functionality. With a focus on
-                            innovative design and clean code, I help brands create memorable digital products.
-                        </p>
-                        <p>
-                            Over the years, I've grown from exploring web design to building full-stack
-                            applications. I believe in constant learning—studying other developers' work,
-                            experimenting with new technologies, and pushing creative boundaries.
-                        </p>
-                        <p>
-                            I specialize in UI/UX Design, Frontend Development, Motion Design, and Branding.
-                            My approach combines strategic thinking with pixel-perfect execution to deliver
-                            experiences that truly stand out.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="s__block s__block--skills">
-                    <h2 class="s__title">Skills</h2>
-                    <ul class="s__skills">
-                        <li class="s__skill s__skill--counter js-skill">
-                            <span class="s__skill__inner">
-                                <span class="s__skill__name">HTML/CSS</span>
-                            </span>
-                            <span class="s__skill__mask"></span>
-                        </li>
-                        <li class="s__skill s__skill--counter js-skill">
-                            <span class="s__skill__inner">
-                                <span class="s__skill__name">JavaScript</span>
-                            </span>
-                            <span class="s__skill__mask"></span>
-                        </li>
-                        <li class="s__skill s__skill--counter js-skill">
-                            <span class="s__skill__inner">
-                                <span class="s__skill__name">React</span>
-                            </span>
-                            <span class="s__skill__mask"></span>
-                        </li>
-                        <li class="s__skill s__skill--counter js-skill">
-                            <span class="s__skill__inner">
-                                <span class="s__skill__name">Figma</span>
-                            </span>
-                            <span class="s__skill__mask"></span>
-                        </li>
-                        <li class="s__skill s__skill--counter js-skill">
-                            <span class="s__skill__inner">
-                                <span class="s__skill__name">UI/UX Design</span>
-                            </span>
-                            <span class="s__skill__mask"></span>
-                        </li>
-
-                        <!--  Hemi hnuai ami hi skills dah belh na templete
+              <!--  Hemi hnuai ami hi skills dah belh na templete
 
                             <li class="s__skill s__skill--text js-skill">
                             <span class="s__skill__inner">
@@ -236,525 +325,1338 @@
 
                         </li>  -->
 
-                        <li class="s__skill s__skill--text js-skill">
-                            <span class="s__skill__inner">
-                                <span class="s__skill__text">5+ Projects Delivered</span>
-                            </span>
-                            <span class="s__skill__mask"></span>
-                        </li>
-                        <li class="s__skill s__skill--text js-skill">
-                            <span class="s__skill__inner">
-                                <span class="s__skill__text">Web Design &amp; Development</span>
-                            </span>
-                            <span class="s__skill__mask"></span>
-                        </li>
+              <li class="s__skill s__skill--text js-skill">
+                <span class="s__skill__inner">
+                  <span class="s__skill__text">5+ Projects Delivered</span>
+                </span>
+                <span class="s__skill__mask"></span>
+              </li>
+              <li class="s__skill s__skill--text js-skill">
+                <span class="s__skill__inner">
+                  <span class="s__skill__text"
+                    >Web Design &amp; Development</span
+                  >
+                </span>
+                <span class="s__skill__mask"></span>
+              </li>
 
-                        <!-- Decorative blank item -->
-                        <li class="s__skill s__skill--blank">
-                            <svg width="49" height="49" viewBox="0 0 49 49" fill="none">
-                                <path fill="#000000"
-                                    d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z" />
-                            </svg>
-                            <svg width="49" height="49" viewBox="0 0 49 49" fill="none">
-                                <path fill="#000000"
-                                    d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z" />
-                            </svg>
-                            <svg width="49" height="49" viewBox="0 0 49 49" fill="none">
-                                <path fill="#000000"
-                                    d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z" />
-                            </svg>
-                            <svg width="49" height="49" viewBox="0 0 49 49" fill="none">
-                                <path fill="#000000"
-                                    d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z" />
-                            </svg>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <svg class="s__grid js-about-grid">
-                <path class="js-about-grid-path" d=""></path>
-            </svg>
-
-            <canvas class="s__canvas js-about-canvas"></canvas>
-        </section>
-
-        <!-- ===== SEPARATOR ===== -->
-        <div class="marquee">
-            <div class="marquee__track js-marquee-track" style="animation-direction: reverse;">
-                <span class="marquee__item">Selected Works</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">Projects</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">Case Studies</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">Selected Works</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">Projects</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">Case Studies</span>
-                <span class="marquee__dot">✦</span>
-                <!-- Duplicate -->
-                <span class="marquee__item">Selected Works</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">Projects</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">Case Studies</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">Selected Works</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">Projects</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">Case Studies</span>
-                <span class="marquee__dot">✦</span>
-            </div>
-        </div>
-
-        <!-- ===== WORK ===== -->
-        <section id="work" class="s-work" data-intersect>
-            <div class="s__outer">
-                <div class="s__inner js-work-container">
-                    <h2 class="s__title">
-                        <span class="s__title__inner js-work-title">
-                            <span class="s__title__letter js-work-letter">W</span>
-                            <span class="s__title__letter js-work-letter">O</span>
-                            <span class="s__title__letter js-work-letter">R</span>
-                            <span class="s__title__letter js-work-letter">K</span>
-                        </span>
-                    </h2>
-
-                    <div class="s__scene js-work-scene">
-                        <!-- Project cards -->
-                        <div class="s__scene__work js-project" data-caption="Project Alpha" data-category="Web Design">
-                            <div class="s__scene__work__inner gradient-1"></div>
-                            <div class="s__scene__work__info">
-                                <span class="s__scene__work__category">Web Design</span>
-                                <span class="s__scene__work__name">Project Alpha</span>
-                                <span class="s__scene__work__desc">Brand identity and web experience for a tech
-                                    startup</span>
-                            </div>
-                        </div>
-
-                        <div class="s__scene__work js-project" data-caption="Project Beta" data-category="Development">
-                            <div class="s__scene__work__inner gradient-2"></div>
-                            <div class="s__scene__work__info">
-                                <span class="s__scene__work__category">Development</span>
-                                <span class="s__scene__work__name">Project Beta</span>
-                                <span class="s__scene__work__desc">Full-stack application with modern
-                                    architecture</span>
-                            </div>
-                        </div>
-
-                        <div class="s__scene__work js-project" data-caption="Project Gamma"
-                            data-category="UI/UX Design">
-                            <div class="s__scene__work__inner gradient-3"></div>
-                            <div class="s__scene__work__info">
-                                <span class="s__scene__work__category">UI/UX Design</span>
-                                <span class="s__scene__work__name">Project Gamma</span>
-                                <span class="s__scene__work__desc">Mobile app design for fitness platform</span>
-                            </div>
-                        </div>
-
-                        <div class="s__scene__work js-project" data-caption="Project Delta" data-category="Branding">
-                            <div class="s__scene__work__inner gradient-4"></div>
-                            <div class="s__scene__work__info">
-                                <span class="s__scene__work__category">Branding</span>
-                                <span class="s__scene__work__name">Project Delta</span>
-                                <span class="s__scene__work__desc">Complete brand refresh for creative agency</span>
-                            </div>
-                        </div>
-                    </div><!-- .s__scene -->
-
-                    <canvas class="s__canvas js-work-canvas"></canvas>
-                </div><!-- .s__inner -->
-
-                <div class="s__mask-outer">
-                    <div class="s__mask js-work-mask">
-                        <svg class="s__mask__svg js-work-mask-svg">
-                            <path class="s__mask__path-inner js-work-mask-path-inner" d=""></path>
-                            <path class="s__mask__path-outer js-work-mask-path-outer" d=""></path>
-                            <path class="s__mask__path-lines js-work-mask-path-lines" d=""></path>
-                        </svg>
-                    </div>
-                </div>
-
-                <div class="s__ruler js-work-ruler"></div>
-            </div><!-- .s__outer -->
-        </section>
-
-        <!-- ===== SEPARATOR ===== -->
-        <div class="marquee">
-            <div class="marquee__track js-marquee-track">
-                <span class="marquee__item">My Process</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">How I Work</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">Workflow</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">My Process</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">How I Work</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">Workflow</span>
-                <span class="marquee__dot">✦</span>
-                <!-- Duplicate -->
-                <span class="marquee__item">My Process</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">How I Work</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">Workflow</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">My Process</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">How I Work</span>
-                <span class="marquee__dot">✦</span>
-                <span class="marquee__item">Workflow</span>
-                <span class="marquee__dot">✦</span>
-            </div>
-        </div>
-
-        <!-- ===== MY WAY / PROCESS ===== -->
-        <section class="s-my-way" data-intersect>
-            <svg class="s__smiley js-smiley" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77.8 77.8"
-                xml:space="preserve">
-                <circle cx="38.9" cy="38.9" r="38.9"></circle>
-                <path
-                    d="M38.9 77.8c-2 0-4.1-.2-6.2-.5C11.6 73.9-2.9 53.9.5 32.8 2.1 22.5 7.7 13.5 16.1 7.4c8.4-6.1 18.7-8.5 29-6.9 10.3 1.6 19.3 7.2 25.4 15.6 6.1 8.4 8.5 18.7 6.9 29-3.1 19.1-19.7 32.7-38.5 32.7zM38.8 1c-7.9 0-15.6 2.5-22.1 7.2C8.5 14.1 3.1 22.9 1.5 32.9-1.8 53.5 12.3 73 32.9 76.3 53.5 79.6 73 65.5 76.3 44.9l.5.1-.5-.1c1.6-10-.8-20-6.7-28.2S54.9 3.1 44.9 1.5c-2-.3-4.1-.5-6.1-.5zM25.5 23.1c-1.9 0-3.5 2-4.1 5.1l-.1.3 3 2.2-2.9 2.2.1.3c.6 2.5 1.5 5.1 4.1 5.1 2.4 0 4.2-3.3 4.2-7.6s-2.4-7.6-4.3-7.6zm26.6 0c-1.9 0-3.5 2-4.1 5.1v.3l3 2.2-3 2.2.1.3c.6 2.5 1.5 5.1 4.1 5.1 2.4 0 4.2-3.3 4.2-7.6s-2.3-7.6-4.3-7.6zM62 39c0-.3-.2-.5-.5-.5s-.5.2-.5.5c0 12.2-9.9 22.1-22.1 22.1-12.2 0-22.1-9.9-22.1-22.1 0-.3-.2-.5-.5-.5s-.5.2-.5.5c0 12.7 10.4 23.1 23.1 23.1S62 51.7 62 39z">
-                </path>
-            </svg>
-
-            <div class="s__objects js-objects">
-                <!-- Process step cards as floating objects -->
-                <div class="a-object a-object--frame">
-                    <figure class="a__inner">
-                        <div class="a__process-card">
-                            <span class="a__step-number">01</span>
-                            <h3 class="a__step-name">Discovery & Strategy</h3>
-                            <p class="a__step-desc">Understanding your goals, audience, and project requirements.</p>
-                        </div>
-                        <figcaption class="a__caption">Step 1 — Discovery</figcaption>
-                    </figure>
-                    <div class="a__side a__side--vertical"></div>
-                    <div class="a__side a__side--horizontal"></div>
-                </div>
-
-                <div class="a-object a-object--frame">
-                    <figure class="a__inner">
-                        <div class="a__process-card">
-                            <span class="a__step-number">02</span>
-                            <h3 class="a__step-name">Design & Prototyping</h3>
-                            <p class="a__step-desc">Creating wireframes and visual designs with pixel-perfect precision.
-                            </p>
-                        </div>
-                        <figcaption class="a__caption">Step 2 — Design</figcaption>
-                    </figure>
-                    <div class="a__side a__side--vertical"></div>
-                    <div class="a__side a__side--horizontal"></div>
-                </div>
-
-                <div class="a-object a-object--frame">
-                    <figure class="a__inner">
-                        <div class="a__process-card">
-                            <span class="a__step-number">03</span>
-                            <h3 class="a__step-name">Development</h3>
-                            <p class="a__step-desc">Translating designs into clean, semantic code with smooth
-                                animations.</p>
-                        </div>
-                        <figcaption class="a__caption">Step 3 — Build</figcaption>
-                    </figure>
-                    <div class="a__side a__side--vertical"></div>
-                    <div class="a__side a__side--horizontal"></div>
-                </div>
-
-                <div class="a-object a-object--frame">
-                    <figure class="a__inner">
-                        <div class="a__process-card">
-                            <span class="a__step-number">04</span>
-                            <h3 class="a__step-name">Launch & Refine</h3>
-                            <p class="a__step-desc">Rigorous testing across devices followed by deployment and
-                                optimizations.</p>
-                        </div>
-                        <figcaption class="a__caption">Step 4 — Launch</figcaption>
-                    </figure>
-                    <div class="a__side a__side--vertical"></div>
-                    <div class="a__side a__side--horizontal"></div>
-                </div>
-
-                <!-- Decorative stars -->
-                <div class="a-object a-object--star">
-                    <div class="a__side a__side--top-left"></div>
-                    <div class="a__side a__side--top-right"></div>
-                    <div class="a__side a__side--bottom-left"></div>
-                    <div class="a__side a__side--bottom-right"></div>
-                </div>
-                <div class="a-object a-object--star">
-                    <div class="a__side a__side--top-left"></div>
-                    <div class="a__side a__side--top-right"></div>
-                    <div class="a__side a__side--bottom-left"></div>
-                    <div class="a__side a__side--bottom-right"></div>
-                </div>
-                <div class="a-object a-object--star">
-                    <div class="a__side a__side--top-left"></div>
-                    <div class="a__side a__side--top-right"></div>
-                    <div class="a__side a__side--bottom-left"></div>
-                    <div class="a__side a__side--bottom-right"></div>
-                </div>
-                <div class="a-object a-object--star">
-                    <div class="a__side a__side--top-left"></div>
-                    <div class="a__side a__side--top-right"></div>
-                    <div class="a__side a__side--bottom-left"></div>
-                    <div class="a__side a__side--bottom-right"></div>
-                </div>
-                <div class="a-object a-object--star">
-                    <div class="a__side a__side--top-left"></div>
-                    <div class="a__side a__side--top-right"></div>
-                    <div class="a__side a__side--bottom-left"></div>
-                    <div class="a__side a__side--bottom-right"></div>
-                </div>
-
-                <div class="s__ruler js-myway-ruler"></div>
-            </div><!-- .s__objects -->
-
-            <div class="s__catcher">
-                <div class="s__catcher__distorted-wrapper">
-                    <div class="s__catcher__distorted">
-                        <div class="s__catcher__text s__catcher__text--distorted">
-                            My <br />
-                            Creative <br />
-                            Process
-                        </div>
-                    </div>
-                </div>
-                <div class="s__catcher__normal-wrapper">
-                    <div class="s__catcher__normal">
-                        <div class="s__catcher__text s__catcher__text--normal">
-                            My <br />
-                            Creative <br />
-                            Process
-                        </div>
-                    </div>
-                </div>
-            </div><!-- .s__catcher -->
-
-            <svg class="s__svg js-myway-svg">
-                <path class="s__svg__circular-path js-myway-lines-path" d=""></path>
-            </svg>
-        </section>
-
-        <!-- ===== CTA / CONTACT ===== -->
-        <section class="s-cta" data-intersect>
-            <div id="contact" class="s__inner js-cta-container">
-                <div class="s__hover js-cta-hover">
-                    <div class="s__button js-cta-button">
-                        <div class="s__button__inner">
-                            <div class="s__button__text js-cta-button-text">GO</div>
-                        </div>
-                    </div>
-
-                    <div class="s__cta js-cta-circle">
-                        <div class="s__cta__line s__cta__line--top">
-                            <div class="s__cta__text">
-                                <span class="s__cta__char">
-                                    <span class="s__cta__char__slice">L</span><span
-                                        class="s__cta__char__slice">L</span><span
-                                        class="s__cta__char__slice">L</span><span class="s__cta__char__slice">L</span>
-                                </span>
-                                <span class="s__cta__char">
-                                    <span class="s__cta__char__slice">e</span><span
-                                        class="s__cta__char__slice">e</span><span
-                                        class="s__cta__char__slice">e</span><span class="s__cta__char__slice">e</span>
-                                </span>
-                                <span class="s__cta__char">
-                                    <span class="s__cta__char__slice">t</span><span
-                                        class="s__cta__char__slice">t</span><span
-                                        class="s__cta__char__slice">t</span><span class="s__cta__char__slice">t</span>
-                                </span>
-                                <span class="s__cta__char">
-                                    <span class="s__cta__char__slice">'</span><span
-                                        class="s__cta__char__slice">'</span><span
-                                        class="s__cta__char__slice">'</span><span class="s__cta__char__slice">'</span>
-                                </span>
-                                <span class="s__cta__char">
-                                    <span class="s__cta__char__slice">s</span><span
-                                        class="s__cta__char__slice">s</span><span
-                                        class="s__cta__char__slice">s</span><span class="s__cta__char__slice">s</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="s__cta__line s__cta__line--bottom">
-                            <div class="s__cta__text">
-                                <span class="s__cta__char">
-                                    <span class="s__cta__char__slice">R</span><span
-                                        class="s__cta__char__slice">R</span><span
-                                        class="s__cta__char__slice">R</span><span class="s__cta__char__slice">R</span>
-                                </span>
-                                <span class="s__cta__char">
-                                    <span class="s__cta__char__slice">o</span><span
-                                        class="s__cta__char__slice">o</span><span
-                                        class="s__cta__char__slice">o</span><span class="s__cta__char__slice">o</span>
-                                </span>
-                                <span class="s__cta__char">
-                                    <span class="s__cta__char__slice">c</span><span
-                                        class="s__cta__char__slice">c</span><span
-                                        class="s__cta__char__slice">c</span><span class="s__cta__char__slice">c</span>
-                                </span>
-                                <span class="s__cta__char">
-                                    <span class="s__cta__char__slice">k</span><span
-                                        class="s__cta__char__slice">k</span><span
-                                        class="s__cta__char__slice">k</span><span class="s__cta__char__slice">k</span>
-                                </span>
-                            </div>
-                        </div>
-                        <a href="mailto:joelkizyking@gmail.com" class="s__cta__link">
-                            joelkizyking@gmail.com
-                        </a>
-                        <div class="s__cta__stars">
-                            <svg class="s__cta__star" width="49" height="49" viewBox="0 0 49 49" fill="none">
-                                <path d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z">
-                                </path>
-                            </svg>
-                            <svg class="s__cta__star" width="49" height="49" viewBox="0 0 49 49" fill="none">
-                                <path d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z">
-                                </path>
-                            </svg>
-                            <svg class="s__cta__star" width="49" height="49" viewBox="0 0 49 49" fill="none">
-                                <path d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z">
-                                </path>
-                            </svg>
-                            <svg class="s__cta__star" width="49" height="49" viewBox="0 0 49 49" fill="none">
-                                <path d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z">
-                                </path>
-                            </svg>
-                        </div>
-                    </div><!-- .s__cta -->
-                </div><!-- .s__hover -->
-            </div><!-- .s__inner -->
-
-            <div class="s__grid js-cta-grid">
-                <svg class="s__grid__svg js-cta-grid-svg">
-                    <path class="s__grid__path js-cta-grid-path" d=""></path>
+              <!-- Decorative blank item -->
+              <li class="s__skill s__skill--blank">
+                <svg width="49" height="49" viewBox="0 0 49 49" fill="none">
+                  <path
+                    fill="#000000"
+                    d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z"
+                  />
                 </svg>
-            </div>
-        </section>
+                <svg width="49" height="49" viewBox="0 0 49 49" fill="none">
+                  <path
+                    fill="#000000"
+                    d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z"
+                  />
+                </svg>
+                <svg width="49" height="49" viewBox="0 0 49 49" fill="none">
+                  <path
+                    fill="#000000"
+                    d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z"
+                  />
+                </svg>
+                <svg width="49" height="49" viewBox="0 0 49 49" fill="none">
+                  <path
+                    fill="#000000"
+                    d="m24.5 0 3.3 21.2L49 24.5l-21.2 3.3L24.5 49l-3.3-21.2L0 24.5l21.2-3.3L24.5 0z"
+                  />
+                </svg>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-        <!-- ===== FOOTER ===== -->
-        <footer class="site-foot">
-            <div class="site-foot__container">
-                <span class="site-foot__text">Designed & Built by Joel Lalrinhlua</span>
-                <span class="site-foot__text">© 2026</span>
+        <svg class="s__grid js-about-grid">
+          <path class="js-about-grid-path" d=""></path>
+        </svg>
+
+        <canvas class="s__canvas js-about-canvas"></canvas>
+      </section>
+
+      <!-- ===== SEPARATOR ===== -->
+      <div class="marquee">
+        <div
+          class="marquee__track js-marquee-track"
+          style="animation-direction: reverse"
+        >
+          <span class="marquee__item">Selected Works</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">Projects</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">Case Studies</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">Selected Works</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">Projects</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">Case Studies</span>
+          <span class="marquee__dot">✦</span>
+          <!-- Duplicate -->
+          <span class="marquee__item">Selected Works</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">Projects</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">Case Studies</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">Selected Works</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">Projects</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">Case Studies</span>
+          <span class="marquee__dot">✦</span>
+        </div>
+      </div>
+
+      <!-- ===== WORK ===== -->
+      <section id="work" class="s-work-marquee" data-intersect>
+        <!-- Section header -->
+        <div class="swm__header">
+          <div class="swm__header__left">
+            <span class="swm__header__label">Selected Works</span>
+            <h2 class="swm__title">Projects</h2>
+          </div>
+          <span class="swm__subtitle">Drag to scroll · Click to explore</span>
+        </div>
+
+        <!-- Marquee container (default view) -->
+        <div class="swm__marquee-wrapper js-swm-marquee-wrapper">
+          <div class="swm__track js-swm-track">
+            <!-- Cards injected by JS -->
+          </div>
+        </div>
+
+        <!-- Project detail view (hidden by default) -->
+        <div class="swm__detail js-swm-detail" aria-hidden="true">
+          <button class="swm__back js-swm-back" aria-label="Back to projects">
+            <span class="swm__back__arrow">←</span>
+            <span class="swm__back__text">All Projects</span>
+          </button>
+          <div class="swm__detail__inner js-swm-detail-inner">
+            <div class="swm__detail__meta js-swm-detail-meta">
+              <span class="swm__detail__index js-swm-detail-index">01</span>
+              <h3 class="swm__detail__name js-swm-detail-name"></h3>
+              <div class="swm__detail__stack js-swm-detail-stack"></div>
             </div>
-        </footer>
-    </div><!-- .site-wrapper -->
+            <div class="swm__detail__content js-swm-detail-content"></div>
+          </div>
+        </div>
+
+        <!-- Confidential overlay -->
+        <div class="swm__confidential js-swm-confidential" aria-hidden="true">
+          <button class="swm__back js-swm-conf-back" aria-label="Back to projects">
+            <span class="swm__back__arrow">←</span>
+            <span class="swm__back__text">All Projects</span>
+          </button>
+          <div class="swm__confidential__inner">
+            <div class="swm__confidential__lock">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            <span class="swm__confidential__label">CONFIDENTIAL</span>
+            <h3 class="swm__confidential__name js-swm-conf-name"></h3>
+            <p class="swm__confidential__msg">This project is under NDA while I work at <strong>LushAI</strong>. I'm actively building two proprietary AI products — details can't be shared publicly, but feel free to reach out directly.</p>
+            <a href="mailto:joelkizyking@gmail.com" class="swm__confidential__cta">Reach Out →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SEPARATOR ===== -->
+      <div class="marquee">
+        <div class="marquee__track js-marquee-track">
+          <span class="marquee__item">My Process</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">How I Work</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">Workflow</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">My Process</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">How I Work</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">Workflow</span>
+          <span class="marquee__dot">✦</span>
+          <!-- Duplicate -->
+          <span class="marquee__item">My Process</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">How I Work</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">Workflow</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">My Process</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">How I Work</span>
+          <span class="marquee__dot">✦</span>
+          <span class="marquee__item">Workflow</span>
+          <span class="marquee__dot">✦</span>
+        </div>
+      </div>
+
+      <!-- ===== MY WAY / PROCESS ===== -->
+      <section class="s-cta s-my-way" data-intersect id="my-creative-process">
+        <!-- Hanging badge that animates in from above -->
+        <div class="process-badge js-process-badge" aria-hidden="true">
+          <div class="process-badge__inner">
+            <span class="process-badge__star">✦</span>
+            <span class="process-badge__text">My Creative Process</span>
+            <span class="process-badge__star">✦</span>
+          </div>
+          <div class="process-badge__thread"></div>
+        </div>
+        
+        <div class="s__inner js-cta-container s__my-way-cta">
+          <div class="s__hover js-cta-hover">
+            <!-- Smiley Face replacing the GO text originally here -->
+            <div class="s__button js-cta-button s__button--smiley">
+              <div class="s__button__inner">
+                <svg
+                  class="s__smiley js-smiley"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 77.8 77.8"
+                  xml:space="preserve"
+                  style="width: 100%; height: 100%;"
+                >
+                  <circle cx="38.9" cy="38.9" r="38.9"></circle>
+                  <path
+                    d="M38.9 77.8c-2 0-4.1-.2-6.2-.5C11.6 73.9-2.9 53.9.5 32.8 2.1 22.5 7.7 13.5 16.1 7.4c8.4-6.1 18.7-8.5 29-6.9 10.3 1.6 19.3 7.2 25.4 15.6 6.1 8.4 8.5 18.7 6.9 29-3.1 19.1-19.7 32.7-38.5 32.7zM38.8 1c-7.9 0-15.6 2.5-22.1 7.2C8.5 14.1 3.1 22.9 1.5 32.9-1.8 53.5 12.3 73 32.9 76.3 53.5 79.6 73 65.5 76.3 44.9l.5.1-.5-.1c1.6-10-.8-20-6.7-28.2S54.9 3.1 44.9 1.5c-2-.3-4.1-.5-6.1-.5zM25.5 23.1c-1.9 0-3.5 2-4.1 5.1l-.1.3 3 2.2-2.9 2.2.1.3c.6 2.5 1.5 5.1 4.1 5.1 2.4 0 4.2-3.3 4.2-7.6s-2.4-7.6-4.3-7.6zm26.6 0c-1.9 0-3.5 2-4.1 5.1v.3l3 2.2-3 2.2.1.3c.6 2.5 1.5 5.1 4.1 5.1 2.4 0 4.2-3.3 4.2-7.6s-2.3-7.6-4.3-7.6zM62 39c0-.3-.2-.5-.5-.5s-.5.2-.5.5c0 12.2-9.9 22.1-22.1 22.1-12.2 0-22.1-9.9-22.1-22.1 0-.3-.2-.5-.5-.5s-.5.2-.5.5c0 12.7 10.4 23.1 23.1 23.1S62 51.7 62 39z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+
+            <div class="s__cta js-cta-circle s__cta--my-way">
+               <div class="s__cta__line s__cta__line--top">
+                  <div class="s__cta__text">
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">V</span><span class="s__cta__char__slice">V</span><span class="s__cta__char__slice">V</span><span class="s__cta__char__slice">V</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">S</span><span class="s__cta__char__slice">S</span><span class="s__cta__char__slice">S</span><span class="s__cta__char__slice">S</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">O</span><span class="s__cta__char__slice">O</span><span class="s__cta__char__slice">O</span><span class="s__cta__char__slice">O</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">N</span><span class="s__cta__char__slice">N</span><span class="s__cta__char__slice">N</span><span class="s__cta__char__slice">N</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">,</span><span class="s__cta__char__slice">,</span><span class="s__cta__char__slice">,</span><span class="s__cta__char__slice">,</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">P</span><span class="s__cta__char__slice">P</span><span class="s__cta__char__slice">P</span><span class="s__cta__char__slice">P</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">L</span><span class="s__cta__char__slice">L</span><span class="s__cta__char__slice">L</span><span class="s__cta__char__slice">L</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">A</span><span class="s__cta__char__slice">A</span><span class="s__cta__char__slice">A</span><span class="s__cta__char__slice">A</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">N</span><span class="s__cta__char__slice">N</span><span class="s__cta__char__slice">N</span><span class="s__cta__char__slice">N</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">,</span><span class="s__cta__char__slice">,</span><span class="s__cta__char__slice">,</span><span class="s__cta__char__slice">,</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">B</span><span class="s__cta__char__slice">B</span><span class="s__cta__char__slice">B</span><span class="s__cta__char__slice">B</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">U</span><span class="s__cta__char__slice">U</span><span class="s__cta__char__slice">U</span><span class="s__cta__char__slice">U</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">L</span><span class="s__cta__char__slice">L</span><span class="s__cta__char__slice">L</span><span class="s__cta__char__slice">L</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">D</span><span class="s__cta__char__slice">D</span><span class="s__cta__char__slice">D</span><span class="s__cta__char__slice">D</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">,</span><span class="s__cta__char__slice">,</span><span class="s__cta__char__slice">,</span><span class="s__cta__char__slice">,</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">D</span><span class="s__cta__char__slice">D</span><span class="s__cta__char__slice">D</span><span class="s__cta__char__slice">D</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">E</span><span class="s__cta__char__slice">E</span><span class="s__cta__char__slice">E</span><span class="s__cta__char__slice">E</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">P</span><span class="s__cta__char__slice">P</span><span class="s__cta__char__slice">P</span><span class="s__cta__char__slice">P</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">L</span><span class="s__cta__char__slice">L</span><span class="s__cta__char__slice">L</span><span class="s__cta__char__slice">L</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">O</span><span class="s__cta__char__slice">O</span><span class="s__cta__char__slice">O</span><span class="s__cta__char__slice">O</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">Y</span><span class="s__cta__char__slice">Y</span><span class="s__cta__char__slice">Y</span><span class="s__cta__char__slice">Y</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span>
+                    </span>
+                    <span class="s__cta__char">
+                       <span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">p</span><span class="s__cta__char__slice">p</span><span class="s__cta__char__slice">p</span><span class="s__cta__char__slice">p</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">l</span><span class="s__cta__char__slice">l</span><span class="s__cta__char__slice">l</span><span class="s__cta__char__slice">l</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">a</span><span class="s__cta__char__slice">a</span><span class="s__cta__char__slice">a</span><span class="s__cta__char__slice">a</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">n</span><span class="s__cta__char__slice">n</span><span class="s__cta__char__slice">n</span><span class="s__cta__char__slice">n</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">,</span><span class="s__cta__char__slice">,</span><span class="s__cta__char__slice">,</span><span class="s__cta__char__slice">,</span>
+                    </span>
+                  </div>
+               </div>
+               <div class="s__cta__line s__cta__line--bottom">
+                  <div class="s__cta__text">
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span>
+                    </span>
+                    <span class="s__cta__char">
+                       <span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">b</span><span class="s__cta__char__slice">b</span><span class="s__cta__char__slice">b</span><span class="s__cta__char__slice">b</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">u</span><span class="s__cta__char__slice">u</span><span class="s__cta__char__slice">u</span><span class="s__cta__char__slice">u</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">i</span><span class="s__cta__char__slice">i</span><span class="s__cta__char__slice">i</span><span class="s__cta__char__slice">i</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">l</span><span class="s__cta__char__slice">l</span><span class="s__cta__char__slice">l</span><span class="s__cta__char__slice">l</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">d</span><span class="s__cta__char__slice">d</span><span class="s__cta__char__slice">d</span><span class="s__cta__char__slice">d</span>
+                    </span>
+                     <span class="s__cta__char">
+                      <span class="s__cta__char__slice">,</span><span class="s__cta__char__slice">,</span><span class="s__cta__char__slice">,</span><span class="s__cta__char__slice">,</span>
+                    </span>
+                    <span class="s__cta__char">
+                       <span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span><span class="s__cta__char__slice">I</span>
+                    </span>
+                    <span class="s__cta__char">
+                       <span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span><span class="s__cta__char__slice">&nbsp;</span>
+                    </span>
+                     <span class="s__cta__char">
+                      <span class="s__cta__char__slice">d</span><span class="s__cta__char__slice">d</span><span class="s__cta__char__slice">d</span><span class="s__cta__char__slice">d</span>
+                    </span>
+                     <span class="s__cta__char">
+                      <span class="s__cta__char__slice">e</span><span class="s__cta__char__slice">e</span><span class="s__cta__char__slice">e</span><span class="s__cta__char__slice">e</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">p</span><span class="s__cta__char__slice">p</span><span class="s__cta__char__slice">p</span><span class="s__cta__char__slice">p</span>
+                    </span>
+                     <span class="s__cta__char">
+                      <span class="s__cta__char__slice">l</span><span class="s__cta__char__slice">l</span><span class="s__cta__char__slice">l</span><span class="s__cta__char__slice">l</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">o</span><span class="s__cta__char__slice">o</span><span class="s__cta__char__slice">o</span><span class="s__cta__char__slice">o</span>
+                    </span>
+                    <span class="s__cta__char">
+                      <span class="s__cta__char__slice">y</span><span class="s__cta__char__slice">y</span><span class="s__cta__char__slice">y</span><span class="s__cta__char__slice">y</span>
+                    </span>
+                  </div>
+               </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="s__objects js-objects">
+          <!-- Process step cards as floating objects -->
+          <div class="a-object a-object--frame">
+            <figure class="a__inner">
+              <div class="a__process-card">
+                <span class="a__step-number">01</span>
+                <h3 class="a__step-name">Discovery & Strategy</h3>
+                <p class="a__step-desc">
+                  Understanding your goals, audience, and project requirements.
+                </p>
+              </div>
+              <figcaption class="a__caption">Step 1 — Discovery</figcaption>
+            </figure>
+            <div class="a__side a__side--vertical"></div>
+            <div class="a__side a__side--horizontal"></div>
+          </div>
+
+          <div class="a-object a-object--frame">
+            <figure class="a__inner">
+              <div class="a__process-card">
+                <span class="a__step-number">02</span>
+                <h3 class="a__step-name">Design & Prototyping</h3>
+                <p class="a__step-desc">
+                  Creating wireframes and visual designs with pixel-perfect
+                  precision.
+                </p>
+              </div>
+              <figcaption class="a__caption">Step 2 — Design</figcaption>
+            </figure>
+            <div class="a__side a__side--vertical"></div>
+            <div class="a__side a__side--horizontal"></div>
+          </div>
+
+          <div class="a-object a-object--frame">
+            <figure class="a__inner">
+              <div class="a__process-card">
+                <span class="a__step-number">03</span>
+                <h3 class="a__step-name">Development</h3>
+                <p class="a__step-desc">
+                  Translating designs into clean, semantic code with smooth
+                  animations.
+                </p>
+              </div>
+              <figcaption class="a__caption">Step 3 — Build</figcaption>
+            </figure>
+            <div class="a__side a__side--vertical"></div>
+            <div class="a__side a__side--horizontal"></div>
+          </div>
+
+          <div class="a-object a-object--frame">
+            <figure class="a__inner">
+              <div class="a__process-card">
+                <span class="a__step-number">04</span>
+                <h3 class="a__step-name">Launch & Refine</h3>
+                <p class="a__step-desc">
+                  Rigorous testing across devices followed by deployment and
+                  optimizations.
+                </p>
+              </div>
+              <figcaption class="a__caption">Step 4 — Launch</figcaption>
+            </figure>
+            <div class="a__side a__side--vertical"></div>
+            <div class="a__side a__side--horizontal"></div>
+          </div>
+
+          <!-- Decorative stars -->
+          <div class="a-object a-object--star">
+            <div class="a__side a__side--top-left"></div>
+            <div class="a__side a__side--top-right"></div>
+            <div class="a__side a__side--bottom-left"></div>
+            <div class="a__side a__side--bottom-right"></div>
+          </div>
+          <div class="a-object a-object--star">
+            <div class="a__side a__side--top-left"></div>
+            <div class="a__side a__side--top-right"></div>
+            <div class="a__side a__side--bottom-left"></div>
+            <div class="a__side a__side--bottom-right"></div>
+          </div>
+          <div class="a-object a-object--star">
+            <div class="a__side a__side--top-left"></div>
+            <div class="a__side a__side--top-right"></div>
+            <div class="a__side a__side--bottom-left"></div>
+            <div class="a__side a__side--bottom-right"></div>
+          </div>
+          <div class="a-object a-object--star">
+            <div class="a__side a__side--top-left"></div>
+            <div class="a__side a__side--top-right"></div>
+            <div class="a__side a__side--bottom-left"></div>
+            <div class="a__side a__side--bottom-right"></div>
+          </div>
+          <div class="a-object a-object--star">
+            <div class="a__side a__side--top-left"></div>
+            <div class="a__side a__side--top-right"></div>
+            <div class="a__side a__side--bottom-left"></div>
+            <div class="a__side a__side--bottom-right"></div>
+          </div>
+
+          <div class="s__ruler js-myway-ruler"></div>
+        </div>
+        <!-- .s__objects -->
+
+        <div class="s__catcher">
+          <div class="s__catcher__distorted-wrapper">
+            <div class="s__catcher__distorted">
+              <div class="s__catcher__text s__catcher__text--distorted">
+                My <br />
+                Creative <br />
+                Process
+              </div>
+            </div>
+          </div>
+          <div class="s__catcher__normal-wrapper">
+            <div class="s__catcher__normal">
+              <div class="s__catcher__text s__catcher__text--normal">
+                My <br />
+                Creative <br />
+                Process
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- .s__catcher -->
+
+        <svg class="s__svg js-myway-svg">
+          <path class="s__svg__circular-path js-myway-lines-path" d=""></path>
+        </svg>
+      </section>
+
+      <!-- ===== CTA / CONTACT ===== -->
+      <section class="s-cta" data-intersect>
+
+        <!-- Expanding background circle -->
+        <div class="s__cta js-cta-circle">
+          <div class="s__cta__hover-text js-cta-hover-text">Let's Work Together!! ;p</div>
+        </div>
+
+        <div id="contact" class="s__inner js-cta-container">
+          <!-- Hover trigger zone -->
+          <div class="s__hover js-cta-hover">
+            <div class="s__button js-cta-button s__button--contacts" id="contact-btn">
+              <div class="s__button__inner">
+                <div class="s__button__text js-cta-button-text">Contact Me</div>
+                <div class="s__button__hover-label">LETS WORK TOGETHER ;P</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact options popup -->
+        <div class="contact-options js-contact-options" id="contact-options" aria-hidden="true">
+          <div class="contact-options__inner">
+            <button class="contact-options__close js-contact-options-close" aria-label="Close">×</button>
+            <p class="contact-options__intro">How would you like to connect?</p>
+            <div class="contact-options__links">
+              <a href="https://www.instagram.com/341425_/" target="_blank" rel="noopener noreferrer" class="contact-options__link contact-options__link--ig">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                <span>Instagram DM</span>
+              </a>
+              <a href="mailto:joelkizyking@gmail.com?subject=Let's%20Work%20Together&body=Hi%20Joel%2C%0A%0AI%20found%20your%20portfolio%20and%20would%20love%20to%20connect!" class="contact-options__link contact-options__link--email">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                <span>Send Email</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="s__grid js-cta-grid">
+          <svg class="s__grid__svg js-cta-grid-svg">
+            <path class="s__grid__path js-cta-grid-path" d=""></path>
+          </svg>
+        </div>
+      </section>
+
+      <!-- ===== FOOTER ===== -->
+      <footer class="site-foot">
+        <div class="site-foot__container">
+          <span class="site-foot__text"
+            >Designed & Built by Joel Lalrinhlua</span
+          >
+          <div class="site-foot__socials">
+            <a
+              href="https://github.com/JoelLalrinhlua"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="site-foot__social-link"
+              aria-label="GitHub"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                ></path>
+              </svg>
+            </a>
+            <a
+              href="https://www.instagram.com/341425_/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="site-foot__social-link"
+              aria-label="Instagram"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path
+                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a
+              href="https://linkedin.com/in/joelalrinhlua0102/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="site-foot__social-link"
+              aria-label="LinkedIn"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                ></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+            <a
+              href="https://www.youtube.com/watch?v=QDia3e12czc"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="site-foot__social-link"
+              aria-label="YouTube"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"
+                ></path>
+                <polygon
+                  points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"
+                ></polygon>
+              </svg>
+            </a>
+            <a
+              href="mailto:joelkizyking@gmail.com"
+              class="site-foot__social-link"
+              aria-label="Email"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                ></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </a>
+          </div>
+          <span class="site-foot__text">© 2026</span>
+        </div>
+      </footer>
+    </div>
+    <!-- .site-wrapper -->
 
     <!-- ===== INTRO SCREEN ===== -->
-    <div class="site-intro js-intro"
-        style="opacity: 1; position: fixed; top: 0; left: 0; z-index: 50; width: 100%; height: 100%; background: #000000;">
-        <img class="site-intro__splash js-splash" src="splash.jpg" alt="Joel" />
-        <div class="site-intro__greeting js-greeting">Hello!</div>
+    <div
+      class="site-intro js-intro"
+      style="
+        opacity: 1;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 50;
+        width: 100%;
+        height: 100%;
+        background: #000000;
+      "
+    >
+      <img class="site-intro__splash js-splash" src="splash.jpg" alt="Joel" />
+      <div class="site-intro__greeting js-greeting">Hello!</div>
 
-        <div class="site-intro__border site-intro__border--top js-border-top"></div>
-        <div class="site-intro__border site-intro__border--left js-border-left"></div>
-        <div class="site-intro__border site-intro__border--right js-border-right"></div>
-    </div><!-- .site-intro -->
+      <div
+        class="site-intro__border site-intro__border--top js-border-top"
+      ></div>
+      <div
+        class="site-intro__border site-intro__border--left js-border-left"
+      ></div>
+      <div
+        class="site-intro__border site-intro__border--right js-border-right"
+      ></div>
+    </div>
+    <!-- .site-intro -->
 
     <div class="site-mount js-mount"></div>
     <div class="site-contrast-mask js-contrast-mask"></div>
 
     <!-- ===== SCROLLBAR ===== -->
     <div class="site-scrollbar js-scrollbar">
-        <div class="site-scrollbar__track">
-            <div class="site-scrollbar__thumb js-scrollbar-thumb"></div>
-        </div>
+      <div class="site-scrollbar__track">
+        <div class="site-scrollbar__thumb js-scrollbar-thumb"></div>
+      </div>
     </div>
 
     <!-- ===== CONTACT MODAL ===== -->
     <div class="contact-modal" id="contact-modal">
-        <div class="modal-backdrop"></div>
-        <div class="modal-content">
-            <button class="modal-close" id="modal-close">×</button>
-            <div class="modal-header">
-                <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
-                    <path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="#E63B2E" />
-                </svg>
-                <h3 class="modal-title">Write to Me</h3>
-            </div>
-            <form class="contact-form" action="mailto:joelkizyking@gmail.com" method="post" enctype="text/plain">
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" placeholder="John Doe" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Your Email</label>
-                    <input type="email" id="email" name="email" placeholder="john@example.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="4" placeholder="How can we build something amazing?"
-                        required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Send Message →</button>
-            </form>
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <button class="modal-close" id="modal-close">×</button>
+        <div class="modal-header">
+          <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+            <path
+              d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z"
+              fill="#E63B2E"
+            />
+          </svg>
+          <h3 class="modal-title">Write to Me</h3>
         </div>
+        <form
+          class="contact-form"
+          action="mailto:joelkizyking@gmail.com"
+          method="post"
+          enctype="text/plain"
+        >
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="John Doe"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="john@example.com"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              placeholder="How can we build something amazing?"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message →</button>
+        </form>
+      </div>
     </div>
 
     <script src="script.js"></script>
 
     <!-- Tubes Cursor Module -->
     <script type="module">
-        import TubesCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js";
+      import TubesCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js";
 
-        const canvasElement = document.getElementById('canvas');
-        if (canvasElement) {
-            const app = TubesCursor(canvasElement, {
-                tubes: {
-                    colors: ["#f967fb", "#53bc28", "#6958d5"],
-                    lights: {
-                        intensity: 200,
-                        colors: ["#83f36e", "#fe8a2e", "#ff008a", "#60aed5"]
-                    }
-                }
-            });
+      const canvasElement = document.getElementById("canvas");
+      if (canvasElement) {
+        const app = TubesCursor(canvasElement, {
+          tubes: {
+            colors: ["#f967fb", "#53bc28", "#6958d5"],
+            lights: {
+              intensity: 200,
+              colors: ["#83f36e", "#fe8a2e", "#ff008a", "#60aed5"],
+            },
+          },
+        });
 
-            // Using canvas element for the click to avoid interference with other UI.
-            document.body.addEventListener('click', () => {
-                const colors = randomColors(3);
-                const lightsColors = randomColors(4);
-                app.tubes.setColors(colors);
-                app.tubes.setLightsColors(lightsColors);
-            });
+        // Using canvas element for the click to avoid interference with other UI.
+        document.body.addEventListener("click", () => {
+          const colors = randomColors(3);
+          const lightsColors = randomColors(4);
+          app.tubes.setColors(colors);
+          app.tubes.setLightsColors(lightsColors);
+        });
 
-            function randomColors(count) {
-                return new Array(count)
-                    .fill(0)
-                    .map(() => "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0'));
-            }
+        function randomColors(count) {
+          return new Array(count).fill(0).map(
+            () =>
+              "#" +
+              Math.floor(Math.random() * 16777215)
+                .toString(16)
+                .padStart(6, "0"),
+          );
         }
+      }
     </script>
 
     <!-- Interactive Typography Logic -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const fontFamilies = [
-                'var(--font-bigger)',
-                'var(--font-editorial)',
-                'var(--font-fraktion)',
-                'sans-serif',
-                'Impact'
-            ];
-            let currentFontIndex = 0;
-            const heroWords = document.querySelectorAll('.js-magnetic-word');
-            
-            heroWords.forEach(word => {
-                word.addEventListener('click', (e) => {
-                    // Stop event from reaching the canvas background which triggers color changes
-                    e.stopPropagation(); 
-                    
-                    currentFontIndex = (currentFontIndex + 1) % fontFamilies.length;
-                    document.documentElement.style.setProperty('--font-hero-dynamic', fontFamilies[currentFontIndex]);
-                });
-            });
-        });
-    </script>
-</body>
+      document.addEventListener("DOMContentLoaded", () => {
+        const fontFamilies = [
+          "var(--font-bigger)",
+          "var(--font-editorial)",
+          "var(--font-fraktion)",
+          "sans-serif",
+          "Impact",
+        ];
+        let currentFontIndex = 0;
+        const heroWords = document.querySelectorAll(".js-magnetic-word");
 
+        heroWords.forEach((word) => {
+          word.addEventListener("click", (e) => {
+            // Stop event from reaching the canvas background which triggers color changes
+            e.stopPropagation();
+
+            currentFontIndex = (currentFontIndex + 1) % fontFamilies.length;
+            document.documentElement.style.setProperty(
+              "--font-hero-dynamic",
+              fontFamilies[currentFontIndex],
+            );
+          });
+        });
+      });
+    </script>
+
+    <!-- Work Marquee, Contact & Process Badge Logic -->
+    <script>
+    (function() {
+
+      // ===== PROJECT DATA =====
+      const PROJECTS = [
+        {
+          id: 1,
+          title: "ChhehChhawl",
+          tag: "App",
+          stack: ["React Native", "Supabase", "Node.js", "PostgreSQL", "Expo"],
+          bullets: [
+            "Built a task marketplace platform for posting and accepting short-term jobs",
+            "Implemented backend logic for task creation, updates, and workflow management",
+            "Designed and handled database interactions with Supabase & PostgreSQL",
+            "Developed REST API endpoints for user actions and task handling",
+            "Managed task states: posted → accepted → completed"
+          ]
+        },
+        {
+          id: 2,
+          title: "AI-Powered Resume Analyzer",
+          tag: "AI",
+          stack: ["Python", "FastAPI", "NLP", "OpenAI API", "React"],
+          bullets: [
+            "Developed a web application to analyze resumes and generate structured feedback",
+            "Implemented backend logic for input handling (resume upload / text processing)",
+            "Performed text preprocessing and feature extraction using NLP",
+            "Built keyword/skill extraction system to identify important resume elements",
+            "Generated output: missing skills, match score, and improvement suggestions"
+          ]
+        },
+        {
+          id: 3,
+          title: "Mental Health Assistant",
+          tag: "AI · Chatbot",
+          stack: ["React", "OpenAI API", "TailwindCSS", "Vercel"],
+          bullets: [
+            "Built a conversational AI-based chatbot for mental health support",
+            "Designed clean and responsive user interface for chat interaction",
+            "Integrated OpenAI APIs to generate empathetic AI-driven responses",
+            "Implemented basic mood-based interaction flow",
+            "Focused on accessibility and smooth user experience"
+          ]
+        },
+        {
+          id: 4,
+          title: "Non-Profit Client Website",
+          tag: "Web",
+          stack: ["HTML", "CSS", "JavaScript", "Netlify"],
+          bullets: [
+            "Developing a professional website for a Mizo organization in Australia",
+            "Responsible for end-to-end development: design → development → deployment",
+            "Handling layout design and user interface",
+            "Managing hosting setup and deployment environment",
+            "Working on content management and client requirements"
+          ]
+        },
+        {
+          id: 5,
+          title: "BusLoop",
+          tag: "Mobile",
+          stack: ["Flutter", "Firebase", "Supabase", "Google Maps API"],
+          bullets: [
+            "Real-time bus tracking and coordination system for closed environments (colleges, campuses)",
+            "User App (BusNow): live bus location, ETA, route/stop info, and delay alerts",
+            "Staff App: start/stop trips, share live GPS, update bus status, manage routes",
+            "Driver location → backend (Supabase/Firebase) → live user map — the core loop",
+            "Eliminates blind waiting, reduces confusion, scales well across campuses"
+          ]
+        },
+        {
+          id: 6,
+          title: "Personal App (Upcoming)",
+          tag: "Full-stack",
+          stack: ["TBA"],
+          bullets: [
+            "Currently in active development — launching soon",
+            "Full-stack personal project with unique feature set",
+            "Designed with a focus on user experience and performance"
+          ]
+        },
+        {
+          id: 7,
+          title: "LushAI — Project #1",
+          tag: "Confidential",
+          stack: ["AI", "Python", "Proprietary"],
+          confidential: true,
+          displayName: "LushAI Project #1"
+        },
+        {
+          id: 8,
+          title: "LushAI — Project #2",
+          tag: "Confidential",
+          stack: ["AI", "Python", "Proprietary"],
+          confidential: true,
+          displayName: "LushAI Project #2"
+        }
+      ];
+
+      // ===== DRAG STATE =====
+      let isDragging = false;
+      let startX = 0;
+      let currentX = 0;
+      let dragOffset = 0;
+      let animOffset = 0;
+      let dragStartTime = 0;
+      let DRAG_THRESHOLD = 6; // px — less than this = click, more = drag
+
+      // ===== BUILD MARQUEE CARDS =====
+      function buildMarquee() {
+        const track = document.querySelector('.js-swm-track');
+        if (!track) return;
+
+        // Double the cards for seamless infinite loop
+        const allProjects = [...PROJECTS, ...PROJECTS];
+
+        allProjects.forEach((project, i) => {
+          const realIdx = i % PROJECTS.length;
+          const card = document.createElement('div');
+          card.className = 'swm__card';
+          card.setAttribute('data-index', realIdx);
+          card.setAttribute('role', 'button');
+          card.setAttribute('tabindex', '0');
+          card.setAttribute('aria-label', `View ${project.title}`);
+
+          const stackTagsHtml = project.stack
+            .slice(0, 3)
+            .map(t => `<span class="swm__stack-tag">${t}</span>`)
+            .join('');
+
+          if (project.confidential) {
+            card.innerHTML = `
+              <div class="swm__card__accent"></div>
+              <span class="swm__card__num">${String(project.id).padStart(2,'0')}</span>
+              <div class="swm__card__conf-center">
+                <div class="swm__card__conf-lock">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                </div>
+                <span class="swm__card__conf-nda">NDA</span>
+              </div>
+              <div class="swm__card__body">
+                <span class="swm__card__name">${project.title}</span>
+                <div class="swm__card__stack-preview">
+                  <span class="swm__stack-tag" style="border-color:var(--color-accent);color:var(--color-accent);opacity:0.8">Confidential</span>
+                </div>
+              </div>
+              <span class="swm__card__hint">View Info →</span>
+            `;
+          } else {
+            card.innerHTML = `
+              <div class="swm__card__accent"></div>
+              <span class="swm__card__num">${String(project.id).padStart(2,'0')}</span>
+              <span class="swm__card__tag">${project.tag}</span>
+              <div class="swm__card__body">
+                <span class="swm__card__name">${project.title}</span>
+                <div class="swm__card__stack-preview">${stackTagsHtml}</div>
+              </div>
+              <span class="swm__card__hint">Explore →</span>
+            `;
+          }
+
+          // Hover via JS (class-based so drag can suppress it)
+          card.addEventListener('mouseenter', () => {
+            if (!isDragging) card.classList.add('is-hovered');
+          });
+          card.addEventListener('mouseleave', () => {
+            card.classList.remove('is-hovered');
+          });
+
+          // Keyboard
+          card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              triggerCard(realIdx);
+            }
+          });
+
+          track.appendChild(card);
+        });
+      }
+
+      // ===== DRAG-TO-SCROLL =====
+      function initDragScroll() {
+        const wrapper = document.querySelector('.js-swm-marquee-wrapper');
+        const track   = document.querySelector('.js-swm-track');
+        if (!wrapper || !track) return;
+
+        let rafId      = null;
+        let velocity   = 0;
+        let lastX      = 0;
+        let posX       = 0;   // current drag-controlled X
+        let isAnimating = false; // true while CSS animation is playing
+        let trackWidth = 0;
+
+        // Get track total width (half = one full set of cards)
+        function getTrackHalfWidth() {
+          return track.scrollWidth / 2;
+        }
+
+        // Read the actual rendered translateX from CSS animation
+        function getComputedX() {
+          const style = window.getComputedStyle(track);
+          const matrix = style.transform || style.webkitTransform;
+          if (!matrix || matrix === 'none') return 0;
+          const match = matrix.match(/matrix.*\((.*)\)/);
+          if (!match) return 0;
+          const parts = match[1].split(',');
+          return parseFloat(parts[4]) || 0;
+        }
+
+        // Clamp posX so cards feel infinite (wrap around)
+        function wrapPosition() {
+          const hw = getTrackHalfWidth();
+          if (!hw) return;
+          // Wrap: when we've scrolled past a full set, jump back
+          while (posX < -hw) posX += hw;
+          while (posX > 0) posX -= hw;
+        }
+
+        function applyTransform() {
+          track.style.transform = `translateX(${posX}px)`;
+        }
+
+        function stopAnimation() {
+          if (isAnimating) {
+            // Capture current CSS animation position before stopping
+            posX = getComputedX();
+            track.style.animation = 'none';
+            track.style.transform = `translateX(${posX}px)`;
+            isAnimating = false;
+          }
+        }
+
+        function resumeAnimation() {
+          track.style.animation = '';
+          track.style.transform = '';
+          isAnimating = true;
+        }
+
+        const startDrag = (clientX) => {
+          isDragging = false;
+          stopAnimation();
+          startX  = clientX;
+          lastX   = clientX;
+          velocity = 0;
+          if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        };
+
+        const onDrag = (clientX) => {
+          const diff = clientX - startX;
+          if (!isDragging && Math.abs(diff) > DRAG_THRESHOLD) {
+            isDragging = true;
+            wrapper.classList.add('is-dragging');
+            track.classList.add('is-dragging');
+            document.querySelectorAll('.swm__card.is-hovered').forEach(c => c.classList.remove('is-hovered'));
+          }
+          if (isDragging) {
+            velocity = (clientX - lastX) * 1.1; // slight amplification
+            lastX   = clientX;
+            posX   += velocity;
+            wrapPosition();
+            applyTransform();
+          }
+        };
+
+        const endDrag = () => {
+          wrapper.classList.remove('is-dragging');
+          track.classList.remove('is-dragging');
+
+          if (!isDragging) { isDragging = false; return; }
+          isDragging = false;
+
+          // Momentum scrolling with higher retention
+          const coast = () => {
+            velocity *= 0.96; // slow decay = feels fast and smooth
+            posX    += velocity;
+            wrapPosition();
+            applyTransform();
+            if (Math.abs(velocity) > 0.3) {
+              rafId = requestAnimationFrame(coast);
+            } else {
+              // After 1.5s idle, hand back to CSS animation
+              setTimeout(() => {
+                if (!isDragging) resumeAnimation();
+              }, 1500);
+            }
+          };
+          rafId = requestAnimationFrame(coast);
+        };
+
+        isAnimating = true; // starts in CSS-animated state
+
+        // Mouse
+        wrapper.addEventListener('mousedown', (e) => {
+          e.preventDefault();
+          startDrag(e.clientX);
+
+          const onMouseMove = (e) => onDrag(e.clientX);
+          const onMouseUp   = () => {
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+            endDrag();
+          };
+          document.addEventListener('mousemove', onMouseMove);
+          document.addEventListener('mouseup', onMouseUp);
+        });
+
+        // Touch
+        wrapper.addEventListener('touchstart', (e) => {
+          startDrag(e.touches[0].clientX);
+        }, { passive: true });
+
+        wrapper.addEventListener('touchmove', (e) => {
+          onDrag(e.touches[0].clientX);
+        }, { passive: true });
+
+        wrapper.addEventListener('touchend', endDrag);
+
+        // Click on cards — only if NOT a drag
+        wrapper.addEventListener('click', (e) => {
+          if (isDragging) return;
+          const card = e.target.closest('.swm__card');
+          if (!card) return;
+          const idx = parseInt(card.getAttribute('data-index'), 10);
+          triggerCard(idx);
+        });
+      }
+
+      // ===== OPEN PROJECT (normal or confidential) =====
+      function triggerCard(idx) {
+        const project = PROJECTS[idx];
+        if (!project) return;
+        if (project.confidential) {
+          openConfidential(project);
+        } else {
+          openProject(project);
+        }
+      }
+
+      function openProject(project) {
+        const section   = document.querySelector('.s-work-marquee');
+        const marqueeWr = section.querySelector('.js-swm-marquee-wrapper');
+        const detail    = section.querySelector('.js-swm-detail');
+        const nameEl    = section.querySelector('.js-swm-detail-name');
+        const indexEl   = section.querySelector('.js-swm-detail-index');
+        const stackEl   = section.querySelector('.js-swm-detail-stack');
+        const contentEl = section.querySelector('.js-swm-detail-content');
+        const header    = section.querySelector('.swm__header');
+
+        // Populate
+        indexEl.textContent = String(project.id).padStart(2, '0');
+        nameEl.textContent  = project.title;
+
+        stackEl.innerHTML = project.stack
+          .map(t => `<span class="swm__detail__stack-tag">${t}</span>`)
+          .join('');
+
+        contentEl.innerHTML = '<ul>' + project.bullets.map(b => `<li>${b}</li>`).join('') + '</ul>';
+
+        hideMarqueeHeader(marqueeWr, header, section);
+        detail.setAttribute('aria-hidden', 'false');
+        requestAnimationFrame(() => detail.classList.add('is-open'));
+      }
+
+      function openConfidential(project) {
+        const section   = document.querySelector('.s-work-marquee');
+        const marqueeWr = section.querySelector('.js-swm-marquee-wrapper');
+        const conf      = section.querySelector('.js-swm-confidential');
+        const nameEl    = section.querySelector('.js-swm-conf-name');
+        const header    = section.querySelector('.swm__header');
+
+        nameEl.textContent = project.displayName || project.title;
+
+        hideMarqueeHeader(marqueeWr, header, section);
+        conf.setAttribute('aria-hidden', 'false');
+        requestAnimationFrame(() => conf.classList.add('is-open'));
+      }
+
+      function hideMarqueeHeader(marqueeWr, header, section) {
+        marqueeWr.classList.add('is-hiding');
+        header.style.cssText = 'opacity:0;transform:translateY(-8px);transition:opacity 0.4s ease,transform 0.4s ease;pointer-events:none;';
+        section.style.minHeight = '90vh';
+      }
+
+      function closeAll() {
+        const section   = document.querySelector('.s-work-marquee');
+        const marqueeWr = section.querySelector('.js-swm-marquee-wrapper');
+        const detail    = section.querySelector('.js-swm-detail');
+        const conf      = section.querySelector('.js-swm-confidential');
+        const header    = section.querySelector('.swm__header');
+
+        detail.classList.remove('is-open');
+        conf.classList.remove('is-open');
+        detail.setAttribute('aria-hidden', 'true');
+        conf.setAttribute('aria-hidden', 'true');
+        header.style.cssText = '';
+
+        setTimeout(() => {
+          marqueeWr.classList.remove('is-hiding');
+          section.style.minHeight = '';
+        }, 320);
+      }
+
+      function initBackButtons() {
+        document.querySelector('.js-swm-back')?.addEventListener('click', closeAll);
+        document.querySelector('.js-swm-conf-back')?.addEventListener('click', closeAll);
+      }
+
+      // ===== PROCESS BADGE =====
+      function initProcessBadge() {
+        const badge   = document.querySelector('.js-process-badge');
+        const section = document.querySelector('#my-creative-process');
+        if (!badge || !section) return;
+
+        let triggered = false;
+        const obs = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting && !triggered) {
+            triggered = true;
+            badge.classList.add('is-hanging');
+          }
+        }, { threshold: 0.05 });
+        obs.observe(section);
+      }
+
+      // ===== CONTACT BUTTON =====
+      function initContactButton() {
+        const btn     = document.getElementById('contact-btn');
+        const popup   = document.querySelector('.js-contact-options');
+        const closeBtn = document.querySelector('.js-contact-options-close');
+        const ctaCircle = document.querySelector('.js-cta-circle');
+        const hoverZone = document.querySelector('.s-cta .js-cta-hover');
+
+        if (!btn || !popup) return;
+
+        // Show/hide "Lets Work Together" text in the expanding circle
+        btn.addEventListener('mouseenter', () => {
+          hoverZone?.classList.add('is-active');
+          if (ctaCircle) {
+            const t = ctaCircle.querySelector('.js-cta-hover-text');
+            if (t) t.style.opacity = '1';
+          }
+        });
+
+        btn.addEventListener('mouseleave', () => {
+          hoverZone?.classList.remove('is-active');
+          if (ctaCircle) {
+            const t = ctaCircle.querySelector('.js-cta-hover-text');
+            if (t) t.style.opacity = '';
+          }
+        });
+
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          popup.classList.add('is-open');
+          popup.setAttribute('aria-hidden', 'false');
+        });
+
+        const closePop = () => {
+          popup.classList.remove('is-open');
+          popup.setAttribute('aria-hidden', 'true');
+        };
+
+        closeBtn?.addEventListener('click', closePop);
+
+        // Click outside to close
+        popup.addEventListener('click', (e) => {
+          if (e.target === popup) closePop();
+        });
+
+        // Escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && popup.classList.contains('is-open')) closePop();
+        });
+      }
+
+      // ===== INIT =====
+      document.addEventListener('DOMContentLoaded', () => {
+        buildMarquee();
+        initDragScroll();
+        initBackButtons();
+        initProcessBadge();
+        initContactButton();
+      });
+
+    })();
+    </script>
+  </body>
 </html>

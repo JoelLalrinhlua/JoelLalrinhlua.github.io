@@ -488,7 +488,7 @@ class FloatingObject {
 // ===== CTA =====
 class CTASection {
     constructor() {
-        this.el = document.querySelector('.s-cta');
+        this.el = document.querySelector('.s-cta:not(.s-my-way)');
         if (!this.el) return;
         this.container = this.el.querySelector('.js-cta-container');
         this.hover = this.el.querySelector('.js-cta-hover');
@@ -518,13 +518,15 @@ class CTASection {
         }, { passive: true });
     }
     setSize() {
-        if (!this.gridEl || !this.container) return;
-        const gb = this.gridEl.getBoundingClientRect();
+        if (!this.container) return;
         const cb = this.container.getBoundingClientRect();
+        const maxSize = Math.max(cb.width, cb.height) * 1.5; // Made it bigger per user request
+        if (this.cta) this.cta.style.setProperty('--size', maxSize + 'px');
+        
+        if (!this.gridEl) return;
+        const gb = this.gridEl.getBoundingClientRect();
         this.grid.width = gb.width; this.grid.height = gb.height;
         if (this.gridSvg) { this.gridSvg.style.width = gb.width + 'px'; this.gridSvg.style.height = gb.height + 'px'; }
-        const maxSize = Math.min(cb.width, cb.height) - 32;
-        if (this.cta) this.cta.style.setProperty('--size', maxSize + 'px');
     }
     setGrid() {
         const { grid } = this;
@@ -553,6 +555,7 @@ class CTASection {
         if (this.buttonIsHovered) return;
         this.buttonIsHovered = true;
         this.hover.classList.add('is-active');
+        this.el.classList.add('is-active');
         if (this.tl) this.tl.pause();
         gsap.to(this.wave, { op: 1, delay: 0.3, duration: 1.2, ease: 'expo.inOut', overwrite: true });
         e.stopPropagation();
@@ -561,6 +564,7 @@ class CTASection {
         if (!this.buttonIsHovered) return;
         this.buttonIsHovered = false;
         this.hover.classList.remove('is-active');
+        this.el.classList.remove('is-active');
         if (this.tl) this.tl.play(0);
         gsap.to(this.wave, { op: 0, duration: 0.7, ease: 'expo.inOut', overwrite: true });
     }
@@ -688,10 +692,74 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => site.init(), { once: true });
 } else { site.init(); }
 
+// ===== MY WAY CTA =====
+class MyWayCTASection {
+    constructor() {
+        this.el = document.querySelector('.s-my-way');
+        if (!this.el) return;
+        this.container = this.el.querySelector('.s__my-way-cta');
+        if (!this.container) return;
+        this.hover = this.container.querySelector('.js-cta-hover');
+        this.button = this.container.querySelector('.js-cta-button');
+        this.cta = this.container.querySelector('.s__cta--my-way');
+
+        this.buttonIsHovered = false; this.isPaused = true;
+        this.wave = { progress: 0, op: 0, speed: 15, strength: 1, state: 'paused' };
+        
+        if (document.readyState === 'complete') ticker.nextTick(this.init, this);
+        else emitter.once('siteLoaded', this.init, this);
+    }
+    init() { this.setSize(); this.createPulse(); this.bindEvents(); }
+    bindEvents() {
+        emitter.on('resize', () => { this.setSize(); }, this);
+        if (this.hover) {
+            this.hover.addEventListener('mouseenter', e => { this.onHover(e); });
+            this.hover.addEventListener('mouseleave', e => { this.onOut(e); });
+            this.hover.addEventListener('touchstart', e => { this.onHover(e); });
+        }
+    }
+    setSize() {
+        if (!this.container) return;
+        const cb = this.container.getBoundingClientRect();
+        const maxSize = Math.min(cb.width, cb.height) - 32;
+        if (this.cta) this.cta.style.setProperty('--size', maxSize + 'px');
+    }
+    createPulse() {
+        const smiley = this.container.querySelector('.js-smiley');
+        if (!smiley) return;
+        this.tl = gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
+        this.tl.call(() => { this.wave.state = 'pulse'; });
+        this.tl.fromTo(smiley, { scale: 0.85 }, { scale: 1.05, duration: 2.7, ease: 'power2.in' });
+        this.tl.call(() => { this.wavePulse(); });
+        this.tl.to(smiley, { scale: 0.85, duration: 0.15, ease: 'power4.out' });
+    }
+    onHover(e) {
+        if (this.buttonIsHovered) return;
+        this.buttonIsHovered = true;
+        this.hover.classList.add('is-active');
+        if (this.tl) this.tl.pause();
+        e.stopPropagation();
+    }
+    onOut(e) {
+        if (!this.buttonIsHovered) return;
+        this.buttonIsHovered = false;
+        this.hover.classList.remove('is-active');
+        if (this.tl) this.tl.play(0);
+    }
+    wavePulse() {
+        if (this.buttonIsHovered) return;
+        this.wave.progress = 0; this.wave.state = 'pulse';
+        this.wave.speed = window.safeWidth > 767 ? 15 : 10;
+        this.wave.strength = window.safeWidth > 767 ? 1 : 0.35;
+    }
+}
+
+
 new NewHeroSection();
 new AboutSection();
 new WorkSection();
 new MyWaySection();
+new MyWayCTASection();
 new CTASection();
 new HeaderSection();
 new CustomScrollbar();
