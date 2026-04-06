@@ -1113,18 +1113,40 @@
 
       const canvasElement = document.getElementById("canvas");
       if (canvasElement) {
-        const app = TubesCursor(canvasElement, {
-          tubes: {
-            colors: ["#f967fb", "#53bc28", "#6958d5"],
-            lights: {
-              intensity: 200,
-              colors: ["#83f36e", "#fe8a2e", "#ff008a", "#60aed5"],
+        let app = null;
+        let isHeroVisible = false;
+        const heroSection = document.querySelector('.js-hero-new');
+
+        const initTubes = () => {
+          if (app) return;
+          app = TubesCursor(canvasElement, {
+            tubes: {
+              colors: ["#f967fb", "#53bc28", "#6958d5"],
+              lights: {
+                intensity: 200,
+                colors: ["#83f36e", "#fe8a2e", "#ff008a", "#60aed5"],
+              },
             },
-          },
-        });
+          });
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            isHeroVisible = entry.isIntersecting;
+            if (isHeroVisible) {
+              if (!app) initTubes();
+              canvasElement.style.display = 'block';
+            } else {
+              canvasElement.style.display = 'none';
+            }
+          });
+        }, { threshold: 0 });
+
+        if (heroSection) observer.observe(heroSection);
 
         // Using canvas element for the click to avoid interference with other UI.
         document.body.addEventListener("click", () => {
+          if (!app) return;
           const colors = randomColors(3);
           const lightsColors = randomColors(4);
           app.tubes.setColors(colors);

@@ -1523,7 +1523,7 @@ html.is-contrasted .hero-tubes-canvas {
   padding: 15rem 0;
   overflow: hidden;
   content-visibility: auto;
-  contain-intrinsic-size: 1000px;
+  contain-intrinsic-size: 1px 1000px;
 }
 
 @media (max-width: 1280px) {
@@ -1679,6 +1679,8 @@ html.is-contrasted .hero-tubes-canvas {
   border-bottom: 1px solid var(--color-secondary);
   transition: var(--theme-transition);
   min-height: 80vh;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 800px;
 }
 
 /* Header */

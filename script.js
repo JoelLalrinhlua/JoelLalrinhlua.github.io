@@ -92,7 +92,17 @@ class Site {
     }
     initLenis() {
         if (typeof Lenis === 'undefined') return;
-        const lenis = new Lenis();
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smoothWheel: true,
+            wheelMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
         lenis.on('scroll', () => { if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.update(); });
         gsap.ticker.add(t => lenis.raf(t * 1000));
         gsap.ticker.lagSmoothing(0);
@@ -326,10 +336,16 @@ class AboutSection {
         if (this.path) this.path.setAttribute('d', d);
     }
     tick() {
-        this.scroll.sp += (this.scroll.p - this.scroll.sp) * 0.2;
-        this.bounding.offsetY = (window.safeWidth > 767 ? 400 : 200) * (this.scroll.sp * 2 - 1);
-        this.el.style.setProperty('--offset-y', this.bounding.offsetY + 'px');
-        this.setLines();
+        if (this.isPaused) return;
+        this.scroll.sp += (this.scroll.p - this.scroll.sp) * 0.1;
+        
+        // Only update if there's a meaningful change to reduce layout thrashing
+        const newOffsetY = (window.safeWidth > 767 ? 400 : 200) * (this.scroll.sp * 2 - 1);
+        if (Math.abs(newOffsetY - (this.bounding.offsetY || 0)) > 0.5) {
+            this.bounding.offsetY = newOffsetY;
+            this.el.style.setProperty('--offset-y', this.bounding.offsetY + 'px');
+            this.setLines();
+        }
     }
 }
 
@@ -431,6 +447,13 @@ class MyWaySection {
             d += ` M ${gX * i} ${height} L ${cx} ${cy}`;
         }
         this.linesPath.setAttribute('d', d);
+    }
+    
+    // Performance optimization: only update lines on resize to avoid per-frame overhead
+    // if they aren't actually morphing based on tick
+    updateLines() {
+        if (!this.isActive) return;
+        this.setLines();
     }
     firstObjects() {
         const total = Math.max(Math.min(Math.round((window.safeWidth || 1200) * 0.025), 5), 2);
@@ -583,16 +606,30 @@ class CTASection {
         this.gridPath.setAttribute('d', d);
     }
     tick() {
-        if (this.wave.progress < this.grid.height && this.wave.state !== 'paused') this.wave.progress += this.wave.speed;
+        if (this.isPaused) return;
+        if (this.wave.progress < this.grid.height && this.wave.state !== 'paused') {
+            this.wave.progress += this.wave.speed;
+        }
+        
+        let needsUpdate = false;
         this.grid.points.forEach(col => {
             col.forEach(p => {
+                const oldWx = p.wx;
+                const oldWy = p.wy;
                 p.vx += (0 - p.wx) * 0.001; p.vy += (0 - p.wy) * 0.001;
                 p.vx *= 0.9; p.vy *= 0.9;
                 p.wx += p.vx * 3; p.wy += p.vy * 3;
                 p.wx *= 0.9; p.wy *= 0.9;
+                
+                if (Math.abs(p.wx - oldWx) > 0.1 || Math.abs(p.wy - oldWy) > 0.1) {
+                    needsUpdate = true;
+                }
             });
         });
-        this.drawGrid();
+        
+        if (needsUpdate || this.wave.state === 'pulse') {
+            this.drawGrid();
+        }
     }
 }
 
