@@ -1,0 +1,506 @@
+/* =====================================================
+   J's Game — Stylesheet
+   Black & White · Transparent BG · Portfolio Edition
+   ===================================================== */
+
+@font-face {
+  font-family: 'Benguiat Bold';
+  src: url("./docs/assets/fonts/Benguiat Bold.ttf");
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --white: #ffffff;
+  --off-white: #e8e8e8;
+  --light-grey: #c0c0c0;
+  --mid-grey: #888888;
+  --dark-grey: #333333;
+  --black: #000000;
+  --accent: #ffffff;
+  --glow: rgba(255,255,255,0.12);
+  --font-game: 'Bebas Neue', 'Benguiat Bold', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  min-height: 100vh;
+  width: 100vw;
+  background: #0a0a0a;
+  font-family: var(--font-mono);
+  color: var(--white);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ensure text is always readable regardless of host page bg */
+#title-screen,
+#game-over-screen {
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ---------- Noise Texture Overlay ---------- */
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+/* ---------- Scanlines ---------- */
+.scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(0,0,0,0.07) 3px,
+    rgba(0,0,0,0.07) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ============================================================
+   TITLE SCREEN
+   ============================================================ */
+#title-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  background: transparent;
+}
+
+.title-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  padding: 32px 40px;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  min-width: min(460px, 92vw);
+}
+
+/* --- Logo --- */
+.game-logo {
+  font-family: var(--font-game);
+  line-height: 0.9;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  filter: drop-shadow(0 0 18px rgba(255,255,255,0.25));
+}
+
+.logo-j {
+  font-size: clamp(90px, 16vw, 160px);
+  color: var(--white);
+}
+.logo-apostrophe {
+  font-size: clamp(60px, 10vw, 110px);
+  color: var(--light-grey);
+}
+.logo-s {
+  font-size: clamp(70px, 12vw, 130px);
+  color: var(--white);
+}
+.logo-game {
+  font-size: clamp(28px, 5vw, 52px);
+  color: var(--mid-grey);
+  letter-spacing: 0.28em;
+  align-self: flex-end;
+  margin-bottom: 8px;
+}
+
+/* --- Tagline --- */
+.sub-tagline {
+  font-family: var(--font-mono);
+  font-size: clamp(9px, 1.4vw, 13px);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--mid-grey);
+  margin-top: -8px;
+}
+
+/* --- Dustin Preview --- */
+.dustin-preview {
+  margin: 8px 0 0;
+}
+
+.dustin-idle {
+  width: clamp(40px, 6vw, 70px);
+  filter: grayscale(100%) contrast(1.15);
+  image-rendering: pixelated;
+  animation: float 2.2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* --- Player Info Badge --- */
+.play-hint {
+  font-size: clamp(9px, 1.3vw, 12px);
+  letter-spacing: 0.2em;
+  color: var(--mid-grey);
+  text-transform: uppercase;
+}
+.play-hint strong {
+  color: var(--white);
+}
+
+/* --- Play Button --- */
+#title-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: 2px solid var(--white);
+  color: var(--white);
+  padding: 14px 52px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--font-game);
+  letter-spacing: 0.2em;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+  animation: pulse-border 2.5s ease-in-out infinite;
+}
+
+.btn-text {
+  font-size: clamp(28px, 5vw, 44px);
+  line-height: 1;
+}
+
+.btn-sub {
+  font-family: var(--font-mono);
+  font-size: clamp(7px, 1vw, 10px);
+  letter-spacing: 0.2em;
+  color: var(--mid-grey);
+  text-transform: uppercase;
+}
+
+#title-button:hover,
+#title-button:focus {
+  background: var(--white);
+  color: var(--black);
+  transform: scale(1.03);
+  outline: none;
+}
+
+#title-button:hover .btn-sub,
+#title-button:focus .btn-sub {
+  color: var(--dark-grey);
+}
+
+@keyframes pulse-border {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.0); }
+  50%       { box-shadow: 0 0 0 8px rgba(255,255,255,0.07); }
+}
+
+/* --- Controls Hint --- */
+.controls-hint {
+  font-size: clamp(8px, 1.1vw, 11px);
+  color: var(--mid-grey);
+  letter-spacing: 0.15em;
+}
+
+.controls-hint kbd {
+  background: rgba(255,255,255,0.15);
+  color: var(--white);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+/* ============================================================
+   GAME OVER SCREEN
+   ============================================================ */
+#game-over-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  background: transparent;
+}
+
+.gameover-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+  padding: 36px 44px;
+  max-width: min(560px, 94vw);
+  width: 100%;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+}
+
+/* --- Game Over Heading --- */
+#game-over {
+  font-family: var(--font-game);
+  font-size: clamp(52px, 10vw, 96px);
+  letter-spacing: 0.08em;
+  color: var(--white);
+  animation: glitch 3s infinite;
+  text-shadow: 0 0 30px rgba(255,255,255,0.15);
+}
+
+@keyframes glitch {
+  0%, 95%, 100% { transform: none; text-shadow: 0 0 30px rgba(255,255,255,0.15); }
+  96%   { transform: translate(-3px, 0) skewX(-2deg); text-shadow: 3px 0 0 rgba(255,255,255,0.3), -3px 0 0 rgba(0,0,0,0.4); }
+  97%   { transform: translate(3px, 0) skewX(2deg); }
+  98%   { transform: translate(0, 2px); }
+}
+
+/* --- Final Score --- */
+.final-score {
+  font-size: clamp(13px, 2.5vw, 18px);
+  color: var(--light-grey);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* --- Name Entry --- */
+.name-entry-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  animation: fadeInUp 0.4s ease;
+}
+
+.name-entry-section label {
+  font-size: clamp(9px, 1.3vw, 11px);
+  color: var(--mid-grey);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.name-input-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+#player-name {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.35);
+  color: var(--white);
+  font-family: var(--font-game);
+  font-size: clamp(16px, 3vw, 22px);
+  letter-spacing: 0.25em;
+  padding: 8px 14px;
+  width: clamp(140px, 30vw, 200px);
+  text-transform: uppercase;
+  outline: none;
+  border-radius: 3px;
+  transition: border-color 0.2s, background 0.2s;
+  caret-color: var(--white);
+}
+
+#player-name:focus {
+  border-color: var(--white);
+  background: rgba(255,255,255,0.14);
+}
+
+#player-name::placeholder {
+  color: rgba(255,255,255,0.3);
+}
+
+#submit-score-btn {
+  background: var(--white);
+  color: var(--black);
+  border: none;
+  font-family: var(--font-game);
+  font-size: clamp(13px, 2vw, 18px);
+  letter-spacing: 0.15em;
+  padding: 8px 18px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.2s, transform 0.15s;
+}
+
+#submit-score-btn:hover {
+  background: var(--off-white);
+  transform: scale(1.04);
+}
+
+/* --- Leaderboard --- */
+#highScores {
+  width: 100%;
+  max-width: 360px;
+}
+
+.hs-title {
+  font-family: var(--font-game);
+  font-size: clamp(14px, 2.5vw, 20px);
+  letter-spacing: 0.4em;
+  color: var(--mid-grey);
+  margin-bottom: 10px;
+}
+
+#hs-list {
+  list-style: none;
+  counter-reset: hs;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#hs-list li {
+  counter-increment: hs;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 3px;
+  animation: fadeInUp 0.3s ease both;
+}
+
+#hs-list li::before {
+  content: '#' counter(hs);
+  font-family: var(--font-mono);
+  font-size: clamp(9px, 1.2vw, 11px);
+  color: rgba(255,255,255,0.4);
+  min-width: 26px;
+}
+
+.hs-name {
+  flex: 1;
+  font-family: var(--font-game);
+  font-size: clamp(14px, 2.2vw, 18px);
+  letter-spacing: 0.15em;
+  color: #ffffff;
+  text-align: left;
+  text-transform: uppercase;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.hs-score {
+  font-family: var(--font-mono);
+  font-size: clamp(11px, 1.6vw, 14px);
+  color: var(--light-grey);
+}
+
+.hs-level {
+  font-family: var(--font-mono);
+  font-size: clamp(9px, 1.2vw, 11px);
+  color: var(--mid-grey);
+}
+
+/* Highlight rank 1 */
+#hs-list li:first-child {
+  border-color: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.04);
+}
+#hs-list li:first-child .hs-name {
+  color: var(--white);
+}
+
+/* --- Play Again Button --- */
+#restart-button {
+  background: transparent;
+  border: 1px solid var(--mid-grey);
+  color: var(--mid-grey);
+  font-family: var(--font-game);
+  font-size: clamp(12px, 2vw, 17px);
+  letter-spacing: 0.2em;
+  padding: 8px 24px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  margin-top: 4px;
+}
+
+#restart-button:hover {
+  border-color: var(--white);
+  color: var(--white);
+  transform: scale(1.04);
+}
+
+/* ============================================================
+   GAME CANVAS
+   ============================================================ */
+#canvas {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Wide: fills the iframe viewport */
+  width: 98vw;
+  height: clamp(200px, 60vh, 500px);
+  max-width: 1200px;
+  background: transparent;
+  image-rendering: pixelated;
+  outline: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  z-index: 10;
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.title-content {
+  animation: fadeInUp 0.6s ease both;
+}
+
+.gameover-content {
+  animation: fadeInUp 0.5s ease both;
+}
+
+/* ============================================================
+   CANVAS HUD — score/level text drawn inside canvas is red
+   by default in the old code; we keep js drawing in white/grey
+   via the game.js overrides
+   ============================================================ */

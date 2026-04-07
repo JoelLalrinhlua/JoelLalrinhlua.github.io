@@ -1286,7 +1286,7 @@ html.is-contrasted .hero-tubes-canvas {
 
 .hero-title__line {
   display: block;
-  overflow: hidden;
+  overflow: visible;
   line-height: 0.85;
 }
 
@@ -1781,7 +1781,7 @@ html.is-contrasted .hero-tubes-canvas {
   gap: 1.25rem;
   align-items: stretch;
   white-space: nowrap;
-  animation: swm-scroll 35s linear infinite;
+  animation: swm-scroll 15s linear infinite;
   will-change: transform;
 }
 
@@ -1799,11 +1799,11 @@ html.is-contrasted .hero-tubes-canvas {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   width: clamp(200px, 20vw, 300px);
   height: clamp(280px, 36vw, 420px);
   border: 1px solid rgba(255,255,255,0.15);
-  background: #0a0a0a;
+  background: var(--color-primary);
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -1914,7 +1914,7 @@ html.is-contrasted .hero-tubes-canvas {
 
 .swm__card__name {
   display: block;
-  font: 700 clamp(0.9rem, 1.8vw, 1.3rem)/1.2 var(--font-bigger);
+  font: 700 clamp(1rem, 2vw, 1.5rem)/1.2 var(--font-bigger);
   text-transform: uppercase;
   letter-spacing: -0.01em;
   color: var(--color-secondary);
@@ -1948,7 +1948,21 @@ html.is-contrasted .hero-tubes-canvas {
 .swm__card.is-hovered .swm__stack-tag {
   border-color: var(--color-primary);
   color: var(--color-primary);
-  opacity: 0.7;
+}
+
+.swm__card__image {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0.5rem;
+  border-radius: 4px;
+  position: relative;
+  z-index: 2;
+}
+
+.theme-light .s-game__iframe {
+  filter: invert(1) hue-rotate(180deg);
 }
 
 .swm__card__num-color { color: var(--color-primary); opacity: 0.5; }
@@ -2428,7 +2442,7 @@ html.is-contrasted .hero-tubes-canvas {
   color: var(--color-primary);
   opacity: 0;
   text-align: center;
-  padding: 2rem;
+  padding: 0 2rem 16rem; /* Uses bottom padding to push text up from center, hovering above the contact button */
   pointer-events: none;
   transition: opacity 0.4s ease;
 }
@@ -2804,12 +2818,14 @@ html.is-contrasted .hero-tubes-canvas {
   justify-content: center;
   position: relative;
   z-index: 3;
-  height: calc(100vh - 8rem - 2px);
+  padding: 8rem 0; /* Changed from fixed height to padding to reduce empty space */
+  min-height: 50vh;
 }
 
 @media (max-width: 767px) {
   .s-cta .s__inner {
-    height: calc(100vh - 4.375rem);
+    padding: 5rem 0;
+    min-height: 40vh;
   }
 }
 
@@ -3510,7 +3526,15 @@ a:hover {
    =================================================================== */
 
 .site-intro__splash {
+  /* Using invert + screen extracts the black ink from white BG in dark mode */
+  filter: invert(1);
   mix-blend-mode: screen;
+}
+
+.theme-light .site-intro__splash {
+  /* Multiply gracefully drops the white BG in light mode */
+  filter: invert(0);
+  mix-blend-mode: multiply;
 }
 
 /* ===================================================================
@@ -3526,3 +3550,110 @@ a:hover {
    PROCESS STEP — scroll-triggered reveal in JS
    =================================================================== */
 /* Triggered by IntersectionObserver in initProcessSteps() */
+
+/* ===================================================================
+   MINI GAME SECTION
+   =================================================================== */
+
+.s-game {
+  position: relative;
+  z-index: 2;
+  background: var(--color-primary);
+  border-top: 1px solid var(--color-secondary);
+  padding: 4rem 2rem 0; /* No bottom padding, touches footer */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: var(--theme-transition);
+}
+
+@media (max-width: 767px) {
+  .s-game {
+    padding: 3rem 1rem 0;
+  }
+}
+
+.s-game__header {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 2rem;
+}
+
+@media (max-width: 767px) {
+  .s-game__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.s-game__header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.s-game__label {
+  font: 400 10px/1 var(--font-fraktion);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+}
+
+.s-game__title {
+  font: 700 clamp(2rem, 5vw, 4rem)/1 var(--font-bigger);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: var(--color-secondary);
+  margin: 0;
+}
+
+.s-game__desc {
+  font: 400 14px/1.6 var(--font-editorial);
+  color: var(--color-secondary);
+  opacity: 0.7;
+  max-width: 400px;
+  text-align: right;
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .s-game__desc {
+    text-align: left;
+  }
+}
+
+.s-game__desc kbd {
+  font-family: var(--font-fraktion);
+  font-size: 0.9em;
+  padding: 0.15rem 0.4rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* Make iframe full width, touching edges if needed, responsive height */
+.s-game__frame-wrapper {
+  width: 100vw;
+  max-width: 100%;
+  position: relative;
+  height: clamp(350px, 75vh, 700px);
+  background: #0a0a0a;
+  border-top: 1px solid var(--color-secondary);
+  margin-bottom: 0; /* touches footer */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.s-game__iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}

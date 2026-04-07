@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="J's Game — a minimalist, aesthetic endless runner. Dodge monsters as Dustin in Hawkins. See if you can top the leaderboard.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <title>J's Game</title>
+    <link rel="icon" href="./docs/assets/favicon_package_v0/favicon-32x32.png">
+</head>
+
+<body>
+
+    <!-- TITLE / PLAY SCREEN -->
+    <div id="title-screen">
+        <div class="noise-overlay"></div>
+        <div class="title-content">
+            <div class="game-logo">
+                <span class="logo-j">J</span><span class="logo-apostrophe">'</span><span class="logo-s">s</span>
+                <span class="logo-game">GAME</span>
+            </div>
+            <p class="sub-tagline">Hawkins, Indiana — Survive the Night</p>
+            <div class="dustin-preview">
+                <img src="./docs/assets/images/dustin/dust3.png" alt="Dustin" class="dustin-idle">
+            </div>
+            <p class="play-hint">Playing as <strong>Dustin</strong> in <strong>Hawkins</strong></p>
+            <button id="title-button" aria-label="Start game">
+                <span class="btn-text">PLAY</span>
+                <span class="btn-sub">SPACE / TAP TO JUMP</span>
+            </button>
+            <p class="controls-hint">Press <kbd>Z</kbd> or <kbd>Space</kbd> · Tap on mobile</p>
+        </div>
+        <div class="scanlines"></div>
+    </div>
+
+    <!-- GAME OVER + NAME INPUT + LEADERBOARD -->
+    <div id="game-over-screen" class="hidden">
+        <div class="noise-overlay"></div>
+        <div class="gameover-content">
+            <h1 id="game-over">GAME OVER</h1>
+            <p id="final-score-display" class="final-score"></p>
+
+            <!-- Name entry -->
+            <div id="name-entry" class="name-entry-section">
+                <label for="player-name">Enter your name for the leaderboard:</label>
+                <div class="name-input-row">
+                    <input type="text" id="player-name" maxlength="12" placeholder="YOUR NAME" autocomplete="off" spellcheck="false">
+                    <button id="submit-score-btn">SUBMIT</button>
+                </div>
+            </div>
+
+            <!-- Leaderboard -->
+            <div id="highScores">
+                <p class="hs-title">— TOP 5 —</p>
+                <ol id="hs-list"></ol>
+            </div>
+
+            <button id="restart-button" aria-label="Play again">PLAY AGAIN</button>
+        </div>
+        <div class="scanlines"></div>
+    </div>
+
+    <!-- GAME CANVAS -->
+    <canvas id="canvas" width="1200" height="420" class="hidden"></canvas>
+
+    <script src="scripts/dustinTop.js"></script>
+    <script src="scripts/dustin.js"></script>
+    <script src="scripts/demongorgonTop.js"></script>
+    <script src="scripts/demogorgon.js"></script>
+    <script src="scripts/dogsTop.js"></script>
+    <script src="scripts/dogs.js"></script>
+    <script src="scripts/batsTop.js"></script>
+    <script src="scripts/bats.js"></script>
+    <script src="scripts/slimeTop.js"></script>
+    <script src="scripts/slime.js"></script>
+    <script src="scripts/demonTopo.js"></script>
+    <script src="scripts/demons.js"></script>
+    <script src="scripts/game.js"></script>
+</body>
+
+</html>
