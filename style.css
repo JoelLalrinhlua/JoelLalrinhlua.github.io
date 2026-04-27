@@ -96,13 +96,15 @@ html {
 }
 
 html.is-scroll-blocked {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body {
   position: relative;
   padding: 0;
   min-height: 100vh;
+  overflow-x: hidden;
   font: 400 16px/1.48 var(--font-editorial);
   letter-spacing: -0.025em;
   color: var(--color-secondary);
@@ -1145,14 +1147,17 @@ html.is-contrasted .hero-tubes-canvas {
   border: 1px solid var(--color-secondary);
   border-radius: 50%;
   cursor: pointer;
+  opacity: 0.6;
   transition:
     border-color 0.3s ease,
-    transform 0.3s ease;
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .hero-nav__toggle:hover {
   border-color: var(--color-accent);
   transform: scale(1.1);
+  opacity: 1;
 }
 
 .hero-nav__toggle-icon {
