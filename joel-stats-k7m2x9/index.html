@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Analytics — Private</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #080808;
+      --surface: #111;
+      --surface-2: #181818;
+      --border: rgba(255,255,255,0.07);
+      --text: #f0ede8;
+      --muted: rgba(240,237,232,0.4);
+      --accent: #e63b2e;
+      --green: #53bc28;
+      --blue: #4a9eff;
+      --purple: #9b8ef0;
+      --font: 'Inter', sans-serif;
+      --ease: cubic-bezier(0.16,1,0.3,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== LOCK SCREEN ===== */
+    #lock-screen {
+      position: fixed; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: var(--bg);
+      z-index: 100;
+      gap: 0;
+    }
+    .lock-icon {
+      width: 52px; height: 52px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      display: grid; place-items: center;
+      margin-bottom: 20px;
+    }
+    .lock-title {
+      font-size: 22px; font-weight: 700;
+      letter-spacing: -0.04em;
+      margin-bottom: 6px;
+    }
+    .lock-sub {
+      font-size: 13px; color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .lock-form {
+      display: flex; flex-direction: column;
+      gap: 12px; width: 280px;
+    }
+    .lock-input {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-size: 15px; font-family: var(--font);
+      color: var(--text);
+      outline: none;
+      text-align: center;
+      letter-spacing: 0.2em;
+      transition: border-color 0.2s;
+    }
+    .lock-input:focus { border-color: rgba(255,255,255,0.2); }
+    .lock-input.error { border-color: var(--accent); animation: shake 0.3s ease; }
+    .lock-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 13px;
+      font-size: 14px; font-weight: 600;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .lock-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .lock-error {
+      font-size: 12px; color: var(--accent);
+      text-align: center; height: 16px;
+    }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      75% { transform: translateX(8px); }
+    }
+
+    /* ===== DASHBOARD ===== */
+    #dashboard { display: none; }
+
+    .nav {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 20px 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav__brand {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav__dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      animation: pulse 2s infinite;
+    }
+    .nav__title { font-size: 14px; font-weight: 600; letter-spacing: -0.02em; }
+    .nav__sub { font-size: 12px; color: var(--muted); }
+    .refresh-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 12px; font-weight: 500;
+      font-family: var(--font);
+      cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+      transition: background 0.2s;
+    }
+    .refresh-btn:hover { background: var(--surface-2); }
+    .refresh-btn svg { transition: transform 0.4s; }
+    .refresh-btn.spinning svg { animation: spin 0.7s linear; }
+
+    .main { padding: 32px; max-width: 1000px; margin: 0 auto; }
+
+    /* Period selector */
+    .period-bar {
+      display: flex; gap: 6px; margin-bottom: 28px; flex-wrap: wrap;
+    }
+    .period-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 8px;
+      padding: 7px 14px;
+      font-size: 12px; font-weight: 500;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .period-btn.active {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    /* Stat cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    }
+    .card__label {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 10px;
+    }
+    .card__value {
+      font-size: 36px; font-weight: 700;
+      letter-spacing: -0.04em; line-height: 1;
+      margin-bottom: 6px;
+    }
+    .card__sub {
+      font-size: 11px; color: var(--muted);
+    }
+    .card--green .card__value { color: var(--green); }
+    .card--blue  .card__value { color: var(--blue); }
+    .card--purple .card__value { color: var(--purple); }
+    .card--accent .card__value { color: var(--accent); }
+
+    /* Section title */
+    .section-title {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* Activity table */
+    .table-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+    table {
+      width: 100%; border-collapse: collapse;
+      font-size: 13px;
+    }
+    thead tr { border-bottom: 1px solid var(--border); }
+    th {
+      text-align: left;
+      padding: 12px 20px;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface-2); }
+    td { padding: 12px 20px; color: var(--text); }
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px; font-weight: 600;
+    }
+    .badge--view {
+      background: rgba(74,158,255,0.12);
+      border: 1px solid rgba(74,158,255,0.25);
+      color: var(--blue);
+    }
+    .badge--download {
+      background: rgba(83,188,40,0.12);
+      border: 1px solid rgba(83,188,40,0.25);
+      color: var(--green);
+    }
+
+    /* Daily chart */
+    .chart-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 28px;
+    }
+    .chart-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      height: 120px;
+    }
+    .bar-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      height: 100%;
+      justify-content: flex-end;
+    }
+    .bar-stack {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      justify-content: flex-end;
+    }
+    .bar {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+      min-height: 2px;
+      transition: height 0.5s var(--ease);
+    }
+    .bar--view { background: var(--blue); opacity: 0.7; }
+    .bar--download { background: var(--green); }
+    .bar-label {
+      font-size: 9px; color: var(--muted);
+      text-align: center;
+    }
+
+    .chart-legend {
+      display: flex; gap: 16px; margin-bottom: 16px;
+    }
+    .legend-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--muted);
+    }
+    .legend-dot {
+      width: 8px; height: 8px; border-radius: 2px;
+    }
+
+    /* Loading / empty */
+    .loading {
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px; color: var(--muted); font-size: 13px; gap: 8px;
+    }
+    .spinner {
+      width: 16px; height: 16px;
+      border: 2px solid var(--border);
+      border-top-color: var(--text);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes pulse {
+      0%,100% { opacity: 1; box-shadow: 0 0 8px var(--green); }
+      50% { opacity: 0.5; box-shadow: 0 0 16px var(--green); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeIn 0.5s var(--ease) both; }
+
+    @media (max-width: 600px) {
+      .main { padding: 20px 16px; }
+      .nav { padding: 16px 20px; }
+      .card__value { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== LOCK SCREEN ===== -->
+<div id="lock-screen">
+  <div class="lock-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+    </svg>
+  </div>
+  <h1 class="lock-title">Private Analytics</h1>
+  <p class="lock-sub">Enter your PIN to continue</p>
+  <div class="lock-form">
+    <input
+      id="pin-input"
+      class="lock-input"
+      type="password"
+      placeholder="••••••"
+      maxlength="10"
+      autocomplete="off"
+    />
+    <div class="lock-error" id="lock-error"></div>
+    <button class="lock-btn" id="lock-btn">Unlock →</button>
+  </div>
+</div>
+
+<!-- ===== DASHBOARD ===== -->
+<div id="dashboard">
+
+  <nav class="nav">
+    <div class="nav__brand">
+      <div class="nav__dot"></div>
+      <div>
+        <div class="nav__title">Site Analytics</div>
+        <div class="nav__sub">joelalrinhlua.me · Private</div>
+      </div>
+    </div>
+    <button class="refresh-btn" id="refresh-btn">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="23 4 23 10 17 10"></polyline>
+        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+      </svg>
+      Refresh
+    </button>
+  </nav>
+
+  <main class="main">
+
+    <!-- Period selector -->
+    <div class="period-bar" id="period-bar">
+      <button class="period-btn active" data-days="7">Last 7 days</button>
+      <button class="period-btn" data-days="30">Last 30 days</button>
+      <button class="period-btn" data-days="90">Last 90 days</button>
+      <button class="period-btn" data-days="0">All time</button>
+    </div>
+
+    <!-- Stat cards -->
+    <div class="cards" id="cards">
+      <div class="card">
+        <div class="card__label">Loading…</div>
+        <div class="card__value" style="color:var(--muted)">—</div>
+      </div>
+    </div>
+
+    <!-- Daily chart -->
+    <div class="section-title">Activity — last 14 days</div>
+    <div class="chart-wrap">
+      <div class="chart-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--blue);opacity:0.7"></div>Page views</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Downloads</div>
+      </div>
+      <div class="chart-bars" id="chart-bars">
+        <div class="loading"><div class="spinner"></div> Loading…</div>
+      </div>
+    </div>
+
+    <!-- Recent events table -->
+    <div class="section-title">Recent Events</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Event</th>
+            <th>Page</th>
+            <th>Time</th>
+            <th>Referrer</th>
+          </tr>
+        </thead>
+        <tbody id="events-body">
+          <tr><td colspan="4"><div class="loading"><div class="spinner"></div> Loading…</div></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  // ===== PIN PROTECTION =====
+  const CORRECT_PIN = 'joel2026';
+  const SESSION_KEY = 'analytics_auth';
+
+  const lockScreen = document.getElementById('lock-screen');
+  const dashboard  = document.getElementById('dashboard');
+  const pinInput   = document.getElementById('pin-input');
+  const lockBtn    = document.getElementById('lock-btn');
+  const lockError  = document.getElementById('lock-error');
+
+  function unlock() {
+    if (pinInput.value === CORRECT_PIN) {
+      sessionStorage.setItem(SESSION_KEY, '1');
+      lockScreen.style.display = 'none';
+      dashboard.style.display  = 'block';
+      loadData();
+    } else {
+      pinInput.classList.add('error');
+      lockError.textContent = 'Incorrect PIN. Try again.';
+      pinInput.value = '';
+      setTimeout(() => pinInput.classList.remove('error'), 400);
+    }
+  }
+
+  lockBtn.addEventListener('click', unlock);
+  pinInput.addEventListener('keydown', e => { if (e.key === 'Enter') unlock(); });
+
+  // Auto-unlock if already authenticated this session
+  if (sessionStorage.getItem(SESSION_KEY) === '1') {
+    lockScreen.style.display = 'none';
+    dashboard.style.display  = 'block';
+  }
+
+  // ===== SUPABASE CONFIG =====
+  const SUPA = 'https://ztkzofjklpzrzskxacll.supabase.co/rest/v1/site_analytics';
+  const KEY  = 'sb_publishable_uunVH0MPwzPTKBek4kK5NQ_LULAfOyB';
+  const HEADERS = { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY };
+
+  let currentDays = 7;
+
+  // ===== FETCH DATA =====
+  async function fetchAll(days) {
+    let url = SUPA + '?select=*&order=created_at.desc';
+    if (days > 0) {
+      const since = new Date(Date.now() - days * 864e5).toISOString();
+      url += '&created_at=gte.' + since;
+    }
+    const r = await fetch(url, { headers: HEADERS });
+    return r.json();
+  }
+
+  async function loadData() {
+    try {
+      const rows = await fetchAll(currentDays);
+      renderCards(rows);
+      renderChart(rows);
+      renderTable(rows);
+    } catch (e) {
+      document.getElementById('events-body').innerHTML =
+        '<tr><td colspan="4" style="padding:20px;color:var(--accent);font-size:13px">Failed to load data.</td></tr>';
+    }
+  }
+
+  // ===== RENDER CARDS =====
+  function renderCards(rows) {
+    const totalViews     = rows.filter(r => r.event_type === 'page_view').length;
+    const totalDownloads = rows.filter(r => r.event_type === 'download_click').length;
+    const portfolioViews = rows.filter(r => r.event_type === 'page_view' && r.page === '/').length;
+    const dlPageViews    = rows.filter(r => r.event_type === 'page_view' && r.page === '/download-chhehchhawl').length;
+
+    document.getElementById('cards').innerHTML = `
+      <div class="card card--blue fade-in">
+        <div class="card__label">Total Page Views</div>
+        <div class="card__value">${totalViews.toLocaleString()}</div>
+        <div class="card__sub">All pages combined</div>
+      </div>
+      <div class="card card--accent fade-in" style="animation-delay:0.05s">
+        <div class="card__label">Portfolio Views</div>
+        <div class="card__value">${portfolioViews.toLocaleString()}</div>
+        <div class="card__sub">joelalrinhlua.me</div>
+      </div>
+      <div class="card card--purple fade-in" style="animation-delay:0.1s">
+        <div class="card__label">Download Page Views</div>
+        <div class="card__value">${dlPageViews.toLocaleString()}</div>
+        <div class="card__sub">/download-chhehchhawl</div>
+      </div>
+      <div class="card card--green fade-in" style="animation-delay:0.15s">
+        <div class="card__label">APK Downloads</div>
+        <div class="card__value">${totalDownloads.toLocaleString()}</div>
+        <div class="card__sub">Clicked download button</div>
+      </div>
+    `;
+  }
+
+  // ===== RENDER CHART (last 14 days) =====
+  function renderChart(rows) {
+    const days = 14;
+    const dayMap = {};
+    for (let i = days - 1; i >= 0; i--) {
+      const d = new Date(Date.now() - i * 864e5);
+      const key = d.toISOString().slice(0, 10);
+      dayMap[key] = { views: 0, downloads: 0 };
+    }
+    rows.forEach(r => {
+      const key = r.created_at.slice(0, 10);
+      if (dayMap[key]) {
+        if (r.event_type === 'page_view')       dayMap[key].views++;
+        if (r.event_type === 'download_click')  dayMap[key].downloads++;
+      }
+    });
+
+    const keys   = Object.keys(dayMap);
+    const maxVal = Math.max(1, ...keys.map(k => dayMap[k].views + dayMap[k].downloads));
+
+    const barsHTML = keys.map(k => {
+      const d = dayMap[k];
+      const vH = Math.round((d.views / maxVal) * 100);
+      const dlH = Math.round((d.downloads / maxVal) * 100);
+      const label = new Date(k).toLocaleDateString('en', { month: 'short', day: 'numeric' });
+      return `<div class="bar-group">
+        <div class="bar-stack">
+          ${d.views > 0     ? `<div class="bar bar--view"     style="height:${vH}px"  title="${d.views} views"></div>` : ''}
+          ${d.downloads > 0 ? `<div class="bar bar--download" style="height:${dlH}px" title="${d.downloads} downloads"></div>` : ''}
+          ${d.views === 0 && d.downloads === 0 ? `<div class="bar" style="height:2px;background:var(--border)"></div>` : ''}
+        </div>
+        <div class="bar-label">${label.split(' ')[1]}</div>
+      </div>`;
+    }).join('');
+
+    document.getElementById('chart-bars').innerHTML = barsHTML;
+  }
+
+  // ===== RENDER TABLE =====
+  function renderTable(rows) {
+    if (!rows.length) {
+      document.getElementById('events-body').innerHTML =
+        '<tr><td colspan="4" style="padding:24px;text-align:center;color:var(--muted);font-size:13px">No events yet.</td></tr>';
+      return;
+    }
+
+    const recent = rows.slice(0, 50);
+    document.getElementById('events-body').innerHTML = recent.map(r => {
+      const isDownload = r.event_type === 'download_click';
+      const badge = isDownload
+        ? '<span class="badge badge--download">⬇ Download</span>'
+        : '<span class="badge badge--view">👁 Page View</span>';
+      const time = new Date(r.created_at).toLocaleString('en', {
+        month: 'short', day: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+      });
+      const ref = r.referrer
+        ? (() => { try { return new URL(r.referrer).hostname; } catch { return r.referrer.slice(0, 30); } })()
+        : '<span style="color:var(--muted)">Direct</span>';
+      return `<tr>
+        <td>${badge}</td>
+        <td style="color:var(--muted);font-size:12px">${r.page || '—'}</td>
+        <td style="color:var(--muted);font-size:12px">${time}</td>
+        <td style="font-size:12px">${ref}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  // ===== PERIOD BUTTONS =====
+  document.getElementById('period-bar').addEventListener('click', e => {
+    const btn = e.target.closest('.period-btn');
+    if (!btn) return;
+    document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentDays = parseInt(btn.dataset.days);
+    loadData();
+  });
+
+  // ===== REFRESH =====
+  const refreshBtn = document.getElementById('refresh-btn');
+  refreshBtn.addEventListener('click', () => {
+    refreshBtn.classList.add('spinning');
+    loadData().finally(() => {
+      setTimeout(() => refreshBtn.classList.remove('spinning'), 700);
+    });
+  });
+
+  // Load on start if already unlocked
+  if (sessionStorage.getItem(SESSION_KEY) === '1') loadData();
+</script>
+</body>
+</html>

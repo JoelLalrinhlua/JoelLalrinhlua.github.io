@@ -712,6 +712,29 @@
 
   <script src="script.js"></script>
 
+  <!-- ===== ANALYTICS TRACKER ===== -->
+  <script>
+    (function () {
+      try {
+        fetch('https://ztkzofjklpzrzskxacll.supabase.co/rest/v1/site_analytics', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': 'sb_publishable_uunVH0MPwzPTKBek4kK5NQ_LULAfOyB',
+            'Authorization': 'Bearer sb_publishable_uunVH0MPwzPTKBek4kK5NQ_LULAfOyB',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({
+            event_type: 'page_view',
+            page: '/',
+            referrer: document.referrer || null,
+            user_agent: navigator.userAgent || null
+          })
+        });
+      } catch (e) { /* silent fail */ }
+    })();
+  </script>
+
   <!-- Tubes Cursor Module -->
   <script type="module">
     import TubesCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js";

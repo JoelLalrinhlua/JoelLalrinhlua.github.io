@@ -635,10 +635,37 @@
   </div>
 
   <script>
-    // Animate download button on click
+    const SUPA_URL = 'https://ztkzofjklpzrzskxacll.supabase.co/rest/v1/site_analytics';
+    const SUPA_KEY = 'sb_publishable_uunVH0MPwzPTKBek4kK5NQ_LULAfOyB';
+
+    function trackEvent(type) {
+      try {
+        fetch(SUPA_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPA_KEY,
+            'Authorization': 'Bearer ' + SUPA_KEY,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({
+            event_type: type,
+            page: '/download-chhehchhawl',
+            referrer: document.referrer || null,
+            user_agent: navigator.userAgent || null
+          })
+        });
+      } catch (e) { /* silent fail */ }
+    }
+
+    // Track page view
+    trackEvent('page_view');
+
+    // Track download click + button animation
     const btn = document.getElementById('download-btn');
     if (btn) {
       btn.addEventListener('click', () => {
+        trackEvent('download_click');
         btn.style.transform = 'scale(0.97)';
         setTimeout(() => { btn.style.transform = ''; }, 150);
       });
