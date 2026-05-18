@@ -638,7 +638,24 @@
     const SUPA_URL = 'https://ztkzofjklpzrzskxacll.supabase.co/rest/v1/site_analytics';
     const SUPA_KEY = 'sb_publishable_uunVH0MPwzPTKBek4kK5NQ_LULAfOyB';
 
-    function trackEvent(type) {
+    function detectDevice() {
+      const ua = navigator.userAgent;
+      if (/tablet|ipad|playbook|silk/i.test(ua)) return 'Tablet';
+      if (/mobile|iphone|ipod|android|blackberry|mini|windows\sce|palm/i.test(ua)) return 'Mobile';
+      return 'Desktop';
+    }
+
+    function detectBrowser() {
+      const ua = navigator.userAgent;
+      if (ua.includes('Edg/'))    return 'Edge';
+      if (ua.includes('OPR/') || ua.includes('Opera')) return 'Opera';
+      if (ua.includes('Chrome/')) return 'Chrome';
+      if (ua.includes('Firefox/'))return 'Firefox';
+      if (ua.includes('Safari/')) return 'Safari';
+      return 'Other';
+    }
+
+    function sendEvent(type, geo) {
       try {
         fetch(SUPA_URL, {
           method: 'POST',
@@ -652,20 +669,30 @@
             event_type: type,
             page: '/download-chhehchhawl',
             referrer: document.referrer || null,
-            user_agent: navigator.userAgent || null
+            user_agent: navigator.userAgent || null,
+            country: geo.country_name || null,
+            country_code: geo.country_code || null,
+            city: geo.city || null,
+            region: geo.region || null,
+            device_type: detectDevice(),
+            browser: detectBrowser()
           })
         });
       } catch (e) { /* silent fail */ }
     }
 
-    // Track page view
-    trackEvent('page_view');
+    // Fetch geo once, then track page view
+    let geoCache = {};
+    fetch('https://ipapi.co/json/')
+      .then(r => r.json())
+      .then(geo => { geoCache = geo; sendEvent('page_view', geo); })
+      .catch(() => sendEvent('page_view', {}));
 
     // Track download click + button animation
     const btn = document.getElementById('download-btn');
     if (btn) {
       btn.addEventListener('click', () => {
-        trackEvent('download_click');
+        sendEvent('download_click', geoCache);
         btn.style.transform = 'scale(0.97)';
         setTimeout(() => { btn.style.transform = ''; }, 150);
       });
