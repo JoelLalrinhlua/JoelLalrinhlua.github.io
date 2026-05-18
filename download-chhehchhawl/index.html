@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Download Chhehchhawl — Joel Lalrinhlua</title>
+  <meta name="description"
+    content="Download Chhehchhawl, a community app built by Joel Lalrinhlua. Get the latest Android APK." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Download Chhehchhawl" />
+  <meta property="og:description" content="Download the Chhehchhawl Android app — built by Joel Lalrinhlua." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://joelalrinhlua.me/download-chhehchhawl" />
+
+  <!-- Fonts — match portfolio -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== DESIGN TOKENS ===== */
+    :root {
+      --color-bg: #0a0a0a;
+      --color-surface: #111111;
+      --color-surface-2: #181818;
+      --color-border: rgba(255, 255, 255, 0.08);
+      --color-text: #f0ede8;
+      --color-text-muted: rgba(240, 237, 232, 0.45);
+      --color-accent: #e63b2e;
+      --color-accent-glow: rgba(230, 59, 46, 0.25);
+      --color-green: #53bc28;
+      --color-purple: #6958d5;
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-pill: 999px;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-sans);
+      min-height: 100dvh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== NOISE OVERLAY ===== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* ===== AMBIENT GRADIENT ===== */
+    .ambient {
+      position: fixed;
+      top: -30%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 600px;
+      background: radial-gradient(ellipse at center,
+        rgba(230, 59, 46, 0.12) 0%,
+        rgba(105, 88, 213, 0.08) 40%,
+        transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===== LAYOUT ===== */
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 40px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--color-text);
+    }
+
+    .nav__logo-mark {
+      width: 32px;
+      height: 32px;
+      background: var(--color-accent);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: #fff;
+      letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+
+    .nav__logo-text {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+    }
+
+    .nav__back {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      letter-spacing: 0.01em;
+    }
+
+    .nav__back:hover { color: var(--color-text); }
+
+    .nav__back svg {
+      transition: transform 0.2s var(--ease-out);
+    }
+
+    .nav__back:hover svg {
+      transform: translateX(-3px);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px 80px;
+      text-align: center;
+    }
+
+    /* Label badge */
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      padding: 6px 14px 6px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 36px;
+      animation: fadeUp 0.6s var(--ease-out) 0.1s both;
+    }
+
+    .hero__badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--color-green);
+      box-shadow: 0 0 8px var(--color-green);
+      animation: pulse 2s infinite;
+    }
+
+    /* App icon */
+    .hero__icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.04),
+        0 8px 32px rgba(0,0,0,0.5),
+        0 0 60px rgba(105, 88, 213, 0.2);
+      animation: fadeUp 0.6s var(--ease-out) 0.2s both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero__icon::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 60%);
+      border-radius: inherit;
+    }
+
+    .hero__icon svg {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero__title {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+      animation: fadeUp 0.6s var(--ease-out) 0.3s both;
+    }
+
+    .hero__title span {
+      background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.6) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero__subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--color-text-muted);
+      max-width: 420px;
+      line-height: 1.65;
+      margin-bottom: 48px;
+      font-weight: 400;
+      animation: fadeUp 0.6s var(--ease-out) 0.4s both;
+    }
+
+    /* ===== DOWNLOAD CARD ===== */
+    .download-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      width: 100%;
+      max-width: 440px;
+      margin-bottom: 28px;
+      animation: fadeUp 0.6s var(--ease-out) 0.5s both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .download-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    }
+
+    .download-card__meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .download-card__info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .download-card__name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text);
+      letter-spacing: -0.02em;
+    }
+
+    .download-card__size {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+
+    .download-card__type-badge {
+      background: rgba(105, 88, 213, 0.15);
+      border: 1px solid rgba(105, 88, 213, 0.3);
+      color: #9b8ef0;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+    }
+
+    /* Download button */
+    .btn-download {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px 24px;
+      background: var(--color-accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 15px;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      letter-spacing: -0.02em;
+      cursor: pointer;
+      text-decoration: none;
+      transition:
+        transform 0.2s var(--ease-out),
+        box-shadow 0.2s var(--ease-out),
+        background 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-download::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+      opacity: 1;
+    }
+
+    .btn-download:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px var(--color-accent-glow), 0 4px 12px rgba(0,0,0,0.4);
+      background: #d4342a;
+    }
+
+    .btn-download:active {
+      transform: translateY(0);
+    }
+
+    .btn-download svg {
+      position: relative;
+      z-index: 1;
+      transition: transform 0.2s var(--ease-out);
+    }
+
+    .btn-download:hover svg {
+      transform: translateY(2px);
+    }
+
+    .btn-download__text {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== INFO CHIPS ===== */
+    .info-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      animation: fadeUp 0.6s var(--ease-out) 0.6s both;
+      max-width: 440px;
+    }
+
+    .chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      padding: 7px 14px;
+      font-size: 12px;
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+
+    .chip svg {
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    /* ===== WARNING NOTE ===== */
+    .install-note {
+      margin-top: 28px;
+      background: rgba(255, 200, 0, 0.05);
+      border: 1px solid rgba(255, 200, 0, 0.15);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      animation: fadeUp 0.6s var(--ease-out) 0.7s both;
+    }
+
+    .install-note svg {
+      color: #f0c000;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .install-note p {
+      font-size: 12.5px;
+      color: rgba(240, 192, 0, 0.8);
+      line-height: 1.6;
+    }
+
+    .install-note strong {
+      color: #f0c000;
+      font-weight: 600;
+    }
+
+    /* ===== FOOTER ===== */
+    .foot {
+      border-top: 1px solid var(--color-border);
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .foot__text {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+
+    .foot__link {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .foot__link:hover { color: var(--color-text); }
+
+    /* ===== SPARKLE DECORATIONS ===== */
+    .sparkles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .sparkle {
+      position: absolute;
+      opacity: 0.15;
+      animation: spinSlow linear infinite;
+    }
+
+    .sparkle--1 { top: 10%; left: 8%;  width: 28px; animation-duration: 20s; }
+    .sparkle--2 { top: 20%; right: 10%; width: 18px; animation-duration: 28s; animation-direction: reverse; }
+    .sparkle--3 { bottom: 25%; left: 12%; width: 22px; animation-duration: 24s; }
+    .sparkle--4 { bottom: 15%; right: 8%; width: 32px; animation-duration: 18s; animation-direction: reverse; }
+    .sparkle--5 { top: 55%; left: 4%;  width: 14px; animation-duration: 32s; }
+    .sparkle--6 { top: 40%; right: 5%; width: 20px; animation-duration: 22s; animation-direction: reverse; }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--color-green); }
+      50%       { opacity: 0.6; box-shadow: 0 0 16px var(--color-green); }
+    }
+
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .nav { padding: 18px 20px; }
+      .foot { padding: 16px 20px; }
+      .download-card { padding: 22px 20px; }
+      .hero { padding: 48px 20px 64px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Ambient Glow -->
+  <div class="ambient" aria-hidden="true"></div>
+
+  <!-- Sparkle decorations -->
+  <div class="sparkles" aria-hidden="true">
+    <svg class="sparkle sparkle--1" viewBox="0 0 32 32"><path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="currentColor"/></svg>
+    <svg class="sparkle sparkle--2" viewBox="0 0 32 32"><path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="#6958d5"/></svg>
+    <svg class="sparkle sparkle--3" viewBox="0 0 32 32"><path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="#53bc28"/></svg>
+    <svg class="sparkle sparkle--4" viewBox="0 0 32 32"><path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="currentColor"/></svg>
+    <svg class="sparkle sparkle--5" viewBox="0 0 32 32"><path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="#6958d5"/></svg>
+    <svg class="sparkle sparkle--6" viewBox="0 0 32 32"><path d="M16 0L20 12L32 16L20 20L16 32L12 20L0 16L12 12L16 0Z" fill="#53bc28"/></svg>
+  </div>
+
+  <div class="page">
+    <!-- Nav -->
+    <nav class="nav">
+      <a href="/" class="nav__logo" aria-label="Joel Lalrinhlua — Home">
+        <div class="nav__logo-mark">J</div>
+        <span class="nav__logo-text">Joel Lalrinhlua</span>
+      </a>
+      <a href="/" class="nav__back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 5l-7 7 7 7"/>
+        </svg>
+        Back to Portfolio
+      </a>
+    </nav>
+
+    <!-- Hero -->
+    <main class="hero">
+
+      <!-- Live badge -->
+      <div class="hero__badge">
+        <span class="hero__badge-dot"></span>
+        Latest Release · Android APK
+      </div>
+
+      <!-- App icon -->
+      <div class="hero__icon" aria-hidden="true">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+
+      <!-- Heading -->
+      <h1 class="hero__title">
+        <span>Chhehchhawl</span>
+      </h1>
+
+      <p class="hero__subtitle">
+        A community platform built to connect people. Download the Android app and get started.
+      </p>
+
+      <!-- Download card -->
+      <div class="download-card">
+        <div class="download-card__meta">
+          <div class="download-card__info">
+            <span class="download-card__name">Chhehchhawl.apk</span>
+            <span class="download-card__size">~91.8 MB · Android</span>
+          </div>
+          <span class="download-card__type-badge">APK</span>
+        </div>
+
+        <a
+          id="download-btn"
+          class="btn-download"
+          href="/application-3212dcbb-97ae-4223-88dc-bb1a2adb2308.apk"
+          download="Chhehchhawl.apk"
+          aria-label="Download Chhehchhawl APK"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          <span class="btn-download__text">Download for Android</span>
+        </a>
+      </div>
+
+      <!-- Chips -->
+      <div class="info-chips">
+        <div class="chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+            <line x1="12" y1="18" x2="12.01" y2="18"/>
+          </svg>
+          Android 5.0+
+        </div>
+        <div class="chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          Safe &amp; Secure
+        </div>
+        <div class="chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          Latest Build
+        </div>
+      </div>
+
+      <!-- Install note -->
+      <div class="install-note" role="note">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <p>
+          <strong>Allow Unknown Sources:</strong> Since this APK is not distributed through the Play Store, go to
+          <strong>Settings → Security → Install Unknown Apps</strong> and allow installation from your browser.
+        </p>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="foot">
+      <span class="foot__text">Designed &amp; Built by Joel Lalrinhlua · © 2026</span>
+      <a href="/" class="foot__link">joelalrinhlua.me</a>
+    </footer>
+  </div>
+
+  <script>
+    // Animate download button on click
+    const btn = document.getElementById('download-btn');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        btn.style.transform = 'scale(0.97)';
+        setTimeout(() => { btn.style.transform = ''; }, 150);
+      });
+    }
+  </script>
+</body>
+
+</html>
