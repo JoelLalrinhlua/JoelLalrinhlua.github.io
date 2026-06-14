@@ -713,60 +713,7 @@
   <script src="script.js"></script>
 
   <!-- ===== ANALYTICS TRACKER ===== -->
-  <script>
-    (function () {
-      const SUPA = 'https://ztkzofjklpzrzskxacll.supabase.co/rest/v1/site_analytics';
-      const KEY  = 'sb_publishable_uunVH0MPwzPTKBek4kK5NQ_LULAfOyB';
-
-      function detectDevice() {
-        const ua = navigator.userAgent;
-        if (/tablet|ipad|playbook|silk/i.test(ua)) return 'Tablet';
-        if (/mobile|iphone|ipod|android|blackberry|mini|windows\sce|palm/i.test(ua)) return 'Mobile';
-        return 'Desktop';
-      }
-
-      function detectBrowser() {
-        const ua = navigator.userAgent;
-        if (ua.includes('Edg/'))    return 'Edge';
-        if (ua.includes('OPR/') || ua.includes('Opera')) return 'Opera';
-        if (ua.includes('Chrome/')) return 'Chrome';
-        if (ua.includes('Firefox/'))return 'Firefox';
-        if (ua.includes('Safari/')) return 'Safari';
-        return 'Other';
-      }
-
-      function sendEvent(geo) {
-        try {
-          fetch(SUPA, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'apikey': KEY,
-              'Authorization': 'Bearer ' + KEY,
-              'Prefer': 'return=minimal'
-            },
-            body: JSON.stringify({
-              event_type: 'page_view',
-              page: '/',
-              referrer: document.referrer || null,
-              user_agent: navigator.userAgent || null,
-              country: geo.country_name || null,
-              country_code: geo.country_code || null,
-              city: geo.city || null,
-              region: geo.region || null,
-              device_type: detectDevice(),
-              browser: detectBrowser()
-            })
-          });
-        } catch (e) { /* silent fail */ }
-      }
-
-      fetch('https://ipapi.co/json/')
-        .then(r => r.json())
-        .then(geo => sendEvent(geo))
-        .catch(() => sendEvent({}));
-    })();
-  </script>
+  <script src="/joel-stats-k7m2x9/tracker.js"></script>
 
   <!-- Tubes Cursor Module -->
   <script type="module">

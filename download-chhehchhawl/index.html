@@ -666,183 +666,127 @@
     </footer>
   </div>
 
+  <!-- Shared site tracker (page_view + geo + download link scanning) -->
+  <script src="/joel-stats-k7m2x9/tracker.js"></script>
+
   <script>
-    // ─── CONFIG ──────────────────────────────────────────────────────────────
-    const SUPA_URL = 'https://ztkzofjklpzrzskxacll.supabase.co/rest/v1/site_analytics';
-    const SUPA_KEY = 'sb_publishable_uunVH0MPwzPTKBek4kK5NQ_LULAfOyB';
-    const PAGE = '/download-chhehchhawl';
-    const pageLoadTime = Date.now();
+    // ─── ENHANCED DOWNLOAD PAGE EVENTS ───────────────────────────────────────
+    // tracker.js already fires page_view with geo. Here we add richer
+    // download-specific events: download_start, page_exit with time-on-page, etc.
+    (function () {
+      const SUPA_URL = 'https://ztkzofjklpzrzskxacll.supabase.co/rest/v1/site_analytics';
+      const SUPA_KEY = 'sb_publishable_uunVH0MPwzPTKBek4kK5NQ_LULAfOyB';
+      const PAGE = '/download-chhehchhawl';
+      const pageLoadTime = Date.now();
 
-    // ─── DEVICE + BROWSER DETECTION ──────────────────────────────────────────
-    function detectDevice() {
-      const ua = navigator.userAgent;
-      if (/tablet|ipad|playbook|silk/i.test(ua)) return 'Tablet';
-      if (/mobile|iphone|ipod|android|blackberry|mini|windows\sce|palm/i.test(ua)) return 'Mobile';
-      return 'Desktop';
-    }
+      const connection = navigator.connection?.effectiveType || null;
 
-    function detectBrowser() {
-      const ua = navigator.userAgent;
-      if (ua.includes('Edg/')) return 'Edge';
-      if (ua.includes('OPR/') || ua.includes('Opera')) return 'Opera';
-      if (ua.includes('Chrome/')) return 'Chrome';
-      if (ua.includes('Firefox/')) return 'Firefox';
-      if (ua.includes('Safari/')) return 'Safari';
-      return 'Other';
-    }
-
-    function detectOS() {
-      const ua = navigator.userAgent;
-      if (/Windows NT 10/.test(ua)) return 'Windows 10/11';
-      if (/Windows/.test(ua)) return 'Windows';
-      if (/Mac OS X/.test(ua)) return 'macOS';
-      if (/iPhone|iPad/.test(ua)) return 'iOS';
-      if (/Android/.test(ua)) return 'Android';
-      if (/Linux/.test(ua)) return 'Linux';
-      return 'Unknown';
-    }
-
-    // ─── SCREEN & LANGUAGE ───────────────────────────────────────────────────
-    const screenInfo = `${screen.width}x${screen.height}`;
-    const lang = navigator.language || 'unknown';
-    const connection = navigator.connection?.effectiveType || null;
-
-    // ─── SEND EVENT ──────────────────────────────────────────────────────────
-    function sendEvent(type, geo, extra = {}) {
-      const payload = {
-        event_type: type,
-        page: PAGE,
-        referrer: document.referrer || null,
-        user_agent: navigator.userAgent || null,
-        country: geo.country_name || null,
-        country_code: geo.country_code || null,
-        city: geo.city || null,
-        region: geo.region || null,
-        latitude: geo.latitude || null,
-        longitude: geo.longitude || null,
-        timezone: geo.timezone || null,
-        ip: geo.ip || null,
-        device_type: detectDevice(),
-        browser: detectBrowser(),
-        ...extra
-      };
-
-      // Use sendBeacon for exit events so it survives page unload
-      if (type === 'page_exit' && navigator.sendBeacon) {
-        const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
-        navigator.sendBeacon(SUPA_URL + '?apikey=' + SUPA_KEY, blob);
-        return;
+      // ─── DETECT OS ─────────────────────────────────────────────────────────
+      function detectOS() {
+        const ua = navigator.userAgent;
+        if (/Windows NT 10/.test(ua))  return 'Windows 10/11';
+        if (/Windows/.test(ua))        return 'Windows';
+        if (/Mac OS X/.test(ua))       return 'macOS';
+        if (/iPhone|iPad/.test(ua))    return 'iOS';
+        if (/Android/.test(ua))        return 'Android';
+        if (/Linux/.test(ua))          return 'Linux';
+        return 'Unknown';
       }
 
-      try {
-        fetch(SUPA_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': SUPA_KEY,
-            'Authorization': 'Bearer ' + SUPA_KEY,
-            'Prefer': 'return=minimal'
-          },
-          body: JSON.stringify(payload)
-        });
-      } catch (e) { /* silent */ }
-    }
+      // ─── SEND EXTRA EVENT ──────────────────────────────────────────────────
+      function sendEvent(type, geo, extra) {
+        const payload = Object.assign({
+          event_type: type,
+          page: PAGE,
+        }, extra || {});
 
-    // ─── GEO FETCH ───────────────────────────────────────────────────────────
-    let geoCache = {};
-    let geoReady = false;
+        if (geo && geo.ip) {
+          payload.ip            = geo.ip            || null;
+          payload.country       = geo.country_name  || null;
+          payload.country_code  = geo.country_code  || null;
+          payload.city          = geo.city          || null;
+          payload.region        = geo.region        || null;
+          payload.latitude      = geo.latitude      || null;
+          payload.longitude     = geo.longitude     || null;
+          payload.timezone      = geo.timezone      || null;
+        }
 
-    fetch('https://ipapi.co/json/')
-      .then(r => r.json())
-      .then(geo => {
-        geoCache = geo;
-        geoReady = true;
-        // Fire page_view once geo is ready
-        sendEvent('page_view', geo, {
-          screen_size: screenInfo,
-          language: lang,
-          connection: connection,
-        });
-      })
-      .catch(() => {
-        geoReady = true;
-        sendEvent('page_view', {}, {
-          screen_size: screenInfo,
-          language: lang,
-          connection: connection,
-        });
-      });
-
-    // ─── TIME ON PAGE + EXIT ─────────────────────────────────────────────────
-    let maxScrollPct = 0;
-
-    window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY + window.innerHeight;
-      const total = document.documentElement.scrollHeight;
-      const pct = Math.round((scrolled / total) * 100);
-      if (pct > maxScrollPct) maxScrollPct = pct;
-    }, { passive: true });
-
-    // On page exit — fires reliably on mobile via pagehide
-    function onExit() {
-      const timeOnPage = Math.round((Date.now() - pageLoadTime) / 1000);
-      sendEvent('page_exit', geoCache, {
-        time_on_page_s: timeOnPage,
-        scroll_depth: maxScrollPct,
-      });
-    }
-
-    window.addEventListener('pagehide', onExit);
-    window.addEventListener('beforeunload', onExit);
-
-    // ─── DOWNLOAD TRACKING ───────────────────────────────────────────────────
-    const btn = document.getElementById('download-btn');
-    if (btn) {
-      btn.addEventListener('click', () => {
-        const downloadId = Date.now() + '_' + Math.random().toString(36).slice(2, 8);
-        const timeOnPageAtClick = Math.round((Date.now() - pageLoadTime) / 1000);
-
-        // 1. download_click — user pressed the button
-        sendEvent('download_click', geoCache, {
-          download_id: downloadId,
-          time_on_page_s: timeOnPageAtClick,
-          scroll_depth: maxScrollPct,
-          screen_size: screenInfo,
-          language: lang,
-          connection: connection,
-          os: detectOS(),
-        });
-
-        // 2. download_start — fires 1s later (browser started the DL)
-        setTimeout(() => {
-          sendEvent('download_start', geoCache, {
-            download_id: downloadId,
-            os: detectOS(),
+        if (type === 'page_exit' && navigator.sendBeacon) {
+          const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+          navigator.sendBeacon(SUPA_URL + '?apikey=' + SUPA_KEY, blob);
+          return;
+        }
+        try {
+          fetch(SUPA_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': SUPA_KEY,
+              'Authorization': 'Bearer ' + SUPA_KEY,
+              'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify(payload)
           });
-        }, 1000);
+        } catch (_) { /* silent */ }
+      }
 
-        // 3. download_complete — heuristic: 91.8MB / avg speed
-        //    On mobile (slow 4G ~10Mbps) ≈ 75s, desktop ≈ 15s.
-        //    We send two probes and whichever lands in the analytics is informative.
-        const durations = connection === '4g' ? [20000, 75000]
-          : connection === '3g' ? [60000, 120000]
-            : [15000, 45000];
+      // ─── GEO CACHE (reuse what tracker.js fetches via ipapi.co) ───────────
+      // tracker.js already fetches ipapi.co for its page_view.
+      // We re-fetch here only if geo data is needed for download events.
+      // Use a single shared promise to avoid double-fetching.
+      let geoCache = {};
+      window.__trackerGeoPromise = window.__trackerGeoPromise ||
+        fetch('https://ipapi.co/json/').then(r => r.json()).catch(() => ({}));
+      window.__trackerGeoPromise.then(geo => { geoCache = geo || {}; });
 
-        durations.forEach(delay => {
-          setTimeout(() => {
-            sendEvent('download_complete', geoCache, {
-              download_id: downloadId,
-              probe_delay_s: Math.round(delay / 1000),
-            });
-          }, delay);
+      // ─── SCROLL DEPTH ──────────────────────────────────────────────────────
+      let maxScrollPct = 0;
+      window.addEventListener('scroll', function () {
+        const pct = Math.round(
+          (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100
+        );
+        if (pct > maxScrollPct) maxScrollPct = pct;
+      }, { passive: true });
+
+      // ─── PAGE EXIT ─────────────────────────────────────────────────────────
+      function onExit() {
+        sendEvent('page_exit', geoCache, {
+          time_on_page_s: Math.round((Date.now() - pageLoadTime) / 1000),
+          scroll_depth:   maxScrollPct,
         });
+      }
+      window.addEventListener('pagehide',      onExit);
+      window.addEventListener('beforeunload',  onExit);
 
-        // Button feedback
-        btn.style.transform = 'scale(0.97)';
-        setTimeout(() => { btn.style.transform = ''; }, 150);
-      });
-    }
+      // ─── ENHANCED DOWNLOAD BUTTON TRACKING ─────────────────────────────────
+      // tracker.js handles download_click + download_complete automatically.
+      // Here we add download_start (1 s delay) with richer metadata.
+      var btn = document.getElementById('download-btn');
+      if (btn) {
+        btn.addEventListener('click', function () {
+          var downloadId      = Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+          var timeOnPageAtClick = Math.round((Date.now() - pageLoadTime) / 1000);
+          var os = detectOS();
+
+          // download_start fires 1 s after click (browser begun the DL)
+          setTimeout(function () {
+            sendEvent('download_start', geoCache, {
+              download_id:    downloadId,
+              os:             os,
+              time_on_page_s: timeOnPageAtClick,
+              scroll_depth:   maxScrollPct,
+              connection:     connection,
+            });
+          }, 1000);
+
+          // Button feedback
+          btn.style.transform = 'scale(0.97)';
+          setTimeout(function () { btn.style.transform = ''; }, 150);
+        });
+      }
+    })();
   </script>
+
 </body>
 
 </html>
