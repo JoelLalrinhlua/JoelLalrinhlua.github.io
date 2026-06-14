@@ -671,19 +671,19 @@
 
   <script>
     // ─── ENHANCED DOWNLOAD PAGE EVENTS ───────────────────────────────────────
-    // tracker.js already fires page_view with geo. Here we add richer
-    // download-specific events: download_start, page_exit with time-on-page, etc.
+    // tracker.js fires page_view + download_click + download_complete.
+    // Here we add richer download-specific events: download_start,
+    // page_exit with time-on-page, scroll depth, etc.
+    // We reuse tracker.js's exposed __trackerSend and __trackerGetGeo
+    // to avoid duplicating Supabase POST logic.
     (function () {
-      const SUPA_URL = 'https://ztkzofjklpzrzskxacll.supabase.co/rest/v1/site_analytics';
-      const SUPA_KEY = 'sb_publishable_uunVH0MPwzPTKBek4kK5NQ_LULAfOyB';
-      const PAGE = '/download-chhehchhawl';
-      const pageLoadTime = Date.now();
-
-      const connection = navigator.connection?.effectiveType || null;
+      var pageLoadTime = Date.now();
+      var connection = (navigator.connection && navigator.connection.effectiveType) || null;
+      var exitFired = false;
 
       // ─── DETECT OS ─────────────────────────────────────────────────────────
       function detectOS() {
-        const ua = navigator.userAgent;
+        var ua = navigator.userAgent;
         if (/Windows NT 10/.test(ua))  return 'Windows 10/11';
         if (/Windows/.test(ua))        return 'Windows';
         if (/Mac OS X/.test(ua))       return 'macOS';
@@ -693,90 +693,53 @@
         return 'Unknown';
       }
 
-      // ─── SEND EXTRA EVENT ──────────────────────────────────────────────────
-      function sendEvent(type, geo, extra) {
-        const payload = Object.assign({
-          event_type: type,
-          page: PAGE,
-        }, extra || {});
-
-        if (geo && geo.ip) {
-          payload.ip            = geo.ip            || null;
-          payload.country       = geo.country_name  || null;
-          payload.country_code  = geo.country_code  || null;
-          payload.city          = geo.city          || null;
-          payload.region        = geo.region        || null;
-          payload.latitude      = geo.latitude      || null;
-          payload.longitude     = geo.longitude     || null;
-          payload.timezone      = geo.timezone      || null;
-        }
-
-        if (type === 'page_exit' && navigator.sendBeacon) {
-          const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
-          navigator.sendBeacon(SUPA_URL + '?apikey=' + SUPA_KEY, blob);
-          return;
-        }
-        try {
-          fetch(SUPA_URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'apikey': SUPA_KEY,
-              'Authorization': 'Bearer ' + SUPA_KEY,
-              'Prefer': 'return=minimal'
-            },
-            body: JSON.stringify(payload)
-          });
-        } catch (_) { /* silent */ }
-      }
-
-      // ─── GEO CACHE (reuse what tracker.js fetches via ipapi.co) ───────────
-      // tracker.js already fetches ipapi.co for its page_view.
-      // We re-fetch here only if geo data is needed for download events.
-      // Use a single shared promise to avoid double-fetching.
-      let geoCache = {};
-      window.__trackerGeoPromise = window.__trackerGeoPromise ||
-        fetch('https://ipapi.co/json/').then(r => r.json()).catch(() => ({}));
-      window.__trackerGeoPromise.then(geo => { geoCache = geo || {}; });
-
       // ─── SCROLL DEPTH ──────────────────────────────────────────────────────
-      let maxScrollPct = 0;
+      var maxScrollPct = 0;
       window.addEventListener('scroll', function () {
-        const pct = Math.round(
+        var pct = Math.round(
           (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100
         );
         if (pct > maxScrollPct) maxScrollPct = pct;
       }, { passive: true });
 
       // ─── PAGE EXIT ─────────────────────────────────────────────────────────
+      // Uses tracker.js's send with useBeacon=true so it survives navigation
       function onExit() {
-        sendEvent('page_exit', geoCache, {
-          time_on_page_s: Math.round((Date.now() - pageLoadTime) / 1000),
-          scroll_depth:   maxScrollPct,
-        });
+        if (exitFired) return;
+        exitFired = true;
+        var geo = (typeof window.__trackerGetGeo === 'function') ? window.__trackerGetGeo() : {};
+        if (typeof window.__trackerSend === 'function') {
+          window.__trackerSend('page_exit', geo, {
+            time_on_page_s: Math.round((Date.now() - pageLoadTime) / 1000),
+            scroll_depth:   maxScrollPct,
+          }, true);
+        }
       }
-      window.addEventListener('pagehide',      onExit);
-      window.addEventListener('beforeunload',  onExit);
+      window.addEventListener('pagehide', onExit);
+      window.addEventListener('beforeunload', onExit);
 
       // ─── ENHANCED DOWNLOAD BUTTON TRACKING ─────────────────────────────────
       // tracker.js handles download_click + download_complete automatically.
-      // Here we add download_start (1 s delay) with richer metadata.
+      // Here we add download_start (1s delay) with richer metadata.
       var btn = document.getElementById('download-btn');
       if (btn) {
         btn.addEventListener('click', function () {
-          var downloadId      = Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+          var downloadId        = Date.now() + '_' + Math.random().toString(36).slice(2, 8);
           var timeOnPageAtClick = Math.round((Date.now() - pageLoadTime) / 1000);
           var os = detectOS();
+          var geo = (typeof window.__trackerGetGeo === 'function') ? window.__trackerGetGeo() : {};
 
-          // download_start fires 1 s after click (browser begun the DL)
+          // download_start fires 1s after click (browser has begun the download)
           setTimeout(function () {
-            sendEvent('download_start', geoCache, {
-              download_id:    downloadId,
-              os:             os,
-              time_on_page_s: timeOnPageAtClick,
-              scroll_depth:   maxScrollPct,
-              connection:     connection,
-            });
+            if (typeof window.__trackerSend === 'function') {
+              window.__trackerSend('download_start', geo, {
+                download_id:    downloadId,
+                os:             os,
+                time_on_page_s: timeOnPageAtClick,
+                scroll_depth:   maxScrollPct,
+                connection:     connection,
+              }, true);
+            }
           }, 1000);
 
           // Button feedback

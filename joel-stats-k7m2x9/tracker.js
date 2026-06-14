@@ -68,56 +68,75 @@
     }
 
     // ── Send event to Supabase ───────────────────────────────────────────────────
-    async function send(event_type, geo, extra) {
-        const ua = parseUA();
-        const screen = getScreen();
-        const payload = {
-            event_type,
+    // `useBeacon` flag tells us to use fetch with keepalive (for unload events)
+    function send(event_type, geo, extra, useBeacon) {
+        var ua = parseUA();
+        var screen = getScreen();
+        var payload = {
+            event_type: event_type,
             page: window.location.pathname,
             referrer: document.referrer || null,
             user_agent: navigator.userAgent,
             language: navigator.language || null,
             // Geo fields (from ipapi.co)
-            ip: geo.ip || null,
-            country: geo.country_name || null,
-            country_code: geo.country_code || null,
-            city: geo.city || null,
-            region: geo.region || null,
-            latitude: geo.latitude || null,
-            longitude: geo.longitude || null,
-            timezone: geo.timezone || null,
-            ...ua,
-            ...screen,
-            ...(extra || {}),
+            ip: (geo && geo.ip) || null,
+            country: (geo && geo.country_name) || null,
+            country_code: (geo && geo.country_code) || null,
+            city: (geo && geo.city) || null,
+            region: (geo && geo.region) || null,
+            latitude: (geo && geo.latitude) || null,
+            longitude: (geo && geo.longitude) || null,
+            timezone: (geo && geo.timezone) || null,
         };
+        // Merge UA, screen, and extra data
+        var k;
+        for (k in ua) { if (ua.hasOwnProperty(k)) payload[k] = ua[k]; }
+        for (k in screen) { if (screen.hasOwnProperty(k)) payload[k] = screen[k]; }
+        if (extra) { for (k in extra) { if (extra.hasOwnProperty(k)) payload[k] = extra[k]; } }
+
         try {
-            await fetch(SUPA, {
-                method: 'POST',
-                headers: HDRS,
-                body: JSON.stringify(payload),
-            });
+            if (useBeacon && navigator.sendBeacon) {
+                // sendBeacon cannot send custom headers, so use the apikey query param
+                // Supabase PostgREST accepts ?apikey= as authentication
+                var url = SUPA + '?apikey=' + encodeURIComponent(KEY);
+                var blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+                navigator.sendBeacon(url, blob);
+            } else {
+                fetch(SUPA, {
+                    method: 'POST',
+                    headers: HDRS,
+                    body: JSON.stringify(payload),
+                    keepalive: !!useBeacon,
+                });
+            }
         } catch (_) {
             // Silent fail — never break the user experience
         }
     }
 
+    // Expose send for other scripts on the same page
+    window.__trackerSend = send;
+
     // ── Geo lookup, then fire page_view ─────────────────────────────────────────
-    let geoCache = {};
+    var geoCache = {};
 
     // Expose promise so other scripts on this page can piggyback the same request
     window.__trackerGeoPromise = window.__trackerGeoPromise ||
-        fetch('https://ipapi.co/json/').then(r => r.json()).catch(() => ({}));
+        fetch('https://ipapi.co/json/').then(function (r) { return r.json(); }).catch(function () { return {}; });
 
-    window.__trackerGeoPromise.then(geo => {
+    window.__trackerGeoPromise.then(function (geo) {
         geoCache = geo || {};
         send('page_view', geoCache);
     });
 
+    // Expose geoCache for other scripts
+    window.__trackerGetGeo = function () { return geoCache; };
+
     // ── Download tracking ────────────────────────────────────────────────────────
     function trackDownloads() {
         document.querySelectorAll('a[href], button').forEach(function (el) {
-            const href = el.getAttribute('href') || '';
-            const isDownload =
+            var href = el.getAttribute('href') || '';
+            var isDownload =
                 el.hasAttribute('download') ||
                 /\.(apk|ipa|exe|zip|dmg|pkg|msi|deb|rpm)(\?|$)/i.test(href) ||
                 el.dataset.track === 'download';
@@ -126,17 +145,17 @@
             if (el._trackerBound) return;
             el._trackerBound = true;
 
-            el.addEventListener('click', function () {
-                send('download_click', geoCache, { download_url: href || null });
+            el.addEventListener('click', function (e) {
+                // Use sendBeacon for the click event to ensure it fires even if
+                // the browser navigates away to start the download
+                send('download_click', geoCache, { download_url: href || null }, true);
 
-                // Best-effort completion signal after a short delay
+                // Fire download_complete after 4s delay as a best-effort signal
+                // We use keepalive fetch so it survives page navigation
                 if (href) {
-                    const timer = setTimeout(function () {
-                        send('download_complete', geoCache, { download_url: href });
+                    setTimeout(function () {
+                        send('download_complete', geoCache, { download_url: href }, true);
                     }, 4000);
-                    window.addEventListener('beforeunload', function () {
-                        clearTimeout(timer);
-                    }, { once: true });
                 }
             });
         });
