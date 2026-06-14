@@ -1547,7 +1547,8 @@
     }
     document.getElementById('lbtn').addEventListener('click', unlock);
     pinEl.addEventListener('keydown', e => { if (e.key === 'Enter') unlock(); });
-    if (sessionStorage.getItem(SK) === '1') { lockEl.style.display = 'none'; dashEl.style.display = 'block'; init(); }
+    // NOTE: session-restore init() is called at the BOTTOM of this script,
+    // after all variables and functions are fully defined.
 
     // ─── SUPABASE ────────────────────────────────────────────────────────────────
     const SUPA = 'https://ztkzofjklpzrzskxacll.supabase.co/rest/v1/site_analytics';
@@ -1948,10 +1949,16 @@
       // Poll for new events every 10 seconds
       if (rtPollTimer) clearInterval(rtPollTimer);
       rtPollTimer = setInterval(pollNew, 10000);
-      // Full refresh every 2 minutes
-      setInterval(loadData, 120000);
+      // Full refresh every 5 minutes
+      setInterval(loadData, 300000);
     }
-    // init() is already called above when session is active on page load (line above unlock check)
+
+    // ─── SESSION RESTORE (must be last — needs all vars + functions defined) ──────
+    if (sessionStorage.getItem(SK) === '1') {
+      lockEl.style.display = 'none';
+      dashEl.style.display = 'block';
+      init();
+    }
   </script>
 </body>
 
