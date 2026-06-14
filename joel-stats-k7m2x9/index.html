@@ -1547,7 +1547,7 @@
     }
     document.getElementById('lbtn').addEventListener('click', unlock);
     pinEl.addEventListener('keydown', e => { if (e.key === 'Enter') unlock(); });
-    if (sessionStorage.getItem(SK) === '1') { lockEl.style.display = 'none'; dashEl.style.display = 'block'; }
+    if (sessionStorage.getItem(SK) === '1') { lockEl.style.display = 'none'; dashEl.style.display = 'block'; init(); }
 
     // ─── SUPABASE ────────────────────────────────────────────────────────────────
     const SUPA = 'https://ztkzofjklpzrzskxacll.supabase.co/rest/v1/site_analytics';
@@ -1634,20 +1634,16 @@
     function renderCards(rows) {
       const views = rows.filter(r => r.event_type === 'page_view').length;
       const dlClicks = rows.filter(r => r.event_type === 'download_click').length;
-      const dlDone = rows.filter(r => r.event_type === 'download_complete').length;
       const dlPage = rows.filter(r => r.event_type === 'page_view' && r.page === '/download-chhehchhawl').length;
-      const uniqueIPs = new Set(rows.filter(r => r.ip).map(r => r.ip)).size;
       const conv = dlPage > 0 ? ((dlClicks / dlPage) * 100).toFixed(1) : '0.0';
       const mob = rows.filter(r => r.device_type === 'mobile').length;
       const mobPct = views > 0 ? Math.round(mob / views * 100) : 0;
       document.getElementById('cards').innerHTML = `
     <div class="card fi"><div class="card-label">Page Views</div><div class="card-val cv">${views.toLocaleString()}</div><div class="card-sub">all pages</div></div>
-    <div class="card fi" style="animation-delay:.04s"><div class="card-label">Unique Visitors</div><div class="card-val cp">${uniqueIPs.toLocaleString()}</div><div class="card-sub">by IP address</div></div>
-    <div class="card fi" style="animation-delay:.08s"><div class="card-label">Download Page</div><div class="card-val ca">${dlPage.toLocaleString()}</div><div class="card-sub">/download-chhehchhawl</div></div>
-    <div class="card fi" style="animation-delay:.12s"><div class="card-label">APK Downloads</div><div class="card-val cg">${dlClicks.toLocaleString()}</div><div class="card-sub">button clicks</div></div>
-    <div class="card fi" style="animation-delay:.16s"><div class="card-label">Confirmed DLs</div><div class="card-val cy">${dlDone.toLocaleString()}</div><div class="card-sub">completed</div></div>
-    <div class="card fi" style="animation-delay:.20s"><div class="card-label">Conversion</div><div class="card-val co">${conv}%</div><div class="card-sub">page → download</div></div>
-    <div class="card fi" style="animation-delay:.24s"><div class="card-label">Mobile Share</div><div class="card-val cc">${mobPct}%</div><div class="card-sub">of all views</div></div>
+    <div class="card fi" style="animation-delay:.04s"><div class="card-label">Download Page</div><div class="card-val ca">${dlPage.toLocaleString()}</div><div class="card-sub">/download-chhehchhawl</div></div>
+    <div class="card fi" style="animation-delay:.08s"><div class="card-label">APK Downloads</div><div class="card-val cg">${dlClicks.toLocaleString()}</div><div class="card-sub">button clicks</div></div>
+    <div class="card fi" style="animation-delay:.12s"><div class="card-label">Conversion</div><div class="card-val co">${conv}%</div><div class="card-sub">page → download</div></div>
+    <div class="card fi" style="animation-delay:.16s"><div class="card-label">Mobile Share</div><div class="card-val cc">${mobPct}%</div><div class="card-sub">of all views</div></div>
   `;
     }
 
@@ -1955,7 +1951,7 @@
       // Full refresh every 2 minutes
       setInterval(loadData, 120000);
     }
-    if (sessionStorage.getItem(SK) === '1') init();
+    // init() is already called above when session is active on page load (line above unlock check)
   </script>
 </body>
 
