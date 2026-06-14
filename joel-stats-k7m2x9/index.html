@@ -3,43 +3,45 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Analytics — Private</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex, nofollow" />
+  <title>Analytics — joelalrinhlua.me</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
-  <!-- Leaflet for map -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     :root {
-      --bg: #080808;
-      --surface: #0f0f0f;
-      --surface-2: #161616;
-      --surface-3: #1e1e1e;
-      --border: rgba(255, 255, 255, 0.07);
-      --border-2: rgba(255, 255, 255, 0.12);
-      --text: #f0ede8;
-      --muted: rgba(240, 237, 232, 0.38);
-      --muted-2: rgba(240, 237, 232, 0.6);
-      --accent: #e63b2e;
-      --accent-dim: rgba(230, 59, 46, 0.15);
-      --green: #53bc28;
-      --green-dim: rgba(83, 188, 40, 0.15);
-      --blue: #4a9eff;
-      --blue-dim: rgba(74, 158, 255, 0.12);
-      --purple: #9b8ef0;
-      --purple-dim: rgba(155, 142, 240, 0.12);
-      --yellow: #f0c000;
-      --yellow-dim: rgba(240, 192, 0, 0.12);
-      --orange: #f07030;
-      --orange-dim: rgba(240, 112, 48, 0.12);
+      --bg: #060608;
+      --s1: #0e0e12;
+      --s2: #14141a;
+      --s3: #1c1c25;
+      --b1: rgba(255, 255, 255, .06);
+      --b2: rgba(255, 255, 255, .1);
+      --b3: rgba(255, 255, 255, .16);
+      --tx: #f0eef9;
+      --mu: rgba(240, 238, 249, .38);
+      --mu2: rgba(240, 238, 249, .6);
+      --red: #e63b2e;
+      --red-d: rgba(230, 59, 46, .14);
+      --grn: #3ec86a;
+      --grn-d: rgba(62, 200, 106, .13);
+      --blu: #4f9fff;
+      --blu-d: rgba(79, 159, 255, .12);
+      --pur: #9d8ff2;
+      --pur-d: rgba(157, 143, 242, .12);
+      --yel: #f0bc00;
+      --yel-d: rgba(240, 188, 0, .12);
+      --org: #f07030;
+      --org-d: rgba(240, 112, 48, .12);
+      --cya: #00c9b1;
+      --cya-d: rgba(0, 201, 177, .12);
       --mono: 'JetBrains Mono', monospace;
       --font: 'Inter', sans-serif;
-      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease: cubic-bezier(.16, 1, .3, 1);
       --r: 12px;
     }
 
@@ -58,7 +60,7 @@
 
     body {
       background: var(--bg);
-      color: var(--text);
+      color: var(--tx);
       font-family: var(--font);
       min-height: 100dvh;
       -webkit-font-smoothing: antialiased;
@@ -78,45 +80,44 @@
     }
 
     .lk-icon {
-      width: 56px;
-      height: 56px;
-      background: var(--surface);
-      border: 1px solid var(--border-2);
-      border-radius: 16px;
+      width: 52px;
+      height: 52px;
+      background: var(--s1);
+      border: 1px solid var(--b2);
+      border-radius: 14px;
       display: grid;
       place-items: center;
-      margin-bottom: 22px;
-      box-shadow: 0 0 40px rgba(230, 59, 46, 0.08)
+      margin-bottom: 20px
     }
 
     .lk-title {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 700;
       letter-spacing: -.04em;
-      margin-bottom: 5px
+      margin-bottom: 4px
     }
 
     .lk-sub {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 30px
+      font-size: 12px;
+      color: var(--mu);
+      margin-bottom: 28px
     }
 
     .lk-form {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      width: 290px
+      gap: 9px;
+      width: 280px
     }
 
     .lk-input {
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: var(--s1);
+      border: 1px solid var(--b1);
       border-radius: 10px;
-      padding: 13px 16px;
+      padding: 12px 16px;
       font-size: 15px;
       font-family: var(--mono);
-      color: var(--text);
+      color: var(--tx);
       outline: none;
       text-align: center;
       letter-spacing: .25em;
@@ -124,20 +125,20 @@
     }
 
     .lk-input:focus {
-      border-color: rgba(255, 255, 255, .18)
+      border-color: var(--b2)
     }
 
     .lk-input.err {
-      border-color: var(--accent);
+      border-color: var(--red);
       animation: shake .3s ease
     }
 
     .lk-btn {
-      background: var(--accent);
+      background: var(--red);
       color: #fff;
       border: none;
       border-radius: 10px;
-      padding: 13px;
+      padding: 12px;
       font-size: 14px;
       font-weight: 600;
       font-family: var(--font);
@@ -151,10 +152,10 @@
     }
 
     .lk-err {
-      font-size: 12px;
-      color: var(--accent);
+      font-size: 11px;
+      color: var(--red);
       text-align: center;
-      height: 15px
+      height: 14px
     }
 
     @keyframes shake {
@@ -165,11 +166,11 @@
       }
 
       25% {
-        transform: translateX(-8px)
+        transform: translateX(-7px)
       }
 
       75% {
-        transform: translateX(8px)
+        transform: translateX(7px)
       }
     }
 
@@ -186,25 +187,25 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 28px;
-      height: 56px;
-      background: rgba(8, 8, 8, 0.88);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border)
+      padding: 0 26px;
+      height: 54px;
+      background: rgba(6, 6, 8, .9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--b1)
     }
 
     .nav-left {
       display: flex;
       align-items: center;
-      gap: 12px
+      gap: 10px
     }
 
     .live-dot {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 8px var(--green);
+      background: var(--grn);
+      box-shadow: 0 0 8px var(--grn);
       animation: pulse 2s infinite;
       flex-shrink: 0
     }
@@ -217,22 +218,41 @@
 
     .nav-url {
       font-size: 11px;
-      color: var(--muted);
+      color: var(--mu);
       font-family: var(--mono)
     }
 
-    .nav-actions {
+    .nav-right {
       display: flex;
       gap: 8px;
       align-items: center
     }
 
+    .last-upd {
+      font-size: 11px;
+      color: var(--mu);
+      font-family: var(--mono)
+    }
+
+    .rt-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--grn-d);
+      border: 1px solid rgba(62, 200, 106, .25);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--grn)
+    }
+
     .icon-btn {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--muted-2);
+      background: var(--s1);
+      border: 1px solid var(--b1);
+      color: var(--mu2);
       border-radius: 8px;
-      padding: 7px 12px;
+      padding: 6px 12px;
       font-size: 12px;
       font-weight: 500;
       font-family: var(--font);
@@ -244,23 +264,19 @@
     }
 
     .icon-btn:hover {
-      background: var(--surface-2);
-      color: var(--text);
-      border-color: var(--border-2)
+      background: var(--s2);
+      color: var(--tx);
+      border-color: var(--b2)
     }
 
     .icon-btn.spin svg {
       animation: spinA .6s linear
     }
 
-    .icon-btn svg {
-      transition: none
-    }
-
     /* ── MAIN ── */
     .main {
-      padding: 24px 28px 60px;
-      max-width: 1280px;
+      padding: 22px 26px 60px;
+      max-width: 1300px;
       margin: 0 auto
     }
 
@@ -268,17 +284,17 @@
     .period-bar {
       display: flex;
       gap: 4px;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       flex-wrap: wrap;
       align-items: center
     }
 
     .pb {
       background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted);
+      border: 1px solid var(--b1);
+      color: var(--mu);
       border-radius: 7px;
-      padding: 6px 13px;
+      padding: 5px 12px;
       font-size: 12px;
       font-weight: 500;
       font-family: var(--font);
@@ -287,35 +303,35 @@
     }
 
     .pb:hover {
-      border-color: var(--border-2);
-      color: var(--muted-2)
+      border-color: var(--b2);
+      color: var(--mu2)
     }
 
     .pb.active {
-      background: var(--text);
+      background: var(--tx);
       color: var(--bg);
-      border-color: var(--text);
+      border-color: var(--tx);
       font-weight: 600
     }
 
     .period-label {
       font-size: 11px;
-      color: var(--muted);
+      color: var(--mu);
       margin-left: auto;
       font-family: var(--mono)
     }
 
-    /* ── STAT CARDS ── */
+    /* ── CARDS ── */
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
-      margin-bottom: 24px
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 11px;
+      margin-bottom: 22px
     }
 
     .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: var(--s1);
+      border: 1px solid var(--b1);
       border-radius: var(--r);
       padding: 18px 20px;
       position: relative;
@@ -330,7 +346,7 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .08), transparent)
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .07), transparent)
     }
 
     .card-label {
@@ -338,12 +354,12 @@
       font-weight: 600;
       letter-spacing: .09em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--mu);
       margin-bottom: 8px
     }
 
     .card-val {
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 700;
       letter-spacing: -.04em;
       line-height: 1;
@@ -353,51 +369,55 @@
 
     .card-sub {
       font-size: 11px;
-      color: var(--muted)
+      color: var(--mu)
     }
 
     .card-trend {
       position: absolute;
       top: 18px;
       right: 18px;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
-      padding: 2px 8px;
+      padding: 2px 7px;
       border-radius: 999px
     }
 
     .trend-up {
-      background: var(--green-dim);
-      color: var(--green)
+      background: var(--grn-d);
+      color: var(--grn)
     }
 
     .trend-dn {
-      background: var(--accent-dim);
-      color: var(--accent)
+      background: var(--red-d);
+      color: var(--red)
     }
 
     .cv {
-      color: var(--blue)
+      color: var(--blu)
     }
 
     .ca {
-      color: var(--accent)
+      color: var(--red)
     }
 
     .cp {
-      color: var(--purple)
+      color: var(--pur)
     }
 
     .cg {
-      color: var(--green)
+      color: var(--grn)
     }
 
     .co {
-      color: var(--orange)
+      color: var(--org)
     }
 
     .cy {
-      color: var(--yellow)
+      color: var(--yel)
+    }
+
+    .cc {
+      color: var(--cya)
     }
 
     /* ── SECTION LABEL ── */
@@ -406,7 +426,7 @@
       font-weight: 700;
       letter-spacing: .1em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--mu);
       margin-bottom: 12px;
       display: flex;
       align-items: center;
@@ -417,46 +437,38 @@
       content: '';
       flex: 1;
       height: 1px;
-      background: var(--border)
+      background: var(--b1)
     }
 
-    /* ── GRID LAYOUTS ── */
+    /* ── GRID ── */
     .row3 {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 24px
+      gap: 11px;
+      margin-bottom: 22px
     }
 
     .row2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 24px
-    }
-
-    .row-map {
-      display: grid;
-      grid-template-columns: 1.6fr 1fr;
-      gap: 12px;
-      margin-bottom: 24px
+      gap: 11px;
+      margin-bottom: 22px
     }
 
     @media(max-width:900px) {
 
       .row3,
-      .row2,
-      .row-map {
+      .row2 {
         grid-template-columns: 1fr
       }
     }
 
     /* ── PANEL ── */
     .panel {
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: var(--s1);
+      border: 1px solid var(--b1);
       border-radius: var(--r);
-      padding: 20px
+      padding: 18px
     }
 
     .panel-title {
@@ -464,42 +476,15 @@
       font-weight: 700;
       letter-spacing: .09em;
       text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 16px
-    }
-
-    /* ── MAP ── */
-    #map {
-      height: 320px;
-      border-radius: 10px;
-      overflow: hidden;
-      background: #0d1117
-    }
-
-    .leaflet-container {
-      background: #0d1117 !important
-    }
-
-    .leaflet-tile {
-      filter: invert(1) hue-rotate(180deg) brightness(0.85) saturate(0.6)
-    }
-
-    .map-marker-label {
-      background: var(--surface);
-      border: 1px solid var(--border-2);
-      border-radius: 6px;
-      padding: 4px 8px;
-      font-size: 11px;
-      font-family: var(--mono);
-      color: var(--text);
-      white-space: nowrap
+      color: var(--mu);
+      margin-bottom: 14px
     }
 
     /* ── BAR LIST ── */
     .bar-list {
       display: flex;
       flex-direction: column;
-      gap: 9px
+      gap: 8px
     }
 
     .bl-item {
@@ -517,20 +502,17 @@
 
     .bl-name {
       font-size: 12px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 6px
+      font-weight: 500
     }
 
     .bl-count {
       font-size: 11px;
-      color: var(--muted);
+      color: var(--mu);
       font-family: var(--mono)
     }
 
     .bl-track {
-      background: var(--surface-3);
+      background: var(--s3);
       border-radius: 3px;
       height: 3px;
       overflow: hidden
@@ -546,17 +528,17 @@
     .funnel {
       display: flex;
       flex-direction: column;
-      gap: 8px
+      gap: 7px
     }
 
     .fn-step {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 12px 14px;
-      background: var(--surface-2);
+      gap: 11px;
+      padding: 11px 14px;
+      background: var(--s2);
       border-radius: 9px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--b1);
       position: relative;
       overflow: hidden
     }
@@ -574,8 +556,8 @@
       font-size: 10px;
       font-weight: 700;
       letter-spacing: .06em;
-      color: var(--muted);
-      min-width: 24px;
+      color: var(--mu);
+      min-width: 22px;
       position: relative;
       z-index: 1
     }
@@ -598,27 +580,27 @@
 
     .fn-pct {
       font-size: 11px;
-      color: var(--muted);
+      color: var(--mu);
       position: relative;
       z-index: 1;
       min-width: 36px;
       text-align: right
     }
 
-    /* ── MINI CHART ── */
+    /* ── CHART ── */
     .chart-wrap {
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: var(--s1);
+      border: 1px solid var(--b1);
       border-radius: var(--r);
-      padding: 20px;
-      margin-bottom: 24px
+      padding: 18px;
+      margin-bottom: 22px
     }
 
     .chart-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px
+      margin-bottom: 14px
     }
 
     .chart-legend {
@@ -631,7 +613,7 @@
       align-items: center;
       gap: 5px;
       font-size: 11px;
-      color: var(--muted)
+      color: var(--mu)
     }
 
     .leg-dot {
@@ -676,21 +658,21 @@
       width: 100%;
       border-radius: 3px 3px 0 0;
       min-height: 2px;
-      opacity: .75;
+      opacity: .7;
       transition: opacity .15s
     }
 
     .bar-v {
-      background: var(--blue)
+      background: var(--blu)
     }
 
     .bar-d {
-      background: var(--green)
+      background: var(--grn)
     }
 
     .bar-lbl {
       font-size: 9px;
-      color: var(--muted);
+      color: var(--mu);
       font-family: var(--mono)
     }
 
@@ -700,8 +682,8 @@
       bottom: calc(100% + 6px);
       left: 50%;
       transform: translateX(-50%);
-      background: var(--surface-3);
-      border: 1px solid var(--border-2);
+      background: var(--s3);
+      border: 1px solid var(--b2);
       border-radius: 6px;
       padding: 5px 9px;
       font-size: 11px;
@@ -715,21 +697,156 @@
       display: block
     }
 
-    /* ── TABLE ── */
-    .tbl-wrap {
-      background: var(--surface);
-      border: 1px solid var(--border);
+    /* ── REAL-TIME FEED ── */
+    .rt-feed {
+      background: var(--s1);
+      border: 1px solid var(--b1);
       border-radius: var(--r);
       overflow: hidden;
-      margin-bottom: 24px
+      margin-bottom: 22px
+    }
+
+    .rt-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--b1)
+    }
+
+    .rt-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--mu);
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .rt-count {
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--mu)
+    }
+
+    .rt-list {
+      max-height: 280px;
+      overflow-y: auto
+    }
+
+    .rt-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      border-bottom: 1px solid var(--b1);
+      cursor: pointer;
+      transition: background .1s;
+      animation: slideIn .3s var(--ease)
+    }
+
+    .rt-item:last-child {
+      border-bottom: none
+    }
+
+    .rt-item:hover {
+      background: var(--s2)
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-8px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0)
+      }
+    }
+
+    .rt-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap
+    }
+
+    .rb-view {
+      background: var(--blu-d);
+      border: 1px solid rgba(79, 159, 255, .2);
+      color: var(--blu)
+    }
+
+    .rb-dl {
+      background: var(--grn-d);
+      border: 1px solid rgba(62, 200, 106, .2);
+      color: var(--grn)
+    }
+
+    .rb-done {
+      background: var(--pur-d);
+      border: 1px solid rgba(157, 143, 242, .2);
+      color: var(--pur)
+    }
+
+    .rb-start {
+      background: var(--yel-d);
+      border: 1px solid rgba(240, 188, 0, .2);
+      color: var(--yel)
+    }
+
+    .rt-loc {
+      font-size: 12px;
+      font-weight: 500;
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap
+    }
+
+    .rt-ip {
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--mu);
+      flex-shrink: 0
+    }
+
+    .rt-device {
+      font-size: 11px;
+      color: var(--mu);
+      flex-shrink: 0
+    }
+
+    .rt-time {
+      font-size: 10px;
+      font-family: var(--mono);
+      color: var(--mu);
+      flex-shrink: 0
+    }
+
+    /* ── TABLE ── */
+    .tbl-wrap {
+      background: var(--s1);
+      border: 1px solid var(--b1);
+      border-radius: var(--r);
+      overflow: hidden;
+      margin-bottom: 22px
     }
 
     .tbl-head-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 18px;
-      border-bottom: 1px solid var(--border)
+      padding: 13px 18px;
+      border-bottom: 1px solid var(--b1)
     }
 
     .tbl-filter {
@@ -739,8 +856,8 @@
 
     .tf {
       background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted);
+      border: 1px solid var(--b1);
+      color: var(--mu);
       border-radius: 6px;
       padding: 4px 10px;
       font-size: 11px;
@@ -751,9 +868,9 @@
 
     .tf:hover,
     .tf.active {
-      background: var(--surface-2);
-      color: var(--text);
-      border-color: var(--border-2)
+      background: var(--s2);
+      color: var(--tx);
+      border-color: var(--b2)
     }
 
     table {
@@ -763,28 +880,28 @@
     }
 
     thead tr {
-      border-bottom: 1px solid var(--border)
+      border-bottom: 1px solid var(--b1)
     }
 
     th {
       text-align: left;
-      padding: 10px 18px;
+      padding: 9px 16px;
       font-size: 10px;
       font-weight: 600;
       letter-spacing: .08em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--mu);
       cursor: pointer;
       user-select: none;
       white-space: nowrap
     }
 
     th:hover {
-      color: var(--muted-2)
+      color: var(--mu2)
     }
 
     tbody tr {
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--b1);
       transition: background .1s;
       cursor: pointer
     }
@@ -794,70 +911,69 @@
     }
 
     tbody tr:hover {
-      background: var(--surface-2)
+      background: var(--s2)
     }
 
     td {
-      padding: 10px 18px;
+      padding: 9px 16px;
       vertical-align: middle
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      padding: 2px 8px;
+      gap: 3px;
+      padding: 2px 7px;
       border-radius: 999px;
       font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .03em
+      font-weight: 700
     }
 
     .bv {
-      background: var(--blue-dim);
-      border: 1px solid rgba(74, 158, 255, .2);
-      color: var(--blue)
+      background: var(--blu-d);
+      border: 1px solid rgba(79, 159, 255, .2);
+      color: var(--blu)
     }
 
     .bd {
-      background: var(--green-dim);
-      border: 1px solid rgba(83, 188, 40, .2);
-      color: var(--green)
+      background: var(--grn-d);
+      border: 1px solid rgba(62, 200, 106, .2);
+      color: var(--grn)
     }
 
     .bds {
-      background: var(--yellow-dim);
-      border: 1px solid rgba(240, 192, 0, .2);
-      color: var(--yellow)
+      background: var(--yel-d);
+      border: 1px solid rgba(240, 188, 0, .2);
+      color: var(--yel)
     }
 
     .bdc {
-      background: var(--purple-dim);
-      border: 1px solid rgba(155, 142, 240, .2);
-      color: var(--purple)
+      background: var(--pur-d);
+      border: 1px solid rgba(157, 143, 242, .2);
+      color: var(--pur)
     }
 
     .ip-mono {
       font-family: var(--mono);
       font-size: 11px;
-      color: var(--muted)
+      color: var(--mu)
     }
 
     .coord-mono {
       font-family: var(--mono);
       font-size: 10px;
-      color: var(--muted)
+      color: var(--mu)
     }
 
-    /* ── VISITOR DRAWER ── */
+    /* ── DRAWER ── */
     #drawer {
       position: fixed;
       top: 0;
-      right: -440px;
-      width: 420px;
+      right: -460px;
+      width: 440px;
       height: 100dvh;
-      background: var(--surface);
-      border-left: 1px solid var(--border-2);
+      background: var(--s1);
+      border-left: 1px solid var(--b2);
       z-index: 150;
       transition: right .35s var(--ease);
       overflow-y: auto;
@@ -872,7 +988,7 @@
     #overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, .55);
       z-index: 140;
       opacity: 0;
       pointer-events: none;
@@ -888,9 +1004,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 20px;
-      border-bottom: 1px solid var(--border);
-      flex-shrink: 0
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--b1);
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      background: var(--s1);
+      z-index: 5
     }
 
     .drawer-title {
@@ -900,9 +1020,9 @@
     }
 
     .drawer-close {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      color: var(--muted-2);
+      background: var(--s2);
+      border: 1px solid var(--b1);
+      color: var(--mu2);
       border-radius: 7px;
       width: 30px;
       height: 30px;
@@ -914,17 +1034,17 @@
     }
 
     .drawer-close:hover {
-      background: var(--surface-3);
-      color: var(--text)
+      background: var(--s3);
+      color: var(--tx)
     }
 
     .drawer-body {
-      padding: 20px;
+      padding: 18px;
       flex: 1
     }
 
     .d-section {
-      margin-bottom: 20px
+      margin-bottom: 18px
     }
 
     .d-label {
@@ -932,16 +1052,16 @@
       font-weight: 700;
       letter-spacing: .09em;
       text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 10px
+      color: var(--mu);
+      margin-bottom: 9px
     }
 
     .d-row {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--border)
+      padding: 7px 0;
+      border-bottom: 1px solid var(--b1)
     }
 
     .d-row:last-child {
@@ -950,9 +1070,9 @@
 
     .d-key {
       font-size: 12px;
-      color: var(--muted);
+      color: var(--mu);
       flex-shrink: 0;
-      width: 120px
+      width: 130px
     }
 
     .d-val {
@@ -962,18 +1082,18 @@
       word-break: break-all
     }
 
-    .d-map {
-      height: 140px;
-      border-radius: 8px;
+    #mini-drawer-map {
+      height: 150px;
+      border-radius: 9px;
       overflow: hidden;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       background: #0d1117
     }
 
     .event-list {
       display: flex;
       flex-direction: column;
-      gap: 6px
+      gap: 5px
     }
 
     .ev-item {
@@ -981,7 +1101,7 @@
       align-items: center;
       gap: 8px;
       padding: 7px 10px;
-      background: var(--surface-2);
+      background: var(--s2);
       border-radius: 7px;
       font-size: 11px
     }
@@ -995,9 +1115,60 @@
 
     .ev-time {
       font-family: var(--mono);
-      color: var(--muted);
+      color: var(--mu);
       margin-left: auto;
       font-size: 10px
+    }
+
+    .device-card {
+      background: var(--s2);
+      border: 1px solid var(--b1);
+      border-radius: 9px;
+      padding: 13px;
+      margin-bottom: 10px
+    }
+
+    .device-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 6px
+    }
+
+    .device-row:last-child {
+      margin-bottom: 0
+    }
+
+    .device-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--s3);
+      border-radius: 7px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0
+    }
+
+    .device-name {
+      font-size: 12px;
+      font-weight: 500
+    }
+
+    .device-sub {
+      font-size: 11px;
+      color: var(--mu)
+    }
+
+    .ua-box {
+      font-size: 10px;
+      font-family: var(--mono);
+      color: var(--mu);
+      line-height: 1.6;
+      word-break: break-all;
+      padding: 9px;
+      background: var(--s2);
+      border-radius: 8px;
+      border: 1px solid var(--b1)
     }
 
     /* ── LOADING ── */
@@ -1005,30 +1176,22 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 36px;
-      color: var(--muted);
+      padding: 32px;
+      color: var(--mu);
       font-size: 12px;
       gap: 8px
     }
 
     .spinner {
-      width: 15px;
-      height: 15px;
-      border: 2px solid var(--border);
-      border-top-color: var(--text);
+      width: 14px;
+      height: 14px;
+      border: 2px solid var(--b1);
+      border-top-color: var(--tx);
       border-radius: 50%;
       animation: spinA .6s linear infinite
     }
 
-    /* ── MINI MAP PANEL ── */
-    #mini-drawer-map {
-      height: 140px;
-      background: #0d1117;
-      border-radius: 8px;
-      overflow: hidden
-    }
-
-    /* ── SCROLL BAR ── */
+    /* ── SCROLLBAR ── */
     ::-webkit-scrollbar {
       width: 4px;
       height: 4px
@@ -1039,7 +1202,7 @@
     }
 
     ::-webkit-scrollbar-thumb {
-      background: var(--border-2);
+      background: var(--b2);
       border-radius: 2px
     }
 
@@ -1055,19 +1218,19 @@
       0%,
       100% {
         opacity: 1;
-        box-shadow: 0 0 6px var(--green)
+        box-shadow: 0 0 6px var(--grn)
       }
 
       50% {
         opacity: .5;
-        box-shadow: 0 0 14px var(--green)
+        box-shadow: 0 0 14px var(--grn)
       }
     }
 
     @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(8px)
+        transform: translateY(6px)
       }
 
       to {
@@ -1077,20 +1240,40 @@
     }
 
     .fi {
-      animation: fadeIn .4s var(--ease) both
+      animation: fadeIn .35s var(--ease) both
+    }
+
+    /* ── LEAFLET OVERRIDE ── */
+    .leaflet-container {
+      background: #0d1117 !important
+    }
+
+    .leaflet-tile {
+      filter: invert(1) hue-rotate(180deg) brightness(.85) saturate(.6)
+    }
+
+    .map-marker-label {
+      background: var(--s2);
+      border: 1px solid var(--b2);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--tx);
+      white-space: nowrap
     }
 
     @media(max-width:600px) {
       .main {
-        padding: 16px 14px 48px
+        padding: 14px 12px 48px
       }
 
       .nav {
-        padding: 0 16px
+        padding: 0 14px
       }
 
       .card-val {
-        font-size: 26px
+        font-size: 24px
       }
 
       #drawer {
@@ -1105,7 +1288,7 @@
   <!-- LOCK -->
   <div id="lock">
     <div class="lk-icon">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(230,59,46,0.9)" stroke-width="1.8"
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(230,59,46,.9)" stroke-width="1.8"
         stroke-linecap="round" stroke-linejoin="round">
         <rect x="3" y="11" width="18" height="11" rx="2" />
         <path d="M7 11V7a5 5 0 0 1 10 0v4" />
@@ -1120,11 +1303,11 @@
     </div>
   </div>
 
-  <!-- VISITOR DRAWER -->
+  <!-- OVERLAY + DRAWER -->
   <div id="overlay"></div>
   <div id="drawer">
     <div class="drawer-nav">
-      <span class="drawer-title">Visitor Profile</span>
+      <span class="drawer-title" id="drawer-title">Visitor Profile</span>
       <button class="drawer-close" id="drawer-close">✕</button>
     </div>
     <div class="drawer-body" id="drawer-body">
@@ -1136,7 +1319,6 @@
 
   <!-- DASHBOARD -->
   <div id="dash">
-
     <nav class="nav">
       <div class="nav-left">
         <div class="live-dot"></div>
@@ -1145,8 +1327,12 @@
           <div class="nav-url">joelalrinhlua.me</div>
         </div>
       </div>
-      <div class="nav-actions">
-        <div id="last-updated" style="font-size:11px;color:var(--muted);font-family:var(--mono)"></div>
+      <div class="nav-right">
+        <span class="rt-badge" id="rt-badge" style="display:none">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--grn);display:inline-block"></span>
+          Live
+        </span>
+        <span class="last-upd" id="last-upd"></span>
         <button class="icon-btn" id="rbtn">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
             stroke-linecap="round" stroke-linejoin="round">
@@ -1184,12 +1370,13 @@
         <div class="chart-head">
           <div class="chart-legend">
             <div class="leg">
-              <div class="leg-dot" style="background:var(--blue)"></div>Views
+              <div class="leg-dot" style="background:var(--blu)"></div>Views
             </div>
             <div class="leg">
-              <div class="leg-dot" style="background:var(--green)"></div>Downloads
+              <div class="leg-dot" style="background:var(--grn)"></div>Downloads
             </div>
           </div>
+          <span style="font-size:11px;color:var(--mu);font-family:var(--mono)">Last 14 days</span>
         </div>
         <div class="chart-bars" id="chart">
           <div class="loading">
@@ -1200,7 +1387,7 @@
 
       <!-- Download Funnel -->
       <div class="sec">Download Funnel</div>
-      <div class="panel" style="margin-bottom:24px">
+      <div class="panel" style="margin-bottom:22px">
         <div id="funnel">
           <div class="loading">
             <div class="spinner"></div>
@@ -1208,28 +1395,39 @@
         </div>
       </div>
 
-      <!-- Map + Geo -->
-      <div class="sec">Visitor Map</div>
-      <div class="row-map">
-        <div class="panel">
-          <div class="panel-title">Precise Locations</div>
-          <div id="map"></div>
+      <!-- Real-time Feed -->
+      <div class="sec">Live Activity Feed</div>
+      <div class="rt-feed">
+        <div class="rt-header">
+          <div class="rt-title">
+            <span
+              style="width:6px;height:6px;border-radius:50%;background:var(--grn);display:inline-block;animation:pulse 2s infinite"></span>
+            Recent visitors
+          </div>
+          <span class="rt-count" id="rt-count">Loading…</span>
         </div>
-        <div>
-          <div class="panel" style="margin-bottom:12px">
-            <div class="panel-title">Top Countries</div>
-            <div id="countries-panel">
-              <div class="loading">
-                <div class="spinner"></div>
-              </div>
+        <div class="rt-list" id="rt-list">
+          <div class="loading">
+            <div class="spinner"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Geo + Devices -->
+      <div class="row2">
+        <div class="panel">
+          <div class="panel-title">Top Countries</div>
+          <div id="countries-panel">
+            <div class="loading">
+              <div class="spinner"></div>
             </div>
           </div>
-          <div class="panel">
-            <div class="panel-title">Top Cities</div>
-            <div id="cities-panel">
-              <div class="loading">
-                <div class="spinner"></div>
-              </div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Top Cities</div>
+          <div id="cities-panel">
+            <div class="loading">
+              <div class="spinner"></div>
             </div>
           </div>
         </div>
@@ -1263,11 +1461,11 @@
         </div>
       </div>
 
-      <!-- Timezones + OS -->
+      <!-- OS + Regions -->
       <div class="row2">
         <div class="panel">
-          <div class="panel-title">Timezones</div>
-          <div id="tz-panel">
+          <div class="panel-title">Operating Systems</div>
+          <div id="os-panel">
             <div class="loading">
               <div class="spinner"></div>
             </div>
@@ -1283,7 +1481,7 @@
         </div>
       </div>
 
-      <!-- Recent Events Table -->
+      <!-- Full Events Table -->
       <div class="sec">Recent Visitors</div>
       <div class="tbl-wrap">
         <div class="tbl-head-row">
@@ -1299,10 +1497,10 @@
           <thead>
             <tr>
               <th>Event</th>
-              <th>IP Address</th>
+              <th>IP</th>
               <th>Location</th>
-              <th>Coords</th>
               <th>Device</th>
+              <th>OS</th>
               <th>Browser</th>
               <th>Referrer</th>
               <th>Time</th>
@@ -1320,9 +1518,9 @@
         </table>
       </div>
 
-      <!-- IPs list -->
-      <div class="sec">Unique IP Addresses</div>
-      <div class="panel" style="margin-bottom:24px">
+      <!-- Unique IPs -->
+      <div class="sec">Unique Visitors by IP</div>
+      <div class="panel" style="margin-bottom:22px">
         <div id="ips-panel">
           <div class="loading">
             <div class="spinner"></div>
@@ -1335,39 +1533,27 @@
 
   <script>
     // ─── AUTH ───────────────────────────────────────────────────────────────────
-    const PIN = 'joel2026';
-    const SK = 'analytics_auth_v2';
-    const lockEl = document.getElementById('lock');
-    const dashEl = document.getElementById('dash');
-    const pinEl = document.getElementById('pin');
+    const PIN = 'joel2026', SK = 'analytics_auth_v3';
+    const lockEl = document.getElementById('lock'), dashEl = document.getElementById('dash'), pinEl = document.getElementById('pin');
 
     function unlock() {
       if (pinEl.value === PIN) {
         sessionStorage.setItem(SK, '1');
-        lockEl.style.display = 'none';
-        dashEl.style.display = 'block';
-        init();
+        lockEl.style.display = 'none'; dashEl.style.display = 'block'; init();
       } else {
-        pinEl.classList.add('err');
-        document.getElementById('lerr').textContent = 'Incorrect PIN.';
-        pinEl.value = '';
-        setTimeout(() => pinEl.classList.remove('err'), 400);
+        pinEl.classList.add('err'); document.getElementById('lerr').textContent = 'Incorrect PIN.';
+        pinEl.value = ''; setTimeout(() => pinEl.classList.remove('err'), 400);
       }
     }
     document.getElementById('lbtn').addEventListener('click', unlock);
     pinEl.addEventListener('keydown', e => { if (e.key === 'Enter') unlock(); });
-    if (sessionStorage.getItem(SK) === '1') {
-      lockEl.style.display = 'none';
-      dashEl.style.display = 'block';
-    }
+    if (sessionStorage.getItem(SK) === '1') { lockEl.style.display = 'none'; dashEl.style.display = 'block'; }
 
     // ─── SUPABASE ────────────────────────────────────────────────────────────────
     const SUPA = 'https://ztkzofjklpzrzskxacll.supabase.co/rest/v1/site_analytics';
     const KEY = 'sb_publishable_uunVH0MPwzPTKBek4kK5NQ_LULAfOyB';
     const H = { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY };
-    let days = 7;
-    let allRows = [];
-    let tableFilter = 'all';
+    let days = 7, allRows = [], tableFilter = 'all', lastTs = null, rtPollTimer = null;
 
     async function fetchRows(d) {
       let url = SUPA + '?select=*&order=created_at.desc&limit=5000';
@@ -1377,40 +1563,36 @@
       return r.json();
     }
 
-    // ─── HELPERS ─────────────────────────────────────────────────────────────────
-    function countBy(rows, key) {
-      const m = {};
-      rows.forEach(r => { const v = r[key] || 'Unknown'; m[v] = (m[v] || 0) + 1; });
-      return Object.entries(m).sort((a, b) => b[1] - a[1]);
+    async function fetchNew() {
+      if (!lastTs) return [];
+      const url = SUPA + '?select=*&order=created_at.desc&created_at=gt.' + encodeURIComponent(lastTs) + '&limit=100';
+      const r = await fetch(url, { headers: H });
+      if (!r.ok) return [];
+      return r.json();
     }
 
+    // ─── HELPERS ─────────────────────────────────────────────────────────────────
+    function countBy(rows, key) {
+      const m = {}; rows.forEach(r => { const v = r[key] || 'Unknown'; m[v] = (m[v] || 0) + 1; });
+      return Object.entries(m).sort((a, b) => b[1] - a[1]);
+    }
     function flagEmoji(code) {
       if (!code || code.length !== 2) return '🌍';
       return String.fromCodePoint(...[...code.toUpperCase()].map(c => c.charCodeAt(0) + 127397));
     }
-
-    function fmtTime(iso) {
-      return new Date(iso).toLocaleString('en', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-    }
-
-    function fmtTimeAgo(iso) {
+    function fmtTime(iso) { return new Date(iso).toLocaleString('en', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }); }
+    function fmtAgo(iso) {
       const s = Math.floor((Date.now() - new Date(iso)) / 1000);
-      if (s < 60) return s + 's ago';
-      if (s < 3600) return Math.floor(s / 60) + 'm ago';
-      if (s < 86400) return Math.floor(s / 3600) + 'h ago';
-      return Math.floor(s / 86400) + 'd ago';
+      if (s < 60) return s + 's ago'; if (s < 3600) return Math.floor(s / 60) + 'm ago';
+      if (s < 86400) return Math.floor(s / 3600) + 'h ago'; return Math.floor(s / 86400) + 'd ago';
     }
-
-    function cleanReferrer(ref) {
+    function cleanRef(ref) {
       if (!ref || ref === 'null' || ref === '') return '—';
-      try {
-        const u = new URL(ref);
-        return u.hostname.replace('www.', '');
-      } catch (e) { return ref.slice(0, 30); }
+      try { const u = new URL(ref); return u.hostname.replace('www.', ''); }
+      catch (e) { return ref.slice(0, 28); }
     }
-
     function barList(el, entries, color, max = 8) {
-      if (!entries.length) { el.innerHTML = '<p style="color:var(--muted);font-size:12px;padding:4px 0">No data yet.</p>'; return; }
+      if (!entries.length) { el.innerHTML = '<p style="color:var(--mu);font-size:12px;padding:4px 0">No data yet.</p>'; return; }
       const mx = entries[0][1];
       el.innerHTML = '<div class="bar-list">' + entries.slice(0, max).map(([name, count]) => `
     <div class="bl-item">
@@ -1419,128 +1601,98 @@
     </div>`).join('') + '</div>';
     }
 
-    // ─── MAP ─────────────────────────────────────────────────────────────────────
-    let map = null;
-    let markerLayer = null;
-
-    function initMap() {
-      if (map) return;
-      map = L.map('map', { zoomControl: true, attributionControl: false, preferCanvas: true });
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-      map.setView([20, 0], 2);
-      markerLayer = L.layerGroup().addTo(map);
+    // ─── DEVICE ICON SVG ─────────────────────────────────────────────────────────
+    function deviceIcon(type, os) {
+      if (/mobile|android|iphone/i.test(type) || /ios|android/i.test(os || ''))
+        return `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--mu2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2.5"/></svg>`;
+      if (/tablet|ipad/i.test(type) || /ipados/i.test(os || ''))
+        return `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--mu2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2.5"/></svg>`;
+      return `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--mu2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`;
     }
 
-    function renderMap(rows) {
-      initMap();
-      markerLayer.clearLayers();
-      const pts = rows.filter(r => r.latitude && r.longitude);
-      const seen = new Set();
-      pts.forEach(r => {
-        const key = `${r.latitude?.toFixed(2)},${r.longitude?.toFixed(2)}`;
-        const isDl = r.event_type === 'download_click' || r.event_type === 'download_complete';
-        const color = isDl ? '#53bc28' : '#4a9eff';
-        const circle = L.circleMarker([r.latitude, r.longitude], {
-          radius: isDl ? 7 : 5,
-          fillColor: color,
-          color: color,
-          weight: 1,
-          opacity: 0.9,
-          fillOpacity: 0.6
-        });
-        const label = `${flagEmoji(r.country_code || '')} ${r.city || r.country || 'Unknown'} · ${r.event_type === 'page_view' ? 'View' : 'Download'}`;
-        circle.bindTooltip(label, { className: 'map-marker-label', direction: 'top' });
-        circle.addTo(markerLayer);
-      });
+    // ─── EVENT BADGE ─────────────────────────────────────────────────────────────
+    function evBadge(type) {
+      const map = {
+        page_view: '<span class="badge bv">👁 View</span>',
+        download_click: '<span class="badge bd">⬇ Click</span>',
+        download_start: '<span class="badge bds">↓ Start</span>',
+        download_complete: '<span class="badge bdc">✓ Done</span>',
+      };
+      return map[type] || `<span class="badge bv">${type}</span>`;
     }
-
-    // ─── MINI DRAWER MAP ─────────────────────────────────────────────────────────
-    let drawerMap = null;
-    function showDrawerMap(lat, lng, label) {
-      setTimeout(() => {
-        if (!drawerMap) {
-          drawerMap = L.map('mini-drawer-map', { zoomControl: false, attributionControl: false, dragging: false, scrollWheelZoom: false });
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(drawerMap);
-        }
-        drawerMap.setView([lat, lng], 12);
-        drawerMap.eachLayer(l => { if (l instanceof L.Marker || l instanceof L.CircleMarker) drawerMap.removeLayer(l); });
-        L.circleMarker([lat, lng], { radius: 8, fillColor: '#e63b2e', color: '#e63b2e', weight: 2, fillOpacity: 0.9 }).addTo(drawerMap);
-        drawerMap.invalidateSize();
-      }, 200);
+    function rtBadge(type) {
+      const map = {
+        page_view: '<span class="rt-badge rb-view">View</span>',
+        download_click: '<span class="rt-badge rb-dl">Download</span>',
+        download_start: '<span class="rt-badge rb-start">Start</span>',
+        download_complete: '<span class="rt-badge rb-done">Completed</span>',
+      };
+      return map[type] || `<span class="rt-badge rb-view">${type}</span>`;
     }
 
     // ─── RENDER CARDS ─────────────────────────────────────────────────────────────
     function renderCards(rows) {
       const views = rows.filter(r => r.event_type === 'page_view').length;
       const dlClicks = rows.filter(r => r.event_type === 'download_click').length;
-      const dlComplete = rows.filter(r => r.event_type === 'download_complete').length;
-      const portViews = rows.filter(r => r.event_type === 'page_view' && r.page === '/').length;
-      const dlPageViews = rows.filter(r => r.event_type === 'page_view' && r.page === '/download-chhehchhawl').length;
+      const dlDone = rows.filter(r => r.event_type === 'download_complete').length;
+      const dlPage = rows.filter(r => r.event_type === 'page_view' && r.page === '/download-chhehchhawl').length;
       const uniqueIPs = new Set(rows.filter(r => r.ip).map(r => r.ip)).size;
-      const convRate = dlPageViews > 0 ? ((dlClicks / dlPageViews) * 100).toFixed(1) : '0.0';
-
+      const conv = dlPage > 0 ? ((dlClicks / dlPage) * 100).toFixed(1) : '0.0';
+      const mob = rows.filter(r => r.device_type === 'mobile').length;
+      const mobPct = views > 0 ? Math.round(mob / views * 100) : 0;
       document.getElementById('cards').innerHTML = `
     <div class="card fi"><div class="card-label">Page Views</div><div class="card-val cv">${views.toLocaleString()}</div><div class="card-sub">all pages</div></div>
-    <div class="card fi" style="animation-delay:.04s"><div class="card-label">Unique Visitors</div><div class="card-val cp">${uniqueIPs.toLocaleString()}</div><div class="card-sub">by IP</div></div>
-    <div class="card fi" style="animation-delay:.08s"><div class="card-label">Download Page</div><div class="card-val ca">${dlPageViews.toLocaleString()}</div><div class="card-sub">/download-chhehchhawl</div></div>
+    <div class="card fi" style="animation-delay:.04s"><div class="card-label">Unique Visitors</div><div class="card-val cp">${uniqueIPs.toLocaleString()}</div><div class="card-sub">by IP address</div></div>
+    <div class="card fi" style="animation-delay:.08s"><div class="card-label">Download Page</div><div class="card-val ca">${dlPage.toLocaleString()}</div><div class="card-sub">/download-chhehchhawl</div></div>
     <div class="card fi" style="animation-delay:.12s"><div class="card-label">APK Downloads</div><div class="card-val cg">${dlClicks.toLocaleString()}</div><div class="card-sub">button clicks</div></div>
-    <div class="card fi" style="animation-delay:.16s"><div class="card-label">Confirmed DLs</div><div class="card-val cy">${dlComplete.toLocaleString()}</div><div class="card-sub">completed</div></div>
-    <div class="card fi" style="animation-delay:.20s"><div class="card-label">Conversion</div><div class="card-val co">${convRate}%</div><div class="card-sub">visitors → downloads</div></div>
+    <div class="card fi" style="animation-delay:.16s"><div class="card-label">Confirmed DLs</div><div class="card-val cy">${dlDone.toLocaleString()}</div><div class="card-sub">completed</div></div>
+    <div class="card fi" style="animation-delay:.20s"><div class="card-label">Conversion</div><div class="card-val co">${conv}%</div><div class="card-sub">page → download</div></div>
+    <div class="card fi" style="animation-delay:.24s"><div class="card-label">Mobile Share</div><div class="card-val cc">${mobPct}%</div><div class="card-sub">of all views</div></div>
   `;
     }
 
-    // ─── RENDER CHART ────────────────────────────────────────────────────────────
+    // ─── RENDER CHART ─────────────────────────────────────────────────────────────
     function renderChart(rows) {
       const map = {};
-      for (let i = 13; i >= 0; i--) {
-        const k = new Date(Date.now() - i * 864e5).toISOString().slice(0, 10);
-        map[k] = { v: 0, d: 0 };
-      }
-      rows.forEach(r => {
-        const k = r.created_at.slice(0, 10);
-        if (map[k]) {
-          if (r.event_type === 'page_view') map[k].v++;
-          if (r.event_type === 'download_click') map[k].d++;
-        }
-      });
+      for (let i = 13; i >= 0; i--) { const k = new Date(Date.now() - i * 864e5).toISOString().slice(0, 10); map[k] = { v: 0, d: 0 }; }
+      rows.forEach(r => { const k = r.created_at.slice(0, 10); if (map[k]) { if (r.event_type === 'page_view') map[k].v++; if (r.event_type === 'download_click') map[k].d++; } });
       const keys = Object.keys(map);
       const maxV = Math.max(1, ...keys.map(k => map[k].v + map[k].d));
       document.getElementById('chart').innerHTML = keys.map(k => {
         const { v, d } = map[k];
-        const vH = Math.round(v / maxV * 100);
-        const dH = Math.round(d / maxV * 100);
+        const vH = Math.round(v / maxV * 100), dH = Math.round(d / maxV * 100);
         const lbl = new Date(k + 'T12:00:00').toLocaleDateString('en', { month: 'short', day: 'numeric' });
         const day = lbl.split(' ')[1] || lbl;
         return `<div class="bar-grp">
-      <div class="bar-tooltip">${lbl}<br/>${v} views · ${d} DLs</div>
+      <div class="bar-tooltip">${lbl}<br>${v} views · ${d} DLs</div>
       <div class="bar-stk">
         ${v ? `<div class="bar bar-v" style="height:${vH}px"></div>` : ''}
         ${d ? `<div class="bar bar-d" style="height:${dH}px"></div>` : ''}
-        ${!v && !d ? `<div class="bar" style="height:2px;background:var(--border)"></div>` : ''}
+        ${!v && !d ? `<div class="bar" style="height:2px;background:var(--b1)"></div>` : ''}
       </div>
       <div class="bar-lbl">${day}</div>
     </div>`;
       }).join('');
     }
 
-    // ─── RENDER FUNNEL ───────────────────────────────────────────────────────────
+    // ─── RENDER FUNNEL ────────────────────────────────────────────────────────────
     function renderFunnel(rows) {
       const s1 = rows.filter(r => r.event_type === 'page_view' && (r.page === '/' || r.page == null)).length;
       const s2 = rows.filter(r => r.event_type === 'page_view' && r.page === '/download-chhehchhawl').length;
       const s3 = rows.filter(r => r.event_type === 'download_click').length;
       const s4 = rows.filter(r => r.event_type === 'download_complete').length;
       const steps = [
-        { label: 'Portfolio Visit', val: s1, color: 'var(--blue)' },
-        { label: 'Download Page View', val: s2, color: 'var(--purple)' },
-        { label: 'Download Clicked', val: s3, color: 'var(--yellow)' },
-        { label: 'Download Completed', val: s4, color: 'var(--green)' },
+        { label: 'Portfolio Visit', val: s1, color: 'var(--blu)' },
+        { label: 'Download Page View', val: s2, color: 'var(--pur)' },
+        { label: 'Download Clicked', val: s3, color: 'var(--yel)' },
+        { label: 'Download Completed', val: s4, color: 'var(--grn)' },
       ];
       const mx = Math.max(1, ...steps.map(s => s.val));
       document.getElementById('funnel').innerHTML = '<div class="funnel">' + steps.map((s, i) => {
         const pct = i === 0 ? 100 : steps[0].val > 0 ? ((s.val / steps[0].val) * 100).toFixed(1) : 0;
         const w = Math.round(s.val / mx * 100);
         return `<div class="fn-step">
-      <div class="fn-fill" style="width:${w}%;background:${s.color};opacity:0.08"></div>
+      <div class="fn-fill" style="width:${w}%;background:${s.color};opacity:.09"></div>
       <div class="fn-num">0${i + 1}</div>
       <div class="fn-label">${s.label}</div>
       <div class="fn-val" style="color:${s.color}">${s.val.toLocaleString()}</div>
@@ -1552,26 +1704,57 @@
     // ─── RENDER GEO ──────────────────────────────────────────────────────────────
     function renderGeo(rows) {
       const countries = countBy(rows.filter(r => r.country), 'country');
-      const cwf = countries.map(([c, n]) => {
-        const code = rows.find(r => r.country === c)?.country_code || '';
-        return [flagEmoji(code) + ' ' + c, n];
-      });
-      barList(document.getElementById('countries-panel'), cwf, 'var(--blue)');
-      barList(document.getElementById('cities-panel'), countBy(rows.filter(r => r.city), 'city'), 'var(--purple)');
-      barList(document.getElementById('devices-panel'), countBy(rows.filter(r => r.device_type), 'device_type'), 'var(--green)');
-      barList(document.getElementById('browsers-panel'), countBy(rows.filter(r => r.browser), 'browser'), 'var(--yellow)');
+      const cwf = countries.map(([c, n]) => { const code = rows.find(r => r.country === c)?.country_code || ''; return [flagEmoji(code) + ' ' + c, n]; });
+      barList(document.getElementById('countries-panel'), cwf, 'var(--blu)');
+      barList(document.getElementById('cities-panel'), countBy(rows.filter(r => r.city), 'city'), 'var(--pur)');
+      barList(document.getElementById('devices-panel'), countBy(rows.filter(r => r.device_type), 'device_type'), 'var(--grn)');
+      barList(document.getElementById('browsers-panel'), countBy(rows.filter(r => r.browser), 'browser'), 'var(--yel)');
+      barList(document.getElementById('os-panel'), countBy(rows.filter(r => r.os), 'os'), 'var(--cya)', 6);
+      const refs = countBy(rows.filter(r => r.referrer), 'referrer').map(([r, n]) => [cleanRef(r), n]);
+      const refM = {}; refs.forEach(([r, n]) => { refM[r] = (refM[r] || 0) + n; });
+      barList(document.getElementById('referrers-panel'), Object.entries(refM).sort((a, b) => b[1] - a[1]), 'var(--org)');
+      barList(document.getElementById('regions-panel'), countBy(rows.filter(r => r.region), 'region'), 'var(--pur)', 6);
+    }
 
-      // Referrers
-      const refs = countBy(rows.filter(r => r.referrer), 'referrer').map(([r, n]) => [cleanReferrer(r), n]);
-      const refMerged = {};
-      refs.forEach(([r, n]) => { refMerged[r] = (refMerged[r] || 0) + n; });
-      const refArr = Object.entries(refMerged).sort((a, b) => b[1] - a[1]);
-      barList(document.getElementById('referrers-panel'), refArr, 'var(--orange)');
+    // ─── RENDER RT FEED ──────────────────────────────────────────────────────────
+    function renderRTFeed(rows) {
+      const recent = rows.slice(0, 30);
+      document.getElementById('rt-count').textContent = rows.length.toLocaleString() + ' total events';
+      if (!recent.length) { document.getElementById('rt-list').innerHTML = '<div class="loading" style="padding:20px">No events yet.</div>'; return; }
+      document.getElementById('rt-list').innerHTML = recent.map(r => {
+        const flag = r.country_code ? flagEmoji(r.country_code) + ' ' : '';
+        const loc = `${flag}${r.city || ''}${r.city && r.country ? ', ' : ''}${r.country || 'Unknown'}`;
+        const dev = r.device_model || r.device_type || 'Unknown';
+        return `<div class="rt-item" onclick="openRowDrawer(${JSON.stringify(r).replace(/"/g, '&quot;')})">
+      ${rtBadge(r.event_type)}
+      <span class="rt-loc">${loc}</span>
+      <span class="rt-ip">${r.ip || '—'}</span>
+      <span class="rt-device">${dev}</span>
+      <span class="rt-time">${fmtAgo(r.created_at)}</span>
+    </div>`;
+      }).join('');
+    }
 
-      // Timezones
-      barList(document.getElementById('tz-panel'), countBy(rows.filter(r => r.timezone), 'timezone'), 'var(--blue)', 6);
-      // Regions
-      barList(document.getElementById('regions-panel'), countBy(rows.filter(r => r.region), 'region'), 'var(--purple)', 6);
+    // ─── RENDER TABLE ─────────────────────────────────────────────────────────────
+    function renderTable(rows) {
+      let filtered = tableFilter === 'all' ? rows : rows.filter(r => r.event_type === tableFilter);
+      filtered = filtered.slice(0, 100);
+      if (!filtered.length) { document.getElementById('tbody').innerHTML = '<tr><td colspan="8" style="padding:24px;text-align:center;color:var(--mu)">No events.</td></tr>'; return; }
+      document.getElementById('tbody').innerHTML = filtered.map(r => {
+        const flag = r.country_code ? flagEmoji(r.country_code) + ' ' : '';
+        const loc = `${flag}${r.city || ''}${r.city && r.country ? ', ' : ''}${r.country || '—'}`;
+        const dev = r.device_model ? `${r.device_type || ''} · ${r.device_model}` : r.device_type || '—';
+        return `<tr onclick="openRowDrawer(${JSON.stringify(r).replace(/"/g, '&quot;')})">
+      <td>${evBadge(r.event_type)}</td>
+      <td class="ip-mono">${r.ip || '—'}</td>
+      <td>${loc}</td>
+      <td style="color:var(--mu)">${dev}</td>
+      <td style="color:var(--mu)">${r.os || '—'}</td>
+      <td style="color:var(--mu)">${r.browser || ''}${r.browser_version ? ' ' + r.browser_version : ''}</td>
+      <td style="color:var(--mu);font-size:11px">${cleanRef(r.referrer)}</td>
+      <td style="color:var(--mu)">${fmtAgo(r.created_at)}</td>
+    </tr>`;
+      }).join('');
     }
 
     // ─── RENDER IPs ──────────────────────────────────────────────────────────────
@@ -1579,95 +1762,73 @@
       const ipMap = {};
       rows.forEach(r => {
         if (!r.ip) return;
-        if (!ipMap[r.ip]) ipMap[r.ip] = { count: 0, country: r.country, country_code: r.country_code, city: r.city, last: r.created_at, events: [] };
-        ipMap[r.ip].count++;
-        ipMap[r.ip].events.push(r.event_type);
+        if (!ipMap[r.ip]) ipMap[r.ip] = { count: 0, country: r.country, country_code: r.country_code, city: r.city, os: r.os, device_type: r.device_type, device_model: r.device_model, browser: r.browser, last: r.created_at, events: [] };
+        ipMap[r.ip].count++; ipMap[r.ip].events.push(r.event_type);
+        if (r.created_at > ipMap[r.ip].last) ipMap[r.ip].last = r.created_at;
       });
       const sorted = Object.entries(ipMap).sort((a, b) => b[1].count - a[1].count);
-      if (!sorted.length) { document.getElementById('ips-panel').innerHTML = '<p style="color:var(--muted);font-size:12px">No IP data yet.</p>'; return; }
+      if (!sorted.length) { document.getElementById('ips-panel').innerHTML = '<p style="color:var(--mu);font-size:12px">No data yet.</p>'; return; }
       document.getElementById('ips-panel').innerHTML = `
     <table style="font-size:12px">
-      <thead><tr>
-        <th>IP Address</th><th>Country</th><th>City</th><th>Visits</th><th>Events</th><th>Last Seen</th>
-      </tr></thead>
+      <thead><tr><th>IP Address</th><th>Country</th><th>City</th><th>Device</th><th>OS</th><th>Visits</th><th>Last Seen</th></tr></thead>
       <tbody>${sorted.slice(0, 30).map(([ip, d]) => `
-        <tr style="cursor:pointer" onclick="openIPDrawer('${ip}')">
+        <tr onclick="openIPDrawer('${ip}')">
           <td class="ip-mono">${ip}</td>
           <td>${flagEmoji(d.country_code || '')} ${d.country || '—'}</td>
-          <td style="color:var(--muted)">${d.city || '—'}</td>
+          <td style="color:var(--mu)">${d.city || '—'}</td>
+          <td style="color:var(--mu)">${d.device_model || d.device_type || '—'}</td>
+          <td style="color:var(--mu)">${d.os || '—'}</td>
           <td><span style="font-family:var(--mono)">${d.count}</span></td>
-          <td style="color:var(--muted);font-size:11px">${[...new Set(d.events)].join(', ')}</td>
-          <td style="color:var(--muted)">${fmtTimeAgo(d.last)}</td>
+          <td style="color:var(--mu)">${fmtAgo(d.last)}</td>
         </tr>`).join('')}
       </tbody>
     </table>`;
     }
 
-    // ─── RENDER TABLE ────────────────────────────────────────────────────────────
-    function renderTable(rows) {
-      let filtered = tableFilter === 'all' ? rows : rows.filter(r => r.event_type === tableFilter);
-      filtered = filtered.slice(0, 100);
-      if (!filtered.length) {
-        document.getElementById('tbody').innerHTML = '<tr><td colspan="8" style="padding:24px;text-align:center;color:var(--muted)">No events.</td></tr>';
-        return;
-      }
-      document.getElementById('tbody').innerHTML = filtered.map(r => {
-        const badge = {
-          page_view: '<span class="badge bv">👁 View</span>',
-          download_click: '<span class="badge bd">⬇ Click</span>',
-          download_start: '<span class="badge bds">↓ Start</span>',
-          download_complete: '<span class="badge bdc">✓ Done</span>',
-        }[r.event_type] || `<span class="badge bv">${r.event_type}</span>`;
-        const flag = r.country_code ? flagEmoji(r.country_code) + ' ' : '';
-        const coord = r.latitude && r.longitude ? `${parseFloat(r.latitude).toFixed(3)}, ${parseFloat(r.longitude).toFixed(3)}` : '—';
-        return `<tr onclick="openRowDrawer(${JSON.stringify(r).replace(/"/g, '&quot;')})">
-      <td>${badge}</td>
-      <td class="ip-mono">${r.ip || '—'}</td>
-      <td>${flag}${r.city || ''}${r.city && r.country ? ', ' : ''}${r.country || '—'}</td>
-      <td class="coord-mono">${coord}</td>
-      <td style="color:var(--muted)">${r.device_type || '—'}</td>
-      <td style="color:var(--muted)">${r.browser || '—'}</td>
-      <td style="color:var(--muted);font-size:11px">${cleanReferrer(r.referrer)}</td>
-      <td style="color:var(--muted)">${fmtTimeAgo(r.created_at)}</td>
-    </tr>`;
-      }).join('');
+    // ─── DRAWER MAP ──────────────────────────────────────────────────────────────
+    let drawerMap = null;
+    function showDrawerMap(lat, lng) {
+      setTimeout(() => {
+        if (!drawerMap) {
+          drawerMap = L.map('mini-drawer-map', { zoomControl: false, attributionControl: false, dragging: false, scrollWheelZoom: false });
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(drawerMap);
+        }
+        drawerMap.setView([lat, lng], 12);
+        drawerMap.eachLayer(l => { if (l instanceof L.Marker || l instanceof L.CircleMarker) drawerMap.removeLayer(l); });
+        L.circleMarker([lat, lng], { radius: 8, fillColor: 'var(--red)', color: 'var(--red)', weight: 2, fillOpacity: .9 }).addTo(drawerMap);
+        drawerMap.invalidateSize();
+      }, 200);
     }
 
     // ─── DRAWER ──────────────────────────────────────────────────────────────────
-    function openDrawer() {
-      document.getElementById('drawer').classList.add('open');
-      document.getElementById('overlay').classList.add('open');
-    }
-    function closeDrawer() {
-      document.getElementById('drawer').classList.remove('open');
-      document.getElementById('overlay').classList.remove('open');
-    }
+    function openDrawer() { document.getElementById('drawer').classList.add('open'); document.getElementById('overlay').classList.add('open'); }
+    function closeDrawer() { document.getElementById('drawer').classList.remove('open'); document.getElementById('overlay').classList.remove('open'); }
     document.getElementById('drawer-close').addEventListener('click', closeDrawer);
     document.getElementById('overlay').addEventListener('click', closeDrawer);
 
-    function openRowDrawer(r) {
-      openDrawer();
-      const visitorRows = allRows.filter(x => x.ip && x.ip === r.ip);
-      renderDrawerContent(r, visitorRows);
-    }
+    function openRowDrawer(r) { openDrawer(); const vr = allRows.filter(x => x.ip && x.ip === r.ip); renderDrawer(r, vr); }
+    function openIPDrawer(ip) { openDrawer(); const rows = allRows.filter(r => r.ip === ip); if (!rows.length) return; renderDrawer(rows[0], rows); }
 
-    function openIPDrawer(ip) {
-      openDrawer();
-      const rows = allRows.filter(r => r.ip === ip);
-      if (!rows.length) return;
-      renderDrawerContent(rows[0], rows);
-    }
-
-    function renderDrawerContent(r, visitorRows) {
+    function renderDrawer(r, vrows) {
       const hasCoords = r.latitude && r.longitude;
+      const os = r.os || 'Unknown';
+      const devModel = r.device_model || null;
+      const devType = r.device_type || 'Unknown';
+      const browser = r.browser || 'Unknown';
+      const bv = r.browser_version ? ` ${r.browser_version}` : '';
+      const sw = r.screen_width ? `${r.screen_width}×${r.screen_height}` : '—';
+      const vp = r.viewport_width ? `${r.viewport_width}×${r.viewport_height}` : '—';
+
+      document.getElementById('drawer-title').textContent = `${flagEmoji(r.country_code || '')} ${r.city || r.country || 'Visitor'}`;
       document.getElementById('drawer-body').innerHTML = `
     ${hasCoords ? `<div id="mini-drawer-map"></div>` : ''}
     <div class="d-section">
       <div class="d-label">Identity</div>
-      <div class="d-row"><span class="d-key">IP Address</span><span class="d-val" style="color:var(--blue)">${r.ip || '—'}</span></div>
-      <div class="d-row"><span class="d-key">Total visits</span><span class="d-val">${visitorRows.length}</span></div>
-      <div class="d-row"><span class="d-key">First seen</span><span class="d-val">${visitorRows.length ? fmtTime(visitorRows[visitorRows.length - 1].created_at) : '—'}</span></div>
+      <div class="d-row"><span class="d-key">IP Address</span><span class="d-val" style="color:var(--blu)">${r.ip || '—'}</span></div>
+      <div class="d-row"><span class="d-key">Total visits</span><span class="d-val">${vrows.length}</span></div>
+      <div class="d-row"><span class="d-key">First seen</span><span class="d-val">${vrows.length ? fmtTime(vrows[vrows.length - 1].created_at) : '—'}</span></div>
       <div class="d-row"><span class="d-key">Last seen</span><span class="d-val">${fmtTime(r.created_at)}</span></div>
+      <div class="d-row"><span class="d-key">Language</span><span class="d-val">${r.language || '—'}</span></div>
     </div>
     <div class="d-section">
       <div class="d-label">Location</div>
@@ -1676,61 +1837,90 @@
       <div class="d-row"><span class="d-key">Region</span><span class="d-val">${r.region || '—'}</span></div>
       <div class="d-row"><span class="d-key">Timezone</span><span class="d-val">${r.timezone || '—'}</span></div>
       <div class="d-row"><span class="d-key">Coordinates</span><span class="d-val coord-mono">${r.latitude ? parseFloat(r.latitude).toFixed(5) : '—'}, ${r.longitude ? parseFloat(r.longitude).toFixed(5) : '—'}</span></div>
-      ${hasCoords ? `<div class="d-row"><span class="d-key">Map</span><span class="d-val"><a href="https://www.google.com/maps?q=${r.latitude},${r.longitude}" target="_blank" style="color:var(--blue)">Open in Google Maps ↗</a></span></div>` : ''}
+      ${hasCoords ? `<div class="d-row"><span class="d-key">Open map</span><span class="d-val"><a href="https://www.google.com/maps?q=${r.latitude},${r.longitude}" target="_blank" style="color:var(--blu)">Google Maps ↗</a></span></div>` : ''}
     </div>
     <div class="d-section">
       <div class="d-label">Device</div>
-      <div class="d-row"><span class="d-key">Device type</span><span class="d-val">${r.device_type || '—'}</span></div>
-      <div class="d-row"><span class="d-key">Browser</span><span class="d-val">${r.browser || '—'}</span></div>
-      <div class="d-row"><span class="d-key">Referrer</span><span class="d-val">${cleanReferrer(r.referrer)}</span></div>
+      <div class="device-card">
+        <div class="device-row">
+          <div class="device-icon">${deviceIcon(devType, os)}</div>
+          <div>
+            <div class="device-name">${devModel || devType}</div>
+            <div class="device-sub">${os}</div>
+          </div>
+        </div>
+      </div>
+      <div class="d-row"><span class="d-key">Device type</span><span class="d-val">${devType}</span></div>
+      ${devModel ? `<div class="d-row"><span class="d-key">Model</span><span class="d-val">${devModel}</span></div>` : ''}
+      <div class="d-row"><span class="d-key">OS</span><span class="d-val">${os}</span></div>
+      <div class="d-row"><span class="d-key">Browser</span><span class="d-val">${browser}${bv}</span></div>
+      <div class="d-row"><span class="d-key">Screen</span><span class="d-val">${sw}</span></div>
+      <div class="d-row"><span class="d-key">Viewport</span><span class="d-val">${vp}</span></div>
+      <div class="d-row"><span class="d-key">Referrer</span><span class="d-val">${cleanRef(r.referrer)}</span></div>
     </div>
     <div class="d-section">
       <div class="d-label">User Agent</div>
-      <div style="font-size:10px;font-family:var(--mono);color:var(--muted);line-height:1.6;word-break:break-all;padding:10px;background:var(--surface-2);border-radius:8px;border:1px solid var(--border)">${r.user_agent || '—'}</div>
+      <div class="ua-box">${r.user_agent || '—'}</div>
     </div>
     <div class="d-section">
-      <div class="d-label">All Events from this visitor</div>
-      <div class="event-list">${visitorRows.slice(0, 20).map(ev => {
-        const colors = { page_view: 'var(--blue)', download_click: 'var(--green)', download_start: 'var(--yellow)', download_complete: 'var(--purple)' };
+      <div class="d-label">All events from this visitor</div>
+      <div class="event-list">${vrows.slice(0, 25).map(ev => {
+        const colors = { page_view: 'var(--blu)', download_click: 'var(--grn)', download_start: 'var(--yel)', download_complete: 'var(--pur)' };
         return `<div class="ev-item">
-          <div class="ev-dot" style="background:${colors[ev.event_type] || 'var(--muted)'}"></div>
+          <div class="ev-dot" style="background:${colors[ev.event_type] || 'var(--mu)'}"></div>
           <span>${ev.event_type}</span>
-          <span style="color:var(--muted);font-size:11px">${ev.page || '—'}</span>
-          <span class="ev-time">${fmtTimeAgo(ev.created_at)}</span>
+          <span style="color:var(--mu);font-size:11px">${ev.page || '—'}</span>
+          <span class="ev-time">${fmtAgo(ev.created_at)}</span>
         </div>`;
       }).join('')}</div>
     </div>
   `;
-      if (hasCoords) showDrawerMap(r.latitude, r.longitude, `${r.city || ''} ${r.country || ''}`);
+      if (hasCoords) showDrawerMap(r.latitude, r.longitude);
     }
 
-    // ─── TABLE FILTER ────────────────────────────────────────────────────────────
+    // ─── TABLE FILTER ─────────────────────────────────────────────────────────────
     document.getElementById('tbl-filter').addEventListener('click', e => {
       const b = e.target.closest('.tf'); if (!b) return;
       document.querySelectorAll('.tf').forEach(x => x.classList.remove('active'));
-      b.classList.add('active');
-      tableFilter = b.dataset.filter;
-      renderTable(allRows);
+      b.classList.add('active'); tableFilter = b.dataset.filter; renderTable(allRows);
     });
 
-    // ─── LOAD ALL ────────────────────────────────────────────────────────────────
+    // ─── REAL-TIME POLLING ────────────────────────────────────────────────────────
+    async function pollNew() {
+      try {
+        const newRows = await fetchNew();
+        if (newRows.length) {
+          // Prepend new rows
+          allRows = [...newRows, ...allRows.filter(r => !newRows.find(n => n.id === r.id))];
+          // Update timestamp
+          if (newRows[0]) lastTs = newRows[0].created_at;
+          renderRTFeed(allRows);
+          renderCards(allRows);
+          renderChart(allRows);
+          renderTable(allRows);
+          // Flash the live dot
+          document.getElementById('rt-badge').style.display = 'inline-flex';
+        }
+      } catch (e) { console.warn('Poll error', e); }
+    }
+
+    // ─── LOAD ALL ─────────────────────────────────────────────────────────────────
     async function loadData() {
       try {
         allRows = await fetchRows(days);
+        if (allRows.length) lastTs = allRows[0].created_at;
         renderCards(allRows);
         renderChart(allRows);
         renderFunnel(allRows);
-        renderMap(allRows);
+        renderRTFeed(allRows);
         renderGeo(allRows);
         renderTable(allRows);
         renderIPs(allRows);
-        // Period label
-        const total = allRows.length;
-        document.getElementById('period-label').textContent = `${total.toLocaleString()} events`;
-        document.getElementById('last-updated').textContent = 'Updated ' + new Date().toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit' });
+        document.getElementById('period-label').textContent = allRows.length.toLocaleString() + ' events';
+        document.getElementById('last-upd').textContent = 'Updated ' + new Date().toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit' });
       } catch (e) {
         console.error(e);
-        document.getElementById('tbody').innerHTML = '<tr><td colspan="8" style="padding:20px;color:var(--accent)">Failed to load data.</td></tr>';
+        document.getElementById('tbody').innerHTML = '<tr><td colspan="8" style="padding:20px;color:var(--red)">Failed to load data. Check your Supabase connection.</td></tr>';
       }
     }
 
@@ -1738,22 +1928,20 @@
     document.getElementById('pbar').addEventListener('click', e => {
       const b = e.target.closest('.pb'); if (!b) return;
       document.querySelectorAll('.pb').forEach(x => x.classList.remove('active'));
-      b.classList.add('active');
-      days = parseInt(b.dataset.days);
-      loadData();
+      b.classList.add('active'); days = parseInt(b.dataset.days); loadData();
     });
 
     // ─── REFRESH ─────────────────────────────────────────────────────────────────
     const rb = document.getElementById('rbtn');
-    rb.addEventListener('click', () => {
-      rb.classList.add('spin');
-      loadData().finally(() => setTimeout(() => rb.classList.remove('spin'), 700));
-    });
+    rb.addEventListener('click', () => { rb.classList.add('spin'); loadData().finally(() => setTimeout(() => rb.classList.remove('spin'), 700)); });
 
-    // ─── INIT ────────────────────────────────────────────────────────────────────
+    // ─── INIT ─────────────────────────────────────────────────────────────────────
     function init() {
       loadData();
-      // Auto-refresh every 2 minutes
+      // Poll for new events every 15 seconds
+      if (rtPollTimer) clearInterval(rtPollTimer);
+      rtPollTimer = setInterval(pollNew, 15000);
+      // Full refresh every 2 minutes
       setInterval(loadData, 120000);
     }
     if (sessionStorage.getItem(SK) === '1') init();
