@@ -1886,21 +1886,30 @@
     });
 
     // ─── REAL-TIME POLLING ────────────────────────────────────────────────────────
+    function updateTimestamp() {
+      document.getElementById('last-upd').textContent =
+        'Updated ' + new Date().toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
+
     async function pollNew() {
       try {
         const newRows = await fetchNew();
         if (newRows.length) {
-          // Prepend new rows
+          // Prepend new rows, dedupe by id
           allRows = [...newRows, ...allRows.filter(r => !newRows.find(n => n.id === r.id))];
-          // Update timestamp
-          if (newRows[0]) lastTs = newRows[0].created_at;
-          renderRTFeed(allRows);
+          // Advance the high-water mark
+          lastTs = newRows[0].created_at;
+          // Re-render ALL panels so nothing is ever stale
           renderCards(allRows);
           renderChart(allRows);
+          renderFunnel(allRows);
+          renderRTFeed(allRows);
+          renderGeo(allRows);
           renderTable(allRows);
-          // Flash the live dot
-          document.getElementById('rt-badge').style.display = 'inline-flex';
+          renderIPs(allRows);
+          document.getElementById('period-label').textContent = allRows.length.toLocaleString() + ' events';
         }
+        updateTimestamp();
       } catch (e) { console.warn('Poll error', e); }
     }
 
@@ -1917,7 +1926,9 @@
         renderTable(allRows);
         renderIPs(allRows);
         document.getElementById('period-label').textContent = allRows.length.toLocaleString() + ' events';
-        document.getElementById('last-upd').textContent = 'Updated ' + new Date().toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit' });
+        updateTimestamp();
+        // Always show Live badge once authenticated and data loaded
+        document.getElementById('rt-badge').style.display = 'inline-flex';
       } catch (e) {
         console.error(e);
         document.getElementById('tbody').innerHTML = '<tr><td colspan="8" style="padding:20px;color:var(--red)">Failed to load data. Check your Supabase connection.</td></tr>';
@@ -1938,9 +1949,9 @@
     // ─── INIT ─────────────────────────────────────────────────────────────────────
     function init() {
       loadData();
-      // Poll for new events every 15 seconds
+      // Poll for new events every 10 seconds
       if (rtPollTimer) clearInterval(rtPollTimer);
-      rtPollTimer = setInterval(pollNew, 15000);
+      rtPollTimer = setInterval(pollNew, 10000);
       // Full refresh every 2 minutes
       setInterval(loadData, 120000);
     }
