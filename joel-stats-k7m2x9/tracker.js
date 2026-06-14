@@ -1,11 +1,6 @@
-/**
- * joelalrinhlua.me — Site Tracker v2
- * Embed this on every page: <script src="/joel-stats-k7m2x9/tracker.js"></script>
- * Sends events to Supabase with full geo enrichment (ipapi.co).
- */
 (function () {
     const SUPA = 'https://ztkzofjklpzrzskxacll.supabase.co/rest/v1/site_analytics';
-    const KEY  = 'sb_publishable_uunVH0MPwzPTKBek4kK5NQ_LULAfOyB';
+    const KEY = 'sb_publishable_uunVH0MPwzPTKBek4kK5NQ_LULAfOyB';
     const HDRS = {
         'apikey': KEY,
         'Authorization': 'Bearer ' + KEY,
@@ -24,40 +19,40 @@
 
         // OS
         let os = 'Unknown';
-        if      (/windows nt 10/i.test(u))               os = 'Windows 10/11';
-        else if (/windows nt/i.test(u))                   os = 'Windows';
-        else if (/iphone os (\d+)/i.test(u))              os = 'iOS '     + u.match(/iphone os (\d+)/i)[1];
-        else if (/ipad.*os (\d+)/i.test(u))               os = 'iPadOS ' + u.match(/ipad.*os (\d+)/i)[1];
-        else if (/android (\d+)/i.test(u))                os = 'Android ' + u.match(/android (\d+)/i)[1];
-        else if (/mac os x (\d+[_.]\d+)/i.test(u))        os = 'macOS '   + u.match(/mac os x (\d+[_.]\d+)/i)[1].replace('_', '.');
-        else if (/linux/i.test(u))                        os = 'Linux';
+        if (/windows nt 10/i.test(u)) os = 'Windows 10/11';
+        else if (/windows nt/i.test(u)) os = 'Windows';
+        else if (/iphone os (\d+)/i.test(u)) os = 'iOS ' + u.match(/iphone os (\d+)/i)[1];
+        else if (/ipad.*os (\d+)/i.test(u)) os = 'iPadOS ' + u.match(/ipad.*os (\d+)/i)[1];
+        else if (/android (\d+)/i.test(u)) os = 'Android ' + u.match(/android (\d+)/i)[1];
+        else if (/mac os x (\d+[_.]\d+)/i.test(u)) os = 'macOS ' + u.match(/mac os x (\d+[_.]\d+)/i)[1].replace('_', '.');
+        else if (/linux/i.test(u)) os = 'Linux';
 
         // Device model (best effort)
         let device_model = null;
         const android = u.match(/android[\s\/][\d.]+;\s*([^;)]+)/i);
-        if      (/iphone/i.test(u))  device_model = 'iPhone';
-        else if (/ipad/i.test(u))    device_model = 'iPad';
-        else if (android)            device_model = android[1].trim();
+        if (/iphone/i.test(u)) device_model = 'iPhone';
+        else if (/ipad/i.test(u)) device_model = 'iPad';
+        else if (android) device_model = android[1].trim();
 
         // Browser
         let browser = 'Unknown';
-        if      (/edg\//i.test(u))                                   browser = 'Edge';
-        else if (/opr\//i.test(u))                                   browser = 'Opera';
-        else if (/chrome\/[\d]+/i.test(u) && !/chromium/i.test(u))  browser = 'Chrome';
-        else if (/firefox\/[\d]+/i.test(u))                         browser = 'Firefox';
-        else if (/safari\/[\d]+/i.test(u) && !/chrome/i.test(u))   browser = 'Safari';
-        else if (/msie|trident/i.test(u))                            browser = 'IE';
+        if (/edg\//i.test(u)) browser = 'Edge';
+        else if (/opr\//i.test(u)) browser = 'Opera';
+        else if (/chrome\/[\d]+/i.test(u) && !/chromium/i.test(u)) browser = 'Chrome';
+        else if (/firefox\/[\d]+/i.test(u)) browser = 'Firefox';
+        else if (/safari\/[\d]+/i.test(u) && !/chrome/i.test(u)) browser = 'Safari';
+        else if (/msie|trident/i.test(u)) browser = 'IE';
 
         // Browser version
         let browser_version = null;
-        const edgv    = u.match(/edg\/([\d.]+)/i);
+        const edgv = u.match(/edg\/([\d.]+)/i);
         const chromev = u.match(/chrome\/([\d.]+)/i);
-        const ffv     = u.match(/firefox\/([\d.]+)/i);
-        const safv    = u.match(/version\/([\d.]+)/i);
-        if      (edgv)    browser_version = edgv[1];
+        const ffv = u.match(/firefox\/([\d.]+)/i);
+        const safv = u.match(/version\/([\d.]+)/i);
+        if (edgv) browser_version = edgv[1];
         else if (chromev) browser_version = chromev[1].split('.').slice(0, 2).join('.');
-        else if (ffv)     browser_version = ffv[1];
-        else if (safv)    browser_version = safv[1];
+        else if (ffv) browser_version = ffv[1];
+        else if (safv) browser_version = safv[1];
 
         return { device_type, os, device_model, browser, browser_version };
     }
@@ -65,32 +60,32 @@
     // ── Screen / viewport info ───────────────────────────────────────────────────
     function getScreen() {
         return {
-            screen_width:    window.screen.width,
-            screen_height:   window.screen.height,
-            viewport_width:  window.innerWidth,
+            screen_width: window.screen.width,
+            screen_height: window.screen.height,
+            viewport_width: window.innerWidth,
             viewport_height: window.innerHeight,
         };
     }
 
     // ── Send event to Supabase ───────────────────────────────────────────────────
     async function send(event_type, geo, extra) {
-        const ua     = parseUA();
+        const ua = parseUA();
         const screen = getScreen();
         const payload = {
             event_type,
-            page:          window.location.pathname,
-            referrer:      document.referrer || null,
-            user_agent:    navigator.userAgent,
-            language:      navigator.language || null,
+            page: window.location.pathname,
+            referrer: document.referrer || null,
+            user_agent: navigator.userAgent,
+            language: navigator.language || null,
             // Geo fields (from ipapi.co)
-            ip:            geo.ip            || null,
-            country:       geo.country_name  || null,
-            country_code:  geo.country_code  || null,
-            city:          geo.city          || null,
-            region:        geo.region        || null,
-            latitude:      geo.latitude      || null,
-            longitude:     geo.longitude     || null,
-            timezone:      geo.timezone      || null,
+            ip: geo.ip || null,
+            country: geo.country_name || null,
+            country_code: geo.country_code || null,
+            city: geo.city || null,
+            region: geo.region || null,
+            latitude: geo.latitude || null,
+            longitude: geo.longitude || null,
+            timezone: geo.timezone || null,
             ...ua,
             ...screen,
             ...(extra || {}),
@@ -109,10 +104,14 @@
     // ── Geo lookup, then fire page_view ─────────────────────────────────────────
     let geoCache = {};
 
-    fetch('https://ipapi.co/json/')
-        .then(r => r.json())
-        .then(geo => { geoCache = geo; send('page_view', geo); })
-        .catch(() => { send('page_view', {}); });
+    // Expose promise so other scripts on this page can piggyback the same request
+    window.__trackerGeoPromise = window.__trackerGeoPromise ||
+        fetch('https://ipapi.co/json/').then(r => r.json()).catch(() => ({}));
+
+    window.__trackerGeoPromise.then(geo => {
+        geoCache = geo || {};
+        send('page_view', geoCache);
+    });
 
     // ── Download tracking ────────────────────────────────────────────────────────
     function trackDownloads() {
