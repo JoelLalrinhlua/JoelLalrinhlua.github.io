@@ -25,6 +25,7 @@
   <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="refinement.css" />
 </head>
 
 <body>
@@ -170,31 +171,48 @@
     <section id="about" class="s-about" data-intersect>
       <div class="s__inner js-about-inner">
         <div class="s__block s__block--about">
+          <div class="section-kicker js-ui-reveal">
+            <span>01 / Profile</span>
+            <span>India · Available worldwide</span>
+          </div>
           <h2 class="s__title">About</h2>
           <div class="s__content">
-            <p>
-              I'm Joel Lalrinhlua, a creative developer based in India,
-              passionate about crafting digital experiences that blend
-              aesthetics with functionality. With a focus on innovative design
-              and clean code, I help brands create memorable digital products.
+            <p class="s__content-lead js-ui-reveal">
+              I design and build digital experiences where strong ideas,
+              expressive visuals, and clean code move as one.
             </p>
             <p>
-              Over the years, I've grown from exploring web design to building
-              full-stack applications. I believe in constant learning—studying
-              other developers' work, experimenting with new technologies, and
-              pushing creative boundaries.
+              I'm Joel Lalrinhlua, a creative developer based in India. I work
+              across product design and development, turning early concepts
+              into thoughtful, memorable products.
             </p>
             <p>
-              I specialize in UI/UX Design, Frontend Development, Motion
-              Design, and Branding. My approach combines strategic thinking
-              with pixel-perfect execution to deliver experiences that truly
-              stand out.
+              My practice spans UI/UX, frontend development, motion, and
+              branding. I stay curious, prototype often, and care about the
+              small decisions that make an interface feel effortless.
             </p>
           </div>
+          <div class="about-proof js-ui-reveal" aria-label="Quick facts">
+            <div class="about-proof__item">
+              <strong>5+</strong>
+              <span>Projects delivered</span>
+            </div>
+            <div class="about-proof__item">
+              <strong>04</strong>
+              <span>Core disciplines</span>
+            </div>
+            <div class="about-proof__item">
+              <strong>01</strong>
+              <span>End-to-end partner</span>
+            </div>
+          </div>
         </div>
-
         <div class="s__block s__block--skills">
-          <h2 class="s__title">Skills</h2>
+          <div class="section-kicker js-ui-reveal">
+            <span>02 / Capabilities</span>
+            <span>Design × Development</span>
+          </div>
+          <h2 class="s__title">What I bring</h2>
           <ul class="s__skills">
             <li class="s__skill s__skill--counter js-skill">
               <span class="s__skill__inner">
@@ -312,10 +330,11 @@
       <!-- Section header -->
       <div class="swm__header">
         <div class="swm__header__left">
-          <span class="swm__header__label">Selected Works</span>
+          <span class="swm__header__label">03 / Selected Works</span>
           <h2 class="swm__title">Projects</h2>
+          <p class="swm__lede">A mix of useful products, expressive interfaces, and experiments built from idea to launch.</p>
         </div>
-        <span class="swm__subtitle">Drag to scroll · Click to explore</span>
+        <span class="swm__subtitle"><span class="swm__subtitle-dot"></span> Drag to browse · Select to explore</span>
       </div>
 
       <!-- Marquee container (default view) -->
@@ -414,6 +433,10 @@
 
       <!-- Section intro -->
       <div class="process-intro">
+        <div class="section-kicker js-ui-reveal">
+          <span>04 / Process</span>
+          <span>Clear, collaborative, iterative</span>
+        </div>
         <h2 class="process-intro__title">How I Work</h2>
         <p class="process-intro__sub">A structured approach to building meaningful digital experiences &mdash; from
           first brief to final pixel.</p>
@@ -511,22 +534,32 @@
       </div>
 
       <div id="contact" class="s__inner js-cta-container">
+        <div class="cta-copy js-ui-reveal">
+          <div class="section-kicker">
+            <span>05 / Contact</span>
+            <span class="cta-availability"><i></i> Open to new ideas</span>
+          </div>
+          <p class="cta-copy__eyebrow">Have a project in mind?</p>
+          <h2 class="cta-copy__title">Let's make<br><em>something good.</em></h2>
+          <p class="cta-copy__body">Tell me what you're building, where it's stuck, or simply what you want people to feel.</p>
+        </div>
         <!-- Hover trigger zone -->
         <div class="s__hover js-cta-hover">
-          <div class="s__button js-cta-button s__button--contacts" id="contact-btn">
+          <button class="s__button js-cta-button s__button--contacts" id="contact-btn" type="button" aria-haspopup="dialog" aria-controls="contact-options">
             <div class="s__button__inner">
-              <div class="s__button__text js-cta-button-text">Contact Me</div>
-              <div class="s__button__hover-label">LETS WORK TOGETHER ;P</div>
+              <span class="s__button__text js-cta-button-text">Start a conversation <b>↗</b></span>
+              <span class="s__button__hover-label">LET'S WORK TOGETHER</span>
             </div>
-          </div>
+          </button>
         </div>
       </div>
 
       <!-- Contact options popup -->
-      <div class="contact-options js-contact-options" id="contact-options" aria-hidden="true">
-        <div class="contact-options__inner">
+      <div class="contact-options js-contact-options" id="contact-options" role="dialog" aria-modal="true" aria-labelledby="contact-options-title" aria-hidden="true">
+        <div class="contact-options__inner" tabindex="-1">
           <button class="contact-options__close js-contact-options-close" aria-label="Close">×</button>
-          <p class="contact-options__intro">How would you like to connect?</p>
+          <p class="contact-options__eyebrow">Start a conversation</p>
+          <h3 class="contact-options__intro" id="contact-options-title">How would you like to connect?</h3>
           <div class="contact-options__links">
             <a href="https://www.instagram.com/341425_/" target="_blank" rel="noopener noreferrer"
               class="contact-options__link contact-options__link--ig">
@@ -553,6 +586,9 @@
 
       <div class="s__grid js-cta-grid">
         <svg class="s__grid__svg js-cta-grid-svg">
+          <path class="s__grid__path js-cta-grid-path" d=""></path>
+        </svg>
+      </div>
     </section>
 
     <!-- ===== SEPARATOR ===== -->
@@ -590,8 +626,9 @@
     <section class="s-game" id="game" data-intersect>
       <div class="s-game__header">
         <div class="s-game__header-left">
-          <span class="s-game__label">Mini Game</span>
+          <span class="s-game__label">06 / Play break</span>
           <h2 class="s-game__title">J's Game</h2>
+          <span class="s-game__built">Designed &amp; built from scratch</span>
         </div>
         <p class="s-game__desc">An endless runner set in Hawkins, Indiana. Dodge monsters as Dustin — <kbd>Space</kbd>
           or <kbd>Z</kbd> to jump, tap on mobile.</p>
@@ -929,7 +966,7 @@
         allProjects.forEach((project, i) => {
           const realIdx = i % PROJECTS.length;
           const card = document.createElement('div');
-          card.className = 'swm__card';
+          card.className = `swm__card ${project.img ? 'swm__card--with-image' : 'swm__card--text'}`;
           card.setAttribute('data-index', realIdx);
           card.setAttribute('role', 'button');
           card.setAttribute('tabindex', '0');
@@ -948,7 +985,7 @@
                 <span class="swm__card__name swm__card__name--top">${project.title}</span>
                 <span class="swm__card__tag" style="color:var(--color-accent)">NDA</span>
               </div>
-              <div class="swm__card__image" style="background-image: url('${project.img ? project.img : ''}')"></div>
+              <div class="swm__card__image"></div>
               <div class="swm__card__conf-center">
                 <div class="swm__card__conf-lock">
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
@@ -970,7 +1007,9 @@
                 <span class="swm__card__name swm__card__name--top">${project.title}</span>
                 <span class="swm__card__tag">${project.tag}</span>
               </div>
-              <div class="swm__card__image" style="background-image: url('${project.img ? project.img : ''}')"></div>
+              ${project.img
+                ? `<div class="swm__card__image" style="background-image: url('${project.img}')"></div>`
+                : `<div class="swm__card__statement"><span>Project brief</span><p>${project.bullets[0]}</p></div>`}
               <div class="swm__card__body">
                 <div class="swm__card__stack-preview">${stackTagsHtml}</div>
               </div>
@@ -1248,6 +1287,8 @@
         const closeBtn = document.querySelector('.js-contact-options-close');
         const ctaCircle = document.querySelector('.js-cta-circle');
         const hoverZone = document.querySelector('.s-cta .js-cta-hover');
+        const dialog = popup?.querySelector('.contact-options__inner');
+        let returnFocus = null;
 
         if (!btn || !popup) return;
 
@@ -1270,13 +1311,18 @@
 
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
+          returnFocus = document.activeElement;
           popup.classList.add('is-open');
           popup.setAttribute('aria-hidden', 'false');
+          document.body.classList.add('has-dialog-open');
+          requestAnimationFrame(() => dialog?.focus());
         });
 
         const closePop = () => {
           popup.classList.remove('is-open');
           popup.setAttribute('aria-hidden', 'true');
+          document.body.classList.remove('has-dialog-open');
+          returnFocus?.focus();
         };
 
         closeBtn?.addEventListener('click', closePop);
@@ -1309,6 +1355,27 @@
         steps.forEach(step => obs.observe(step));
       }
 
+      // ===== REFINED SECTION REVEALS =====
+      function initUIReveals() {
+        const items = document.querySelectorAll('.js-ui-reveal');
+        if (!items.length) return;
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          items.forEach(item => item.classList.add('is-visible'));
+          return;
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          });
+        }, { threshold: 0.18 });
+
+        items.forEach(item => observer.observe(item));
+      }
+
       // ===== INIT =====
       document.addEventListener('DOMContentLoaded', () => {
         buildMarquee();
@@ -1317,6 +1384,7 @@
         initProcessBadge();
         initProcessSteps();
         initContactButton();
+        initUIReveals();
       });
 
     })();

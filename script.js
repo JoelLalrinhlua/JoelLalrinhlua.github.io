@@ -664,6 +664,7 @@ class HeaderSection {
         emitter.on('tick', this.updateConsole, this);
     }
     intro() {
+        if (!this.el) return;
         const logo = this.el.querySelector('.js-logo');
         const items = this.el.querySelectorAll('.js-menu-item');
         const tl = gsap.timeline();
